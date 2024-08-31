@@ -1,0 +1,93 @@
+DB
+
+Users
+id
+user_name
+pass_hash
+updated_id
+created_at
+email
+role
+
+Profile
+id
+user_id FK from Users
+name
+dob
+created_at
+updated_at
+
+Activity
+id
+profile_id from profile
+start_dateTime
+end_dateTime
+created_at
+updated_at
+category
+title
+desc
+visibility
+
+Approval
+id
+approval_dateTime
+activity_id from Activity
+faculty_id from Users
+status
+remark
+
+Document
+id
+doc_path
+activity_id from Activity
+uploaded_at
+
+
+sem5Project/
+│
+├── server/                   # Backend (Node.js + Express)
+│   ├── config/               # Configuration files
+│   │   └── db.js             # MongoDB connection setup
+│   ├── controllers/          # Route logic (CRUD operations)
+│   │   ├── userController.js
+│   │   ├── profileController.js
+│   │   ├── activityController.js
+│   │   ├── approvalController.js
+│   │   └── documentController.js
+│   ├── models/               # Mongoose schemas/models
+│   │   ├── User.js
+│   │   ├── Profile.js
+│   │   ├── Activity.js
+│   │   ├── Approval.js
+│   │   └── Document.js
+│   ├── routes/               # Express routes
+│   │   └── api.js
+│   ├── middleware/           # Middleware functions (e.g., auth)
+│   ├── utils/                # Utility functions (e.g., hashing)
+│   ├── server.js             # Main entry point for the backend
+│   └── .env                  # Environment variables (e.g., DB connection string)
+│
+├── client/                   # Frontend (React)
+│   ├── public/               # Public assets (e.g., images, index.html)
+│   │   └── index.html        # Main HTML file for React
+│   ├── src/                  # React application source files
+│   │   ├── components/       # React components
+│   │   │   ├── Navbar.js
+│   │   │   ├── ProfilePage.js
+│   │   │   ├── ActivityList.js
+│   │   │   ├── ActivityForm.js
+│   │   │   └── ApprovalList.js
+│   │   ├── pages/            # Full page components (e.g., Home, Dashboard)
+│   │   │   ├── HomePage.js
+│   │   │   ├── Dashboard.js
+│   │   │   └── LoginPage.js
+│   │   ├── App.js            # Main React component
+│   │   ├── index.js          # React DOM rendering entry point
+│   │   └── api/              # API service calls (Axios or Fetch)
+│   │       └── apiService.js # Functions to call backend API
+│   └── package.json          # React app dependencies and scripts
+│
+├── package.json              # Main project dependencies and scripts
+├── README.md                 # Project documentation
+└── .gitignore                # Files to ignore in Git
