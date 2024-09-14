@@ -44,6 +44,83 @@ activity_id from Activity
 uploaded_at
 
 
+Enhanced Database Schema:
+1. Users
+This table stores user credentials and roles (e.g., student, faculty, admin), essential for authentication and role-based access control.
+
+Column Name	Data Type	Description
+id	INT (PK)	Unique user identifier (auto-incremented).
+user_name	VARCHAR	Username for login.
+pass_hash	VARCHAR	Hashed password for security.
+email	VARCHAR	User's email address for communication.
+role	ENUM	Role type: student, faculty, admin.
+created_at	TIMESTAMP	Account creation timestamp.
+updated_at	TIMESTAMP	Last update timestamp (e.g., password updates).
+
+
+2. Profile
+This table holds personal details linked to users.
+
+Column Name	Data Type	Description
+id	INT (PK)	Unique profile identifier.
+user_id	INT (FK)	Foreign key referencing Users.id.
+name	VARCHAR	Full name of the user.
+dob	DATE	Date of birth.
+created_at	TIMESTAMP	Profile creation timestamp.
+updated_at	TIMESTAMP	Last profile update timestamp.
+
+
+3. Category
+This table stores activity categories, allowing for scalability and easy management of activity types.
+
+Column Name	Data Type	Description
+id	INT (PK)	Unique category identifier.
+name	VARCHAR	Category name (e.g., Workshops, Sports).
+description	TEXT (Optional)	Description of the category.
+created_at	TIMESTAMP	Timestamp for when the category was created.
+
+
+4. Activity
+Represents activities performed by students, linked to profiles and categories.
+
+Column Name	Data Type	Description
+id	INT (PK)	Unique activity identifier.
+profile_id	INT (FK)	Foreign key referencing Profile.id.
+category_id	INT (FK)	Foreign key referencing Category.id.
+start_dateTime	DATETIME	Activity start date and time.
+end_dateTime	DATETIME	Activity end date and time.
+title	VARCHAR	Title of the activity.
+desc	TEXT	Description of the activity.
+visibility	ENUM	Public, Restricted, Private.
+location	VARCHAR	Physical location where the activity occurred.
+status	ENUM	Draft, Submitted, Approved, Rejected.
+created_at	TIMESTAMP	Activity creation timestamp.
+updated_at	TIMESTAMP	Last update timestamp.
+
+
+5. Approval
+Tracks the approval status of activities by faculty members.
+
+Column Name	Data Type	Description
+id	INT (PK)	Unique approval identifier.
+approval_dateTime	TIMESTAMP	Date and time of approval or rejection.
+activity_id	INT (FK)	Foreign key referencing Activity.id.
+faculty_id	INT (FK)	Foreign key referencing Users.id (faculty role).
+status	ENUM	Pending, Approved, Rejected.
+remark	TEXT	Faculty feedback or reason for rejection.
+
+
+6. Document
+This table stores supporting documents uploaded for activities.
+
+Column Name	Data Type	Description
+id	INT (PK)	Unique document identifier.
+doc_path	VARCHAR	Path or URL to the uploaded document.
+activity_id	INT (FK)	Foreign key referencing Activity.id.
+doc_type	ENUM	Type of document: Certificate, Image, PDF, etc.
+uploaded_at	TIMESTAMP	Timestamp when the document was uploaded.
+
+
 sem5Project/
 │
 ├── server/                   # Backend (Node.js + Express)
@@ -65,28 +142,23 @@ sem5Project/
 │   │   └── api.js
 │   ├── middleware/           # Middleware functions (e.g., auth)
 │   ├── utils/                # Utility functions (e.g., hashing)
+│   ├── public/               # Public assets for backend (if any)
+│   │   ├── styles/           # CSS stylesheets
+│   │   ├── images/           # Image files
+│   │   └── scripts/          # Client-side JS scripts (if needed)
+│   ├── views/                # HTML view templates (if using templating engine like EJS)
+│   │   ├── index.ejs         # Main HTML file for the app
+│   │   ├── profile.ejs       # Profile page template
+│   │   ├── activity.ejs      # Activity page template
+│   │   └── login.ejs         # Login page template
 │   ├── server.js             # Main entry point for the backend
 │   └── .env                  # Environment variables (e.g., DB connection string)
 │
-├── client/                   # Frontend (React)
-│   ├── public/               # Public assets (e.g., images, index.html)
-│   │   └── index.html        # Main HTML file for React
-│   ├── src/                  # React application source files
-│   │   ├── components/       # React components
-│   │   │   ├── Navbar.js
-│   │   │   ├── ProfilePage.js
-│   │   │   ├── ActivityList.js
-│   │   │   ├── ActivityForm.js
-│   │   │   └── ApprovalList.js
-│   │   ├── pages/            # Full page components (e.g., Home, Dashboard)
-│   │   │   ├── HomePage.js
-│   │   │   ├── Dashboard.js
-│   │   │   └── LoginPage.js
-│   │   ├── App.js            # Main React component
-│   │   ├── index.js          # React DOM rendering entry point
-│   │   └── api/              # API service calls (Axios or Fetch)
-│   │       └── apiService.js # Functions to call backend API
-│   └── package.json          # React app dependencies and scripts
+├── public/                   # Public assets for frontend
+│   ├── index.html            # Main HTML file for the frontend
+│   ├── styles/               # CSS stylesheets
+│   ├── images/               # Image files
+│   └── scripts/              # JavaScript files (if needed for frontend functionality)
 │
 ├── package.json              # Main project dependencies and scripts
 ├── README.md                 # Project documentation

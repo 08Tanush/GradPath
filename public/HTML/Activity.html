@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Activity</title>
+  <link rel="stylesheet" href="../styles/activity.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Add Activity</h2>
+    <form id="add-activity-form">
+      
+      <!-- Activity Title -->
+      <label for="activity-title">Activity Title</label>
+      <input type="text" id="activity-title" placeholder="Enter activity title" required>
+
+      <!-- Category -->
+      <label for="category">Category</label>
+      <select id="category" required>
+        <option value="Talks">Talks</option>
+        <option value="Workshops">Workshops</option>
+        <option value="Certification">Certification Courses</option>
+        <option value="Cultural">Cultural Events</option>
+        <option value="Sports">Sports</option>
+        <option value="Student Chapters">Student Chapters</option>
+        <option value="Others">Others</option>
+      </select>
+
+      <!-- Description -->
+      <label for="description">Description</label>
+      <textarea id="description" rows="4" placeholder="Describe the activity..." required></textarea>
+
+      <!-- Start Date and Time -->
+      <label for="start-date">Start Date and Time</label>
+      <input type="datetime-local" id="start-date" required>
+
+      <!-- End Date and Time -->
+      <label for="end-date">End Date and Time</label>
+      <input type="datetime-local" id="end-date" required>
+
+      <!-- Visibility -->
+      <label>Visibility</label>
+      <div class="radio-group">
+        
+        <label for="public"><input type="radio" id="public" name="visibility" value="Public" required>Public (Visible to all students)</label>
+        
+        <label for="restricted"><input type="radio" id="restricted" name="visibility" value="Restricted">Restricted (Visible to management only)</label>
+
+        <label for="custom"><input type="radio" id="custom" name="visibility" value="Custom"> Custom Visibility</label>
+      </div>
+      <br>
+
+      <!-- Document Upload -->
+      <label for="document">Document Upload (Optional)</label>
+      <input type="file" id="document">
+
+      <!-- Faculty Reviewer -->
+      <label for="faculty-reviewer">Faculty Reviewer (Optional)</label>
+      <select id="faculty-reviewer">
+        <option value="">Select Faculty Member</option>
+        <option value="Faculty1">Faculty 1</option>
+        <option value="Faculty2">Faculty 2</option>
+        <option value="Faculty3">Faculty 3</option>
+      </select>
+
+      <!-- Additional Notes -->
+      <label for="additional-notes">Additional Notes (Optional)</label>
+      <textarea id="additional-notes" rows="3" placeholder="Add any additional notes for the faculty or reviewers..."></textarea>
+
+      <!-- Save and Submit Buttons -->
+      <div class="form-buttons">
+        <button type="button" id="save-btn">Save</button>
+        <button type="submit" id="submit-btn">Submit for Approval</button>
+      </div>
+
+    </form>
+  </div>
+</body>
+</html>
