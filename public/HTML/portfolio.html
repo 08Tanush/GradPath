@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/portfolio.css">
 </head>
 <body>
     <div class="container">
+        <!-- Left Section: Profile -->
         <div class="left-section">
             <div class="profile-container">
                 <div class="profile-picture">
                     <img src="../../images/user.png" alt="Profile Picture">
                 </div>
-                <div>
-                    <h1>Name : Tanush</h1>
+                <div class="profile-info">
+                    <h1>Name: Narendra</h1>
                     <p class="title">Engineering Graduate</p>
                 </div>
             </div>
@@ -29,35 +30,98 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, rerum?</p>
             </div>
         </div>
+
+        <!-- Right Section: Timeline -->
         <div class="right-section">
             <h2>Portfolio Timeline</h2>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>2024</h3>
-                        <p>Started a new project on AI-driven analytics.</p>
+                <!-- 2024 Year -->
+                <div class="timeline-year">
+                    <div class="timeline-header" onclick="toggleDetails('year-2024')">
+                        <h2>2024</h2>
+                        <span class="expand-icon">&#x25BC;</span>
+                    </div>
+                    <div id="year-2024" class="timeline-details">
+                        <!-- Activity 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-header" onclick="toggleDetails('activity-2024-1')">
+                                <h3>AI Project Kickoff</h3>
+                                <p class="brief-desc">Started a new project on AI-driven analytics.</p>
+                                <span class="expand-icon">&#x25BC;</span>
+                            </div>
+                            <div id="activity-2024-1" class="timeline-details">
+                                <p class="detailed-desc">Initiated a project focused on AI-driven analytics to improve data-driven decision-making.</p>
+                                <p class="faculty-approval">Approved by Faculty: Dr. John Doe</p>
+                                <a href="certificate1.pdf" class="doc-icon" target="_blank">&#128196; View Document</a>
+                            </div>
+                        </div>
+                        <!-- Activity 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-header" onclick="toggleDetails('activity-2024-2')">
+                                <h3>Machine Learning Workshop</h3>
+                                <p class="brief-desc">Participated in a workshop on Machine Learning.</p>
+                                <span class="expand-icon">&#x25BC;</span>
+                            </div>
+                            <div id="activity-2024-2" class="timeline-details">
+                                <p class="detailed-desc">Attended an intensive workshop on machine learning algorithms and applications.</p>
+                                <p class="faculty-approval">Approved by Faculty: Dr. Alice Smith</p>
+                                <a href="certificate2.pdf" class="doc-icon" target="_blank">&#128196; View Document</a>
+                            </div>
+                        </div>
+                        <!-- Add more activities for 2024 as needed -->
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>2023</h3>
-                        <p>Graduated from Engineering. Completed multiple internships in Software Development.</p>
+
+                <!-- 2023 Year -->
+                <div class="timeline-year">
+                    <div class="timeline-header" onclick="toggleDetails('year-2023')">
+                        <h2>2023</h2>
+                        <span class="expand-icon">&#x25BC;</span>
+                    </div>
+                    <div id="year-2023" class="timeline-details">
+                        <!-- Activity 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-header" onclick="toggleDetails('activity-2023-1')">
+                                <h3>Engineering Graduation</h3>
+                                <p class="brief-desc">Graduated from Engineering with honors.</p>
+                                <span class="expand-icon">&#x25BC;</span>
+                            </div>
+                            <div id="activity-2023-1" class="timeline-details">
+                                <p class="detailed-desc">Graduated with honors in Engineering. Completed internships at top tech companies.</p>
+                                <p class="faculty-approval">Approved by Faculty: Dr. Jane Smith</p>
+                                <a href="certificate3.pdf" class="doc-icon" target="_blank">&#128196; View Document</a>
+                            </div>
+                        </div>
+                        <!-- Activity 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-header" onclick="toggleDetails('activity-2023-2')">
+                                <h3>Internship at TechCorp</h3>
+                                <p class="brief-desc">Completed a significant internship at TechCorp.</p>
+                                <span class="expand-icon">&#x25BC;</span>
+                            </div>
+                            <div id="activity-2023-2" class="timeline-details">
+                                <p class="detailed-desc">Worked as a software intern at TechCorp, focusing on developing web applications.</p>
+                                <p class="faculty-approval">Approved by Faculty: Dr. Richard Roe</p>
+                                <a href="certificate4.pdf" class="doc-icon" target="_blank">&#128196; View Document</a>
+                            </div>
+                        </div>
+                        <!-- Add more activities for 2023 as needed -->
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>2022</h3>
-                        <p>Participated in the Smart India Hackathon and built an innovative project.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>2021</h3>
-                        <p>Created my first MERN stack application and deployed it successfully.</p>
-                    </div>
-                </div>
+
+                <!-- Add more years as needed -->
             </div>
         </div>
     </div>
+    <script>
+        function toggleDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+            } else {
+                details.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>

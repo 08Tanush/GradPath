@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="../styles/portfolio2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="profile-container">
+                <div class="profile-picture">
+                    <img src="../../images/user.png" alt="Profile Picture">
+                </div>
+                <div>
+                    <h1>Name : Narendra</h1>
+                    <p class="title">Engineering Graduate</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><img src="../../images/Linkdin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../../images/Twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="../../images/instagram.jpg" alt="Instagram"></a>
+            </div>
+            <a href="mailto:xyz@example.com" class="email-button">Email Me</a>
+            <div class="about">
+                <h2>About Me</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, rerum?</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <h2>Portfolio Timeline</h2>
+            <ul class="timeline">
+                <!-- 2024 -->
+                <li class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2024 <span class="dot"></span></h3>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Started a new project on AI-driven analytics</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Engaged in a project focusing on AI-driven analytics, exploring various machine learning techniques.</p>
+                            <p>Approved by: Dr. Smith</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Attended International Tech Conference</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Participated in an international tech conference focusing on emerging technologies.</p>
+                            <p>Approved by: Dr. Lee</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Published Research Paper on Machine Learning</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Published a research paper on advancements in machine learning techniques.</p>
+                            <p>Approved by: Prof. Kumar</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Completed Advanced Data Science Course</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Completed an advanced course on data science, gaining expertise in statistical analysis.</p>
+                            <p>Approved by: Prof. Gupta</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Worked on AI-based Startup</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Collaborated on an AI-based startup focusing on predictive analytics solutions.</p>
+                            <p>Approved by: Dr. Patel</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                    </div>
+                </li>
+                <!-- 2023 -->
+                <li class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2023 <span class="dot"></span></h3>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Graduated from Engineering. Completed multiple internships in Software Development</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Completed internships with a focus on software development, gaining practical experience in various technologies.</p>
+                            <p>Approved by: Prof. Johnson</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Developed an E-commerce Platform</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Developed an e-commerce platform using the MERN stack, focusing on user experience and functionality.</p>
+                            <p>Approved by: Dr. Singh</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Contributed to Open Source Projects</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Contributed to several open-source projects, enhancing skills in collaborative software development.</p>
+                            <p>Approved by: Dr. Rao</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Launched Personal Blog</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Launched a personal blog to share insights and experiences related to software development.</p>
+                            <p>Approved by: Prof. Gupta</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                    </div>
+                </li>
+                <!-- 2022 -->
+                <li class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2022 <span class="dot"></span></h3>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Interned at Tech Giants</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Interned at leading tech companies, gaining valuable industry experience and networking opportunities.</p>
+                            <p>Approved by: Prof. Nair</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Developed Mobile Application</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Developed a mobile application using Flutter, focusing on performance optimization and user interface design.</p>
+                            <p>Approved by: Dr. Sen</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Completed Online Certification in AI</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Completed an online certification in artificial intelligence, focusing on machine learning algorithms and applications.</p>
+                            <p>Approved by: Dr. Kumar</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Presented at Tech Meetups</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Presented research and projects at various tech meetups, showcasing innovations and networking with industry experts.</p>
+                            <p>Approved by: Prof. Agarwal</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Participated in Data Science Bootcamp</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Participated in an intensive data science bootcamp to enhance skills in data analysis and visualization.</p>
+                            <p>Approved by: Dr. Roy</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                    </div>
+                </li>
+                <!-- 2021 -->
+                <li class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2021 <span class="dot"></span></h3>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Started Engineering Degree</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Began the engineering degree program with a focus on computer science and software engineering.</p>
+                            <p>Approved by: Prof. Jain</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Completed Introduction to Programming Course</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Completed a foundational course in programming, learning core concepts and languages such as Python and Java.</p>
+                            <p>Approved by: Dr. Bhat</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Joined Robotics Club</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Joined the robotics club and participated in various projects and competitions related to robotics and automation.</p>
+                            <p>Approved by: Prof. Rao</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Developed Simple Web Application</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Developed a simple web application using HTML, CSS, and JavaScript as a part of a class project.</p>
+                            <p>Approved by: Dr. Mehta</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                        <div class="activity-title" onclick="toggleDetails(this)">
+                            <span>Participated in Campus Coding Contest</span>
+                        </div>
+                        <div class="activity-details">
+                            <p>Description: Participated in a campus-wide coding contest, showcasing problem-solving skills and programming knowledge.</p>
+                            <p>Approved by: Prof. Kumar</p>
+                            <span class="doc-icon"><a href="#">&#128196;</a></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <script src="scripts.js">
+
+    </script> -->
+    <script>
+        function toggleDetails(element) {
+            const details = element.nextElementSibling;
+            details.classList.toggle('show');
+        }
+
+    </script>
+</body>
+</html>
