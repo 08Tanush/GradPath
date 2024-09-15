@@ -1,0 +1,225 @@
+facultyapproval.html file:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Activity Approval</title>
+  <link rel="stylesheet" href="../styles/faculty.css">
+  <script>
+    // Function to approve activity
+    function approveActivity(activityId) {
+      const statusElement = document.getElementById(status-${activityId});
+      statusElement.textContent = "Approved";
+      statusElement.style.color = "green";
+      console.log(Activity ${activityId} approved.);
+    }
+
+    // Function to disapprove activity
+    function disapproveActivity(activityId) {
+      const statusElement = document.getElementById(status-${activityId});
+      statusElement.textContent = "Disapproved";
+      statusElement.style.color = "red";
+      console.log(Activity ${activityId} disapproved.);
+    }
+
+    // Function to toggle profile dropdown visibility
+    function toggleDropdown() {
+      const dropdown = document.getElementById("profile-dropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Close the dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.profile-icon')) {
+        const dropdown = document.getElementById("profile-dropdown");
+        if (dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #333;
+      color: white;
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .header .profile {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+      min-width: 150px;
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .profile-dropdown a {
+      display: block;
+      padding: 10px;
+      color: black;
+      text-decoration: none;
+      text-align: left;
+    }
+
+    .profile-dropdown a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Main container */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Activity container */
+    .activity-container {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .activity-header {
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .activity-status {
+      margin: 10px 0;
+    }
+
+    .activity-buttons button {
+      margin-right: 10px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .activity-buttons button.approve {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .activity-buttons button.disapprove {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .activity-buttons button:hover {
+      opacity: 0.9;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <!-- Header -->
+  <div class="header">
+    <h1>Activity Approval</h1>
+    <div class="profile" onclick="toggleDropdown()">
+      <span class="profile-icon"></span>
+      <div class="profile-dropdown" id="profile-dropdown">
+        <a href="#">View Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h2>Pending Activities for Approval</h2>
+
+    <!-- Activity 1 -->
+    <div class="activity-container" id="activity-1">
+      <div class="activity-header">Activity Title: Workshop on AI</div>
+      <div><strong>Description:</strong> Attended a workshop on Artificial Intelligence hosted by XYZ organization.</div>
+      <div><strong>Date:</strong> March 25, 2024</div>
+      <div><strong>Document:</strong> <a href="#">Certificate.pdf</a></div>
+      <div class="activity-status">Status: <span id="status-1">Pending</span></div>
+      <div class="activity-buttons">
+        <button class="approve" onclick="approveActivity(1)">Approve</button>
+        <button class="disapprove" onclick="disapproveActivity(1)">Disapprove</button>
+      </div>
+    </div>
+
+    <!-- Activity 2 -->
+    <div class="activity-container" id="activity-2">
+      <div class="activity-header">Activity Title: Sports Event Participation</div>
+      <div><strong>Description:</strong> Participated in the inter-college football tournament.</div>
+      <div><strong>Date:</strong> April 10, 2024</div>
+      <div><strong>Document:</strong> <a href="#">Certificate.pdf</a></div>
+      <div class="activity-status">Status: <span id="status-2">Pending</span></div>
+      <div class="activity-buttons">
+        <button class="approve" onclick="approveActivity(2)">Approve</button>
+        <button class="disapprove" onclick="disapproveActivity(2)">Disapprove</button>
+      </div>
+    </div>
+
+    <!-- Activity 3 -->
+    <div class="activity-container" id="activity-3">
+      <div class="activity-header">Activity Title: Cultural Event Volunteer</div>
+      <div><strong>Description:</strong> Volunteered at the annual cultural festival.</div>
+      <div><strong>Date:</strong> May 15, 2024</div>
+      <div><strong>Document:</strong> <a href="#">Certificate.pdf</a></div>
+      <div class="activity-status">Status: <span id="status-3">Pending</span></div>
+      <div class="activity-buttons">
+        <button class="approve" onclick="approveActivity(3)">Approve</button>
+        <button class="disapprove" onclick="disapproveActivity(3)">Disapprove</button>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page </title>
-    <link rel="stylesheet" href="home.css">
-
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
     <header>
         <div class="navbar">
             <div class="logo">
-                <h1>MyLink</h1>
+                <h1>GradPath</h1>
             </div>
             <div class="search-bar">
                 <input type="text" placeholder="Search">
@@ -30,29 +29,65 @@
     <main>
         <section class="left-sidebar">
             <div class="profile">
-                <img src="profile-pic.jpg" alt="Profile Picture">
-                <h2>Tanush Karane </h2>
-                <p>Front-End Developer at Brwoser Stack</p>
+                <img src="../../images/user.png" alt="Profile Picture">
+                <h2>Tanush Karane</h2>
+                <p>Front-End Developer at Browser Stack</p>
                 <p>Mumbai Maharashtra</p>
             </div>
-            
         </section>
 
         <section class="feed">
-            <div class="post-box">
-                <textarea placeholder="Start a post"></textarea>
-                <button>Post</button>
-            </div>
             <div class="posts">
                 <div class="post">
-                    <h3>John Doe</h3>
-                    <p>This is an example of a post on LinkedIn's home feed.</p>
+                    <div class="post-header">
+                        <img src="../../images/user.png" alt="User Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <h3>John Doe</h3>
+                            <p>Front-End Developer at Browser Stack</p>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Excited to share that I have completed a new certification in Cyber-Security! 🎉 Check out my certificate below.</p>
+                        <img src="../../images/certificate.png" alt="Certificate" class="certificate-image">
+                    </div>
+                    <div class="post-footer">
+                        <button>Like</button>
+                        <button>Comment</button>
+                        <button>Share</button>
+                    </div>
                 </div>
                 <div class="post">
-                    <h3>Jane Smith</h3>
-                    <p>Another post example for the LinkedIn-style homepage.</p>
+                    <div class="post-header">
+                        <img src="../../images/user.png" alt="User Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <h3>Jane Smith</h3>
+                            <p>Software Engineer at TechCorp</p>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Thrilled to announce my latest achievement in Data Science! Have a look at my certificate below.</p>
+                        <img src="../../images/certificate.png" alt="Certificate" class="certificate-image">
+                    </div>
+                    <div class="post-footer">
+                        <button>Like</button>
+                        <button>Comment</button>
+                        <button>Share</button>
+                    </div>
                 </div>
             </div>
+        </section>
+        
+
+        <section class="right-sidebar">
+            <div class="about-us">
+                <h2>About Us</h2>
+                <h2>Welcome to GradPath, the platform  to show your skills</h2>
+                <h3>Our Mission:</h3>
+                <p>To facilitate meaningful interactions and opportunities among the DBIT Mumbai community, fostering professional development and lifelong connections.</p>
+                <h3>Our Vision:</h3>
+                <p>To be the premier networking tool for DBIT Mumbai, empowering users with the resources and connections needed to excel in their careers and beyond.</p>
+            </div>
+        </section>
     </main>
 
     <footer>

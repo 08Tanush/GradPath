@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Management</title>
+    <link rel="stylesheet" href="../styles/portfolio.css">
+</head>
+<body>
+    <div class="container">
+        <div class="post">
+            <div class="post-header">
+                <div class="user-info">
+                    <img src="../../images/user.png" alt="User Profile" class="profile-pic">
+                    <span class="user-name">Tanush</span>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <p class="caption">This is the current caption of the post.</p>
+                <form action="/submit-post" method="post">
+                    <label for="editCaption">Edit Caption:</label>
+                    <textarea id="editCaption" name="caption" class="edit-textarea"></textarea>
+
+                    <label for="postPrivacy">Privacy:</label>
+                    <select id="postPrivacy" name="privacy">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
