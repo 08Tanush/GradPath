@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Management</title>
+    <link rel="stylesheet" href="../styles/entryManagement.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Manage Activity Visibility</h2>
+
+        <div class="timeline">
+            <!-- Example Activity 1 -->
+            <div class="timeline-item">
+                <div class="activity-header">
+                    <p class="date-time">2024-09-15 14:30</p>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-details">
+                        <h3>Project Presentation</h3>
+                        <div class="doc-item">
+                            <a href="#" class="doc-link">View Document</a>
+                        </div>
+                        <p class="description" contenteditable="true">Presented the final year project on AI-driven analytics.</p>
+                        <button class="edit-btn">Save</button>
+                        <p class="approved-info">Approved by Prof. John Doe</p>
+                    </div>
+                    <div class="activity-visibility">
+                        <label class="slider-label">Visibility: <span class="visibility-text">Public</span></label>
+                        <div class="slider">
+                            <input type="range" min="0" max="1" value="1" class="slider-toggle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example Activity 2 -->
+            <div class="timeline-item">
+                <div class="activity-header">
+                    <p class="date-time">2024-09-14 10:00</p>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-details">
+                        <h3>Workshop on Cybersecurity</h3>
+                        <div class="doc-item">
+                            <a href="#" class="doc-link">View Document</a>
+                        </div>
+                        <p class="description" contenteditable="true">Conducted a cybersecurity workshop focusing on ethical hacking and prevention techniques.</p>
+                        <button class="edit-btn">Save</button>
+                        <p class="approved-info">Approved by Prof. Alice Smith</p>
+                    </div>
+                    <div class="activity-visibility">
+                        <label class="slider-label">Visibility: <span class="visibility-text">Public</span></label>
+                        <div class="slider">
+                            <input type="range" min="0" max="1" value="1" class="slider-toggle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example Activity 3 -->
+            <div class="timeline-item">
+                <div class="activity-header">
+                    <p class="date-time">2024-09-13 09:00</p>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-details">
+                        <h3>Team Meeting</h3>
+                        <div class="doc-item">
+                            <a href="#" class="doc-link">View Document</a>
+                        </div>
+                        <p class="description" contenteditable="true">Led a team meeting discussing the next steps for the development of the student portal.</p>
+                        <button class="edit-btn">Save</button>
+                        <p class="approved-info">Approved by Prof. Michael Brown</p>
+                    </div>
+                    <div class="activity-visibility">
+                        <label class="slider-label">Visibility: <span class="visibility-text">Private</span></label>
+                        <div class="slider">
+                            <input type="range" min="0" max="1" value="0" class="slider-toggle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Activity -->
+            <h3 class="pending-approvals-title">Pending Approvals</h3>
+            <div class="timeline-item pending">
+                <div class="activity-header">
+                    <p class="date-time">2024-09-12 12:30</p>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-details">
+                        <h3>Research Paper Submission</h3>
+                        <div class="doc-item">
+                            <a href="#" class="doc-link">View Document</a>
+                        </div>
+                        <p class="description" contenteditable="true">Submitted a research paper on blockchain-based supply chain systems for review.</p>
+                        <button class="edit-btn">Save</button>
+                        <p class="approval-status">Pending approval by Prof. Sarah Green</p>
+                    </div>
+                    <div class="activity-visibility">
+                        <label class="slider-label">Visibility: <span class="visibility-text">Private</span></label>
+                        <div class="slider">
+                            <input type="range" min="0" max="1" value="0" class="slider-toggle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.slider-toggle').forEach(slider => {
+    slider.addEventListener('input', function () {
+        const visibilityText = this.closest('.activity-visibility').querySelector('.visibility-text');
+        if (this.value == 1) {
+            visibilityText.textContent = 'Public';
+        } else {
+            visibilityText.textContent = 'Private';
+        }
+    });
+});
+
+document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const description = this.previousElementSibling;
+        if (description.contentEditable === 'true') {
+            description.contentEditable = 'false';
+            this.textContent = 'Save';
+            // Add save logic here if needed
+        } else {
+            description.contentEditable = 'true';
+            this.textContent = 'Edit';
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
