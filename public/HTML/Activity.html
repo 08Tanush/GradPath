@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Activity</title>
   <link rel="stylesheet" href="../styles/activity.css">
+  <script>
+    function toggleOtherCategory() {
+      const categorySelect = document.getElementById('category');
+      const otherCategoryInput = document.getElementById('other-category-input');
+
+      if (categorySelect.value === 'Others') {
+        otherCategoryInput.style.display = 'block';
+        otherCategoryInput.required = true; // Make the textbox required
+      } else {
+        otherCategoryInput.style.display = 'none';
+        otherCategoryInput.required = false; // Remove the required constraint
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const categorySelect = document.getElementById('category');
+      categorySelect.addEventListener('change', toggleOtherCategory);
+    });
+  </script>
 </head>
 <body>
   <div class="form-container">
@@ -27,6 +46,12 @@
         <option value="Others">Others</option>
       </select>
 
+      <!-- Other Category Input (Initially hidden) -->
+      <div id="other-category-input" style="display: none;">
+        <label for="other-category">Other Category</label>
+        <input type="text" id="other-category" placeholder="Enter other category">
+      </div>
+
       <!-- Description -->
       <label for="description">Description</label>
       <textarea id="description" rows="4" placeholder="Describe the activity..." required></textarea>
@@ -42,11 +67,8 @@
       <!-- Visibility -->
       <label>Visibility</label>
       <div class="radio-group">
-        
         <label for="public"><input type="radio" id="public" name="visibility" value="Public" required>Public (Visible to all students)</label>
-        
         <label for="restricted"><input type="radio" id="restricted" name="visibility" value="Restricted">Restricted (Visible to management only)</label>
-
         <label for="custom"><input type="radio" id="custom" name="visibility" value="Custom"> Custom Visibility</label>
       </div>
       <br>
