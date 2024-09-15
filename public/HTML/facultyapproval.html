@@ -1,27 +1,25 @@
-facultyapproval.html file:
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faculty Activity Approval</title>
+  <title>Activity Approval</title>
   <link rel="stylesheet" href="../styles/faculty.css">
   <script>
     // Function to approve activity
     function approveActivity(activityId) {
-      const statusElement = document.getElementById(status-${activityId});
+      const statusElement = document.getElementById(`status-${activityId}`);
       statusElement.textContent = "Approved";
       statusElement.style.color = "green";
-      console.log(Activity ${activityId} approved.);
+      console.log(`Activity ${activityId} approved.`);
     }
 
     // Function to disapprove activity
     function disapproveActivity(activityId) {
-      const statusElement = document.getElementById(status-${activityId});
+      const statusElement = document.getElementById(`status-${activityId}`);
       statusElement.textContent = "Disapproved";
       statusElement.style.color = "red";
-      console.log(Activity ${activityId} disapproved.);
+      console.log(`Activity ${activityId} disapproved.`);
     }
 
     // Function to toggle profile dropdown visibility
@@ -165,7 +163,7 @@ facultyapproval.html file:
   
   <!-- Header -->
   <div class="header">
-    <h1>Activity Approval</h1>
+    <h1>Faculty Activity Approval</h1>
     <div class="profile" onclick="toggleDropdown()">
       <span class="profile-icon"></span>
       <div class="profile-dropdown" id="profile-dropdown">
