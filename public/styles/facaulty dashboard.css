@@ -1,0 +1,188 @@
+/* General body and font styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff; /* Blue background for navbar */
+    color: #fff;
+    padding: 20px 30px; /* Increased padding for a taller navbar */
+}
+
+.navbar-logo a {
+    font-size: 40px; /* Larger logo text */
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px; /* Increased padding for spacing */
+    font-size: 24px; /* Slightly larger text */
+}
+
+.navbar-links .search-bar-container {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+}
+
+.search-bar {
+    padding: 15px; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    width: 400px; /* Wider search bar */
+}
+
+.search-btn {
+    padding: 5px 10px; /* Larger button */
+    border: none;
+    border-radius: 20px;
+    background-color: #28a745; /* Green button background */
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 16px; /* Larger text */
+}
+
+.search-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 25px; /* Increased margin for spacing */
+}
+
+.dropdown img {
+    width: 35px; /* Slightly larger icon */
+    height: 35px; /* Corrected height */
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    width: 220px; /* Wider dropdown */
+    z-index: 1;
+}
+
+.dropdown-content a,
+.dropdown-content p {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.dropdown-content a:hover,
+.dropdown-content p:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    padding: 20px;
+}
+
+/* Quick Links */
+.quick-links {
+    margin-bottom: 20px;
+}
+
+.quick-links-dropdown {
+    position: relative;
+    margin-bottom: 20px; /* Space between Quick Links and Welcome Message */
+}
+
+.quick-link-btn {
+    background-color: #007bff; /* Blue button background */
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 24px;
+    display: block;
+    width: 100%; /* Full width button */
+}
+
+.quick-link-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.quick-links-dropdown .dropdown-content {
+    width: auto;
+}
+
+.quick-links-dropdown .dropdown-content a {
+    padding: 10px;
+    color: #007bff; /* Blue text color for links */
+    text-decoration: none;
+}
+
+.quick-links-dropdown .dropdown-content a:hover {
+    background-color: #f1f1f1; /* Light gray background on hover */
+}
+
+/* Welcome Message */
+.welcome-message {
+    margin-bottom: 20px;
+}
+
+/* Card styling */
+.card {
+    background-color: #d8d9d6; /* Darker card background */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 25px; /* Increased padding */
+    margin-bottom: 15px;
+}
+
+.card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card ul li {
+    padding: 5px 0;
+}
+
+/* Sections */
+section {
+    margin-bottom: 20px;
+}
+
+h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
