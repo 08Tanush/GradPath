@@ -1,97 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="../styles/style.css">
-</head>
-<body>
-    <header>
-        <div class="navbar">
-            <div class="logo">
-                <h1>GradPath</h1>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Edit Profile</a></li>
-                    <li><a href="#">Post</a></li>
-                    <li><a href="#">Me</a></li>
-                </ul>
-            </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>GradPath</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main" style="background-color: #f0ffff">
+      <!-- Navbar -->
+      <div class="navbar">
+        <div class="logo">
+          <i
+            class="fa-solid fa-book-atlas"
+            color="Red"
+            padding-top="5rem"
+            height="10px"
+            width="10px"
+          >
+            GradPath</i
+          >
         </div>
-    </header>
+        <div class="links">
+          <a href="/" class="{{ 'active' if request.path == '/' else '' }}"
+            >Home</a
+          >
+          <a
+            href="/Profile"
+            class="{{ 'active' if request.path == '/maps' else '' }}"
+            >Profile</a
+          >
+          
+        </div>
+      </div>
 
-    <main>
-        <section class="left-sidebar">
-            <div class="profile">
-                <img src="../../images/user.png" alt="Profile Picture">
-                <h2>Tanush Karane</h2>
-                <p>Front-End Developer at Browser Stack</p>
-                <p>Mumbai Maharashtra</p>
-            </div>
-        </section>
+      <!-- Page content -->
+      <div class="main-content">
+        <h1 align="center">Welcome to GradPath.</h1>
+        <hr />
+        <iframe
+          src="<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.6014441451525!2d72.88602117497749!3d19.081253182124403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8866a456c9f%3A0x8d1745d15baac575!2sDon%20Bosco%20Institute%20of%20Technology%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1726576173429!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>"
+          width="600"
+          height="450"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </div>
+      <h1 align="center">About Us </h1>
+      <p>
+       <br> Welcome To GradPath , The platform to show your skills<br>
+      </p>
 
-        <section class="feed">
-            <div class="posts">
-                <div class="post">
-                    <div class="post-header">
-                        <img src="../../images/user.png" alt="User Avatar" class="user-avatar">
-                        <div class="user-info">
-                            <h3>John Doe</h3>
-                            <p>Front-End Developer at Browser Stack</p>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <p>Excited to share that I have completed a new certification in Cyber-Security! 🎉 Check out my certificate below.</p>
-                        <img src="../../images/certificate.png" alt="Certificate" class="certificate-image">
-                    </div>
-                    <div class="post-footer">
-                        <button>Like</button>
-                        <button>Comment</button>
-                        <button>Share</button>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="post-header">
-                        <img src="../../images/user.png" alt="User Avatar" class="user-avatar">
-                        <div class="user-info">
-                            <h3>Jane Smith</h3>
-                            <p>Software Engineer at TechCorp</p>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <p>Thrilled to announce my latest achievement in Data Science! Have a look at my certificate below.</p>
-                        <img src="../../images/certificate.png" alt="Certificate" class="certificate-image">
-                    </div>
-                    <div class="post-footer">
-                        <button>Like</button>
-                        <button>Comment</button>
-                        <button>Share</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-
-        <section class="right-sidebar">
-            <div class="about-us">
-                <h2>About Us</h2>
-                <h2>Welcome to GradPath, the platform  to show your skills</h2>
-                <h3>Our Mission:</h3>
-                <p>To facilitate meaningful interactions and opportunities among the DBIT Mumbai community, fostering professional development and lifelong connections.</p>
-                <h3>Our Vision:</h3>
-                <p>To be the premier networking tool for DBIT Mumbai, empowering users with the resources and connections needed to excel in their careers and beyond.</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>MyLink © 2024</p>
-    </footer>
-</body>
+      <footer class="footer">
+        <div class="f-info">
+          <div class="f-info-socials">
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+          </div>
+          <div class="f-info-brand">&copy; AquaSense</div>
+          <div class="f-info-links">
+            <a href="/privacy">Privacy</a>
+            &nbsp<a href="/terms">Terms</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Activity</title>
+    <link rel="stylesheet" href="../styles/addActivity.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Activity</h2>
+        <form id="activity-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <!-- Activity Title -->
+            <label for="title">Activity Title (required)</label>
+            <input type="text" id="title" name="title" required>
+
+            <!-- Description -->
+            <label for="description">Description (required)</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <!-- Category -->
+            <label for="category">Category (required)</label>
+            <select id="category" name="category" required onchange="loadCategoryFields()">
+                <option value="">Select a category</option>
+                <option value="academic-achievements">Academic Achievements</option>
+                <option value="competitions-hackathons">Competitions & Hackathons</option>
+                <option value="extracurricular-activities">Extracurricular Activities</option>
+                <!-- Add other categories here -->
+            </select>
+
+            <!-- Dynamic Category Fields -->
+            <div id="category-fields"></div>
+
+            <!-- Start Date/Time -->
+            <label for="start-date">Start Date/Time (required)</label>
+            <input type="datetime-local" id="start-date" name="start_date" required>
+
+            <!-- End Date/Time -->
+            <label for="end-date">End Date/Time (required)</label>
+            <input type="datetime-local" id="end-date" name="end_date" required>
+
+            <!-- Location -->
+            <label for="location">Location (required)</label>
+            <input type="text" id="location" name="location" required>
+
+            <!-- Document Upload -->
+            <label for="document">Document Upload (required)</label>
+            <input type="file" id="document" name="document" required>
+
+            <!-- Visibility (default to public) -->
+            <label for="visibility">Visibility (required)</label>
+            <select id="visibility" name="visibility" required>
+                <option value="public" selected>Public</option>
+                <option value="private">Private</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit Activity</button>
+        </form>
+    </div>
+
+    <script>
+        // Example for dynamically loading category fields
+function loadCategoryFields() {
+    const category = document.getElementById('category').value;
+    const categoryFields = document.getElementById('category-fields');
+
+    categoryFields.innerHTML = '';  // Clear existing fields
+
+    if (category === 'academic-achievements') {
+        categoryFields.innerHTML = `
+            <label for="type-of-achievement">Type of Achievement (required)</label>
+            <select id="type-of-achievement" name="type_of_achievement" required>
+                <option value="Course">Course</option>
+                <option value="Research Paper">Research Paper</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Certification">Certification</option>
+            </select>
+
+            <label for="institution">Institution/Organization (required)</label>
+            <input type="text" id="institution" name="institution" required>
+            
+            <label for="completion-date">Completion Date (required)</label>
+            <input type="date" id="completion-date" name="completion_date" required>
+        `;
+    } else if (category === 'competitions-hackathons') {
+        categoryFields.innerHTML = `
+            <label for="competition-name">Competition Name (required)</label>
+            <input type="text" id="competition-name" name="competition_name" required>
+
+            <label for="date-of-event">Date of Event (required)</label>
+            <input type="date" id="date-of-event" name="date_of_event" required>
+
+            <label for="organizer">Organizer (required)</label>
+            <input type="text" id="organizer" name="organizer" required>
+        `;
+    }
+    // Add similar blocks for other categories
+}
+
+    </script>
+</body>
+</html>
