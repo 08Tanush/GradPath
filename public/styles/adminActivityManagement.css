@@ -61,7 +61,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     background: white;
     padding: 20px;
@@ -71,7 +71,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #333;
+    color: white;
     margin-bottom: 30px;
 }
 
@@ -102,21 +102,27 @@ tr:nth-child(even) {
 .action-btns {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
-.view-btn, .delete-btn {
+.view-btn, .reject-btn {
     padding: 8px 12px;
     text-decoration: none;
     border-radius: 5px;
     color: white;
     cursor: pointer;
+    margin-right: 10px; /* Added margin to create space */
+}
+
+.reject-btn {
+    margin-right: 0; /* Ensure the last button has no extra margin */
 }
 
 .view-btn {
     background-color: #4CAF50;
 }
 
-.delete-btn {
+.reject-btn {
     background-color: #f44336;
 }
 
@@ -124,7 +130,7 @@ tr:nth-child(even) {
     background-color: #45a049;
 }
 
-.delete-btn:hover {
+.reject-btn:hover {
     background-color: #d32f2f;
 }
 
@@ -147,4 +153,10 @@ tr:nth-child(even) {
 
 .search-btn:hover {
     background-color: #555;
+}
+
+.faculty-dropdown {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
