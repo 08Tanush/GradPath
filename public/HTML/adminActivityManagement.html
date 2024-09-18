@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Activity Management | GradPath</title>
+    <link rel="stylesheet" href="/public/styles/adminActivityManagement.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="header">
+        <h1>Activity Management</h1> 
+        <div class="profile" onclick="toggleDropdown()">
+          <span class="profile-icon"></span>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <a href="#">View Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Search Bar -->
+        <div style="text-align: center;">
+            <input type="text" class="search-bar" placeholder="Search by activity name or student...">
+            <button class="search-btn">Search</button>
+        </div>
+
+        <!-- Activities Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Activity Title</th>
+                    <th>Student Name</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Research Project: AI Study</td>
+                    <td>Tanush Karane</td>
+                    <td>Academic</td>
+                    <td>Pending Review</td>
+                    <td>12th Sep 2024</td>
+                    <td class="action-btns">
+                        <a href="#" class="view-btn">View</a>
+                        <a href="#" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Basketball Championship</td>
+                    <td>Aditi Mehta</td>
+                    <td>Sports</td>
+                    <td>Approved</td>
+                    <td>8th Sep 2024</td>
+                    <td class="action-btns">
+                        <a href="#" class="view-btn">View</a>
+                        <a href="#" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("profile-dropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        // Add event listener for clicking outside the dropdown
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile') && !event.target.matches('.profile-icon')) {
+                var dropdowns = document.getElementsByClassName("profile-dropdown");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
