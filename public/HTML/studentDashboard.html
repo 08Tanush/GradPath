@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="../styles/studentDashboard.css">
+        
+    <!-- ===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="script.js"></script>
+
+     <title>Responsive Navigation Menu Bar</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-bar">
+            <i class='bx bx-menu sidebarOpen' ></i>
+            <span class="logo navLogo"><a href="#">CodingLab</a></span>
+            <div class="menu">
+                <div class="logo-toggle">
+                    <span class="logo"><a href="#">CodingLab</a></span>
+                    <i class='bx bx-x siderbarClose'></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="darkLight-searchBox">
+                <div class="dark-light">
+                    <i class='bx bx-moon moon'></i>
+                    <i class='bx bx-sun sun'></i>
+                </div>
+                <div class="searchBox">
+                   <div class="searchToggle">
+                    <i class='bx bx-x cancel'></i>
+                    <i class='bx bx-search search'></i>
+                   </div>
+                    <div class="search-field">
+                        <input type="text" placeholder="Search...">
+                        <i class='bx bx-search'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-section">
+        <div class="left-sidebar">
+            <div class="profile-card">
+                <img src="../../images/user1.png" alt="Profile Picture" class="profile-pic">
+                <h3>Tanush Karane</h3>
+                <p class="rank">Rank:20</p>
+                <button class="edit-btn">Edit Profile</button>
+                <p class="location">India</p>
+                <a href="#" class="username">08Tanush</a>
+            </div>
+            <div class="community-stats">
+                <h4>Community Stats</h4>
+                <p>Projects Completed: <span>15</span></p>
+                <p>Certificates Earned: <span>10</span></p>
+                <p>Ongoing Porjects: <span>5</span></p>
+                <p>Skills Improved: <span>3</span></p>
+            </div>
+        </div>
+    
+        <div class="main-content">
+            <div class="projects-overview">
+                <h4>Projects Overview</h4>
+                <div class="stats-circle">
+                    <p><strong>20</strong><br>Current Ranking</p>
+                </div>
+                <div class="project-submissions">
+                    <h4>20 Submissions in the Past Year</h4>
+                    <!--ACTIVITY CALENDER-->
+                    <div class="calendar-activity">
+                        <div class="container">
+                            <div class="calendar">
+                              <div class="front">
+                                <div class="current-date">
+                                  <h1>Wednesday 18th</h1>
+                                  <h1>September</h1> 
+                                </div>
+                      
+                                <div class="current-month">
+                                  <ul class="week-days">
+                                    <li>MON</li>
+                                    <li>TUE</li>
+                                    <li>WED</li>
+                                    <li>THU</li>
+                                    <li>FRI</li>
+                                    <li>SAT</li>
+                                    <li>SUN</li>
+                                  </ul>
+                      
+                                  <div class="weeks">
+                                    <div class="first">
+                                      <span class="last-month">28</span>
+                                      <span class="last-month">29</span>
+                                      <span class="last-month">30</span>
+                                      <span class="last-month">31</span>
+                                      <span>01</span>
+                                      <span>02</span>
+                                      <span>03</span>
+                                    </div>
+                      
+                                    <div class="second">
+                                      <span>04</span>
+                                      <span>05</span>
+                                      <span class="event">06</span>
+                                      <span>07</span>
+                                      <span>08</span>
+                                      <span>09</span>
+                                      <span>10</span>
+                                    </div>
+                      
+                                    <div class="third">
+                                      <span>11</span>
+                                      <span>12</span>
+                                      <span>13</span>
+                                      <span>14</span>
+                                      <span class="active">15</span>
+                                      <span>16</span>
+                                      <span>17</span>
+                                    </div>
+                      
+                                    <div class="fourth">
+                                      <span>18</span>
+                                      <span>19</span>
+                                      <span>20</span>
+                                      <span>21</span>
+                                      <span>22</span>
+                                      <span>23</span>
+                                      <span>24</span>
+                                    </div>
+                      
+                                    <div class="fifth">
+                                      <span>25</span>
+                                      <span>26</span>
+                                      <span>27</span>
+                                      <span>28</span>
+                                      <span>29</span>
+                                      <span>30</span>
+                                      <span>31</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                      
+                              <div class="back">
+                                <input placeholder="Advance WEB-DEV course Completed">
+                                <div class="Learned Advance WEB-DEV">
+                                  <div class="date">
+                                    <p class="info-date">
+                                    Date: <span>Sep 15th, 2024</span>
+                                    </p>
+                                    <p class="info-time">
+                                      Time: <span>6:35 PM</span>
+                                    </p>
+                                  </div>
+                                  <div class="address">
+                                    <p>
+                                      Address: <span>IIT Mumbai,Powai,<Mumbai-78></Mumbai-78></span>
+                                    </p>
+                                  </div>
+                                  <div class="observations">
+                                    <p>
+                                      Observations: <span>Be there 15 minutes earlier</span>
+                                    </p>
+                                  </div>
+                                </div>
+                      
+                                <div class="actions">
+                                  <button class="save">
+                                    Save <i class="ion-checkmark"></i>
+                                  </button>
+                                  <button class="dismiss">
+                                    Dismiss <i class="ion-android-close"></i>
+                                  </button>
+                                </div>
+                              </div>
+                      
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="recent-projects">
+                <h4>Recent Projects</h4>
+                <div class="project-list">
+                    <div class="project-item">
+                        <p>AquaSense</p>
+                        <small>Type: python Based Web project</small>
+                        <p><br>AquaSense is an web based GEO-SPATIAL analysis Project <br>
+                        Used for Monitoring water bodies their trends in water levels for analysts </p>
+
+                    </div>
+                    <div class="project-item">
+                        <p>GradPath</p>
+                        <small>Type: Management</small>
+                        <p>An educational platform where you can share your Skills sets your achivement and many more </p>
+                    </div>
+                    <div class="project-item">
+                        <p>Amazon clone</p>
+                        <small>Type: Front-end Development</small>
+                        <p>Made an amazon clone as a first step towards web developement </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="right-sidebar">
+            <div class="skills-card">
+                <h4>Skills</h4>
+                <ul>
+                    <li>Python </li>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                    <li>MongoDB</li>
+                    <li>C-PROGRAMNG</li>
+                    <li>HTML&CSS</li>
+
+                </ul>
+            </div>
+            <div class="badges-card">
+                <h4>Badges</h4>
+                <p>20 Badges Earned</p>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    
+    
+<script>
+
+const body = document.querySelector("body"),
+      nav = document.querySelector("nav"),
+      modeToggle = document.querySelector(".dark-light"),
+      searchToggle = document.querySelector(".searchToggle"),
+      sidebarOpen = document.querySelector(".sidebarOpen"),
+      siderbarClose = document.querySelector(".siderbarClose");
+
+      let getMode = localStorage.getItem("mode");
+          if(getMode && getMode === "dark-mode"){
+            body.classList.add("dark");
+          }
+
+// js code to toggle dark and light mode
+      modeToggle.addEventListener("click" , () =>{
+        modeToggle.classList.toggle("active");
+        body.classList.toggle("dark");
+
+        // js code to keep user selected mode even page refresh or file reopen
+        if(!body.classList.contains("dark")){
+            localStorage.setItem("mode" , "light-mode");
+        }else{
+            localStorage.setItem("mode" , "dark-mode");
+        }
+      });
+
+// js code to toggle search box
+        searchToggle.addEventListener("click" , () =>{
+        searchToggle.classList.toggle("active");
+      });
+ 
+      
+//   js code to toggle sidebar
+sidebarOpen.addEventListener("click" , () =>{
+    nav.classList.add("active");
+});
+
+body.addEventListener("click" , e =>{
+    let clickedElm = e.target;
+
+    if(!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")){
+        nav.classList.remove("active");
+    }
+});
+
+var app = {
+  settings: {
+    container: $('.calendar'),
+    calendar: $('.front'),
+    days: $('.weeks span'),
+    form: $('.back'),
+    input: $('.back input'),
+    buttons: $('.back button')
+  },
+
+  init: function() {
+    instance = this;
+    settings = this.settings;
+    this.bindUIActions();
+  },
+
+  swap: function(currentSide, desiredSide) {
+    settings.container.toggleClass('flip');
+
+    currentSide.fadeOut(900);
+    currentSide.hide();
+    desiredSide.show();
+
+  },
+
+  bindUIActions: function() {
+    settings.days.on('click', function(){
+      instance.swap(settings.calendar, settings.form);
+      settings.input.focus();
+    });
+
+    settings.buttons.on('click', function(){
+      instance.swap(settings.form, settings.calendar);
+    });
+  }
+}
+
+app.init();
+</script>
+
+</body>
+</html>
