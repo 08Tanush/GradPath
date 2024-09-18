@@ -1,39 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, getUserById, updateUserById, deleteUserById } = require('../controllers/userController');
-const { createProfile, getProfileById, updateProfileById, deleteProfileById } = require('../controllers/profileController');
-const { createActivity, getActivityById, updateActivityById, deleteActivityById } = require('../controllers/activityController');
-const { createApproval, getApprovalById, updateApprovalById, deleteApprovalById } = require('../controllers/approvalController');
-const { createDocument, getDocumentById, updateDocumentById, deleteDocumentById } = require('../controllers/documentController');
+const activityController = require('../controllers/activityController');
 
-// User Routes
-router.post('/user', createUser);
-router.get('/user/:id', getUserById);
-router.put('/user/:id', updateUserById);
-router.delete('/user/:id', deleteUserById);
+// Fetch categories and fields
+router.get('/categories', activityController.getCategories);
+router.get('/categoryFields/:categoryId', activityController.getCategoryFields);
 
-// Profile Routes
-router.post('/profile', createProfile);
-router.get('/profile/:id', getProfileById);
-router.put('/profile/:id', updateProfileById);
-router.delete('/profile/:id', deleteProfileById);
-
-// Activity Routes
-router.post('/activity', createActivity);
-router.get('/activity/:id', getActivityById);
-router.put('/activity/:id', updateActivityById);
-router.delete('/activity/:id', deleteActivityById);
-
-// Approval Routes
-router.post('/approval', createApproval);
-router.get('/approval/:id', getApprovalById);
-router.put('/approval/:id', updateApprovalById);
-router.delete('/approval/:id', deleteApprovalById);
-
-// Document Routes
-router.post('/document', createDocument);
-router.get('/document/:id', getDocumentById);
-router.put('/document/:id', updateDocumentById);
-router.delete('/document/:id', deleteDocumentById);
+// Upload activity
+router.post('/uploadActivity', activityController.uploadActivity);
 
 module.exports = router;
+const port=3000
+app.get('/api/activities', async (req, res) => {
+    try {
+      const activities = await Activity.find().sort({ start_dateTime: -1 });
+      res.json(activities);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch activities' });
+    }
+  });
+  
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
+

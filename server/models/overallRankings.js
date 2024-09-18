@@ -1,5 +1,5 @@
 // models/OverallRanking.js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const overallRankingSchema = new mongoose.Schema({
     profile_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true },

@@ -1,5 +1,5 @@
 // models/FacultyAssignment.js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const facultyAssignmentSchema = new mongoose.Schema({
     activity_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Activity', required: true },

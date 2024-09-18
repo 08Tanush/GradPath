@@ -1,8 +1,9 @@
 
 // models/Category.js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
+    id: { type: String, unique: true }, // Explicitly defined 'id' field
     name: { type: String, required: true },
     description: { type: String },
     created_at: { type: Date, default: Date.now }
@@ -10,4 +11,18 @@ const categorySchema = new mongoose.Schema({
 
 const Category = mongoose.model('Category', categorySchema);
 
-export default Category;
+module.exports = {Category};
+
+const express = require('express');
+const router = express.Router();
+
+router.get('/categories', async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.json({ categories });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error loading categories' });
+  }
+});
+

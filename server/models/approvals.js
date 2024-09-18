@@ -1,5 +1,5 @@
 // models/Approval.js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const approvalSchema = new mongoose.Schema({
     document_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Document', required: true },

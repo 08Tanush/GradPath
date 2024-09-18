@@ -1,5 +1,6 @@
 // models/CategoryField.js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const express = require('express');
 
 const categoryFieldSchema = new mongoose.Schema({
     category_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
@@ -12,4 +13,18 @@ const categoryFieldSchema = new mongoose.Schema({
 
 const CategoryField = mongoose.model('CategoryField', categoryFieldSchema);
 
-export default CategoryField;
+const router = express.Router();
+
+router.get('/categoryFields/:categoryId', async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+    const fields = await CategoryField.find({ categoryId });
+    res.json({ fields });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error loading category fields' });
+  }
+});
+
+
+module.exports = {CategoryField, router};
