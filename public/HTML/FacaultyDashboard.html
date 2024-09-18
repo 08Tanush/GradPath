@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="../styles/facaultydashboard.css"> <!-- Assuming your CSS is in the css folder -->
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="#">GradPath</a>
+        </div>
+        <div class="navbar-links">
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="Search...">
+                <button class="search-btn">Search</button>
+            </div>
+            <a href="#">Home</a>
+            <a href="#">Activities</a>
+            <a href="#">Notifications</a>
+            <a href="#">Profile</a>
+            
+            <div class="dropdown notifications">
+                <img src="../../images/bell.png" alt="Notifications">
+                <span class="notification-count">3</span>
+                <div class="dropdown-content">
+                    <p>New submission from Tanush Karane</p>
+                    <p>System update: Review deadline approaching</p>
+                </div>
+            </div>
+            
+            <div class="dropdown profile-dropdown">
+                <img src="../../images/user.png" alt="Profile">
+                <div class="dropdown-content">
+                    <a href="#">View Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <div class="quick-links-dropdown">
+                <button class="quick-link-btn">Quick Links</button>
+                <div class="dropdown-content">
+                    <a href="#">New Submissions</a>
+                    <a href="#">Messages Inbox</a>
+                    <a href="#">Help & Support</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <h2>Welcome, Prof. Shiv Negi</h2>
+            <p>Here’s an overview of today’s activities and tasks.</p>
+        </div>
+
+        <!-- Pending Activities -->
+        <section class="pending-activities">
+            <h3>Pending Reviews</h3>
+            <div class="card">
+                <p><strong>Tanush Karane</strong></p>
+                <p>Curricular Activities:</p>
+                <ul>
+                    <li>Course: Advanced Data Analysis</li>
+                    <li>Certification: AI & ML from AICTE</li>
+                    <li>Talks Attended: "Future of AI in Healthcare"</li>
+                </ul>
+                <p>Notification: Please review the student's curricular activities and provide feedback if necessary.</p>
+            </div>
+            <!-- Repeat for more activities -->
+        </section>
+
+        <!-- Recent Approvals -->
+        <section class="recent-approvals">
+            <h3>Recent Approvals</h3>
+            <div class="card">
+                <p><strong>Aditi Mehta</strong></p>
+                <p>Course: Web Development</p>
+                <p>Approved on: 8th Sep 2024</p>
+            </div>
+            <!-- Repeat for more approvals -->
+        </section>
+
+        <!-- Notifications -->
+        <section class="notifications">
+            <h3>Notifications</h3>
+            <ul>
+                <li>New submission from Tanush Karane</li>
+                <li>System update: Review deadline approaching</li>
+            </ul>
+        </section>
+
+        <!-- Calendar / Upcoming Deadlines -->
+        <section class="upcoming-deadlines">
+            <h3>Upcoming Deadlines</h3>
+            <p>No deadlines in the next week.</p>
+        </section>
+    </div>
+</body>
+</html>
