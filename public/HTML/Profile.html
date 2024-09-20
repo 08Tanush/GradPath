@@ -1,59 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="..//styles/profile.css">
-</head>
-
-<body>
-    <div class="container">
-        <div class="left-section">
-            <div class="profile-section">
-                <div class="profile-picture">
-                    <img src="../../images/user.png" alt="Profile Picture">
-                </div>
-                <h1>Name : Tanush</h1>
-                <p class="title">Engineering Graduate</p>
-            </div>
-
-            <div class="social-links">
-                <a href="#"><img src="../../images/Linkdin.png" alt="LinkedIn"></a>
-                <a href="#"><img src="../../images/Twitter.png" alt="Twitter"></a>
-                <a href="#"><img src="../../images/insttagram new.jpg" alt="Instagram"></a>
-                <a href="mailto:xyz@example.com" class="email-button">Email Me</a>
-            </div>
-
-            <div class="about">
-                <h2>About Me</h2>
-                <p>Hello everyone Tanush here!</p>
-                <ul>
-                    <li>HTML & CSS</li>
-                    <li>ReactJS</li>
-                    <li>MongoDB</li>
-                    <li>Java</li>
-                    <li>JavaScript</li>
-                    <li>Python</li>
-                </ul>
-                <p>Backend Intern @Arcon</p>
-            </div>
-
-            <div class="buttons">
-                <a href="./portfolio.html" class="portfolio-button">Portfolio</a>
-                <a href="#" class="resume-button">Resume</a>
-            </div>
-        </div>
-        <div class="right-section">
-            <img src="../../images/portfolio side image.png" alt="Portfolio Image">
-        </div>
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="../styles/profile.css">
         
-    </div>
+    <!-- ===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-    <footer class="footer">
-        <p>&copy; 2024 Tanush Karane | All Rights Reserved</p>
+    <script src="script.js"></script>
+
+ <title>Responsive Navigation Menu Bar</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-bar">
+            <i class='bx bx-menu sidebarOpen' ></i>
+            <span class="logo navLogo"><a href="#">GradPath</a></span>
+            <div class="menu">
+                <div class="logo-toggle">
+                    <span class="logo"><a href="#">GradPath</a></span>
+                    <i class='bx bx-x siderbarClose'></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="studentDashboard.html">Home</a></li>
+                    <li><a href="addActivity.html">Post</a></li>
+                    <li><a href="portfolio2.html">Portfolio</a></li> <!-- Updated Portfolio link -->
+                    <li><a href="Profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="darkLight-searchBox">
+                <div class="dark-light">
+                    <i class='bx bx-moon moon'></i>
+                    <i class='bx bx-sun sun'></i>
+                </div>
+                <div class="searchBox">
+                   <div class="searchToggle">
+                    <i class='bx bx-x cancel'></i>
+                    <i class='bx bx-search search'></i>
+                   </div>
+                    <div class="search-field">
+                        <input type="text" placeholder="Search...">
+                        <i class='bx bx-search'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!--Code For Main section of student profile-->
+<section id="profile" class="animate">
+    <img src="../../images/user1.png.png" alt="Student Photo">
+    <h2 style="color: #FFD700;">Tanush Karane</h2>
+    <p style="color: #2c3e50; font-style: italic;">Information Technology TE Stusent</p>
+    <p style="color: #2c3e50;">Design Head At GDGC-DBIT</p>
+    <p style="color: #2c3e50;">Contact: tanushkarane@gmail.com</p>
+  </section>
+  <section id="skills" class="animate">
+    <h2 style="color: #FFD700;">Skills</h2>
+    <ul>
+      <li>Programming</li>
+      <li>Web Development</li>
+      <li>Data Structures</li>
+      <li>JavaScript</li>
+      <li>HTML/CSS</li>
+      <li>Python</li>
+    </ul>
+  </section>
+  <section id="education" class="animate">
+    <h2 style="color: #FFD700;">Education</h2>
+    <p style="color: #2c3e50;">Bachelor of Engineering In Information Technology </p>
+    <p style="color: #2c3e50;">Mumbai UniversityS</p>
+    <p style="color: #2c3e50;">Graduation: July 2026</p>
+  </section>
+  <section id="experience" class="animate">
+    <h2 style="color: #FFD700;">Experience</h2>
+    <h3 style="color: #2c3e50;">Software Developer Intern</h3>
+    <p style="color: #2c3e50;">XYZ Tech Solutions, Summer 2022</p>
+    <p style="color: #2c3e50;">Worked on web application development and collaborated with cross-functional teams.</p>
+  </section>
+  <section id="projects" class="animate">
+    <h2 style="color: #FFD700;">Projects</h2>
+    <h3 style="color: #2c3e50;">Portfolio Website</h3>
+    <li><a href="portfolio2.html">Portfolio</a></li>
+    <p style="color: #2c3e50;">Designed and developed a personal portfolio website to showcase skills and projects.</p>
+    <h3 style="color: #2c3e50;">Chat Application</h3>
+    <p style="color: #2c3e50;">Built a real-time chat application using Socket.io and Node.js for a class project.</p>
+  </section>
+  <section id="contact" class="animate">
+    <h2 style="color: #FFD700;">Contact</h2>
+    <p style="color: #2c3e50;">Email:tanushkarane@gmail.com</p>
+    <p style="color: #2c3e50;">LinkedIn: https://www.linkedin.com/in/tanush-karane-75994a31a </p>
+    <p style="color: #2c3e50;">GitHub:   github.com/08Tanush</p>
+  </section>
+
+  <div class="footer-basic">
+    <footer>
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Company Name © 2018</p>
     </footer>
-</body>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script>
 
+    const body = document.querySelector("body"),
+          nav = document.querySelector("nav"),
+          modeToggle = document.querySelector(".dark-light"),
+          searchToggle = document.querySelector(".searchToggle"),
+          sidebarOpen = document.querySelector(".sidebarOpen"),
+          siderbarClose = document.querySelector(".siderbarClose");
+    
+          let getMode = localStorage.getItem("mode");
+              if(getMode && getMode === "dark-mode"){
+                body.classList.add("dark");
+              }
+    
+    // js code to toggle dark and light mode
+          modeToggle.addEventListener("click" , () =>{
+            modeToggle.classList.toggle("active");
+            body.classList.toggle("dark");
+    
+            // js code to keep user selected mode even page refresh or file reopen
+            if(!body.classList.contains("dark")){
+                localStorage.setItem("mode" , "light-mode");
+            }else{
+                localStorage.setItem("mode" , "dark-mode");
+            }
+          });
+    
+    // js code to toggle search box
+            searchToggle.addEventListener("click" , () =>{
+            searchToggle.classList.toggle("active");
+          });
+     
+          
+    //   js code to toggle sidebar
+    sidebarOpen.addEventListener("click" , () =>{
+        nav.classList.add("active");
+    });
+    
+    body.addEventListener("click" , e =>{
+        let clickedElm = e.target;
+    
+        if(!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")){
+            nav.classList.remove("active");
+        }
+    });
+    
+    var app = {
+      settings: {
+        container: $('.calendar'),
+        calendar: $('.front'),
+        days: $('.weeks span'),
+        form: $('.back'),
+        input: $('.back input'),
+        buttons: $('.back button')
+      },
+    
+      init: function() {
+        instance = this;
+        settings = this.settings;
+        this.bindUIActions();
+      },
+    
+      swap: function(currentSide, desiredSide) {
+        settings.container.toggleClass('flip');
+    
+        currentSide.fadeOut(900);
+        currentSide.hide();
+        desiredSide.show();
+    
+      },
+    
+      bindUIActions: function() {
+        settings.days.on('click', function(){
+          instance.swap(settings.calendar, settings.form);
+          settings.input.focus();
+        });
+    
+        settings.buttons.on('click', function(){
+          instance.swap(settings.form, settings.calendar);
+        });
+      }
+    }
+    
+    app.init();
+    </script>
+</body>
 </html>
