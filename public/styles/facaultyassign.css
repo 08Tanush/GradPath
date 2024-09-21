@@ -3,21 +3,31 @@ body {
     background-color: #f4f4f4;
     padding: 0;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     background-color: #333;
     color: white;
-    margin-bottom: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
     margin: 0;
     font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .header .profile {
@@ -34,6 +44,11 @@ body {
     vertical-align: middle;
     background-image: url('https://via.placeholder.com/40');
     background-size: cover;
+    transition: transform 0.3s ease;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
 }
 
 .profile-dropdown {
@@ -54,6 +69,7 @@ body {
     color: black;
     text-decoration: none;
     text-align: left;
+    transition: background-color 0.3s ease;
 }
 
 .profile-dropdown a:hover {
@@ -67,18 +83,25 @@ body {
     padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    width: 90%;
+    margin-top: 80px;
 }
 
 h1 {
     text-align: center;
-    color: white;
+    color: #333;
     margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 table, th, td {
@@ -111,11 +134,12 @@ tr:nth-child(even) {
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    margin-right: 10px; /* Added margin to create space */
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .reject-btn {
-    margin-right: 0; /* Ensure the last button has no extra margin */
+    margin-right: 0;
 }
 
 .view-btn {
@@ -140,6 +164,12 @@ tr:nth-child(even) {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: #333;
+    outline: none;
 }
 
 .search-btn {
@@ -149,6 +179,7 @@ tr:nth-child(even) {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .search-btn:hover {
@@ -159,4 +190,10 @@ tr:nth-child(even) {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.faculty-dropdown:focus {
+    border-color: #333;
+    outline: none;
 }
