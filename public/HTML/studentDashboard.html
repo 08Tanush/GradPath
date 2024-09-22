@@ -1,328 +1,155 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ===== CSS ===== -->
+    
+    <!----======== CSS ======== -->
     <link rel="stylesheet" href="../styles/studentDashboard.css">
-        
-    <!-- ===== Boxicons CSS ===== -->
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <script src="script.js"></script>
-
-     <title>Responsive Navigation Menu Bar</title>
+    <title>Student Dashboard Panel</title>
 </head>
 <body>
     <nav>
-        <div class="nav-bar">
-            <i class='bx bx-menu sidebarOpen' ></i>
-            <span class="logo navLogo"><a href="#">GradPath</a></span>
-            <div class="menu">
-                <div class="logo-toggle">
-                    <span class="logo"><a href="#">GradPath</a></span>
-                    <i class='bx bx-x siderbarClose'></i>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="studentDashboard.html">Home</a></li>
-                    <li><a href="addActivity.html">Post</a></li>
-                    <li><a href="portfolio2.html">Portfolio</a></li> <!-- Updated Portfolio link -->
-                    <li><a href="Profile.html">Profile</a></li>
-                </ul>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="../../images/user1.png.png" alt="">
             </div>
-            <div class="darkLight-searchBox">
-                <div class="dark-light">
-                    <i class='bx bx-moon moon'></i>
-                    <i class='bx bx-sun sun'></i>
+
+            <span class="logo_name">GradPath</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Home</span>
+                </a></li>
+                <li><a href="addActivity2.html">
+                  <i class="uil uil-plus"></i>
+                    <span class="link-name">Post</span>
+                </a></li>
+                <li><a href="portfolio2.html">
+                    <i class=" uil-comment-download"></i> 
+                    <span class="link-name">Portfolio</span>
+                </a></li>
+                
+                <li><a href="Profile.html">
+                    <i class="uil uil-browser"></i>
+                    <span class="link-name">Profile</span>
+                </a></li> 
+
+                <li><a href="entryManagement.html">
+                  <i class="uil uil-cog"></i>
+                  <span class="link-name">Manage Activity</span>
+              </a></li>
+            
+            <ul class="logout-mode">
+                <li><a href="#">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                    <span class="link-name">Dark Mode</span>
+                </a>
+
+                <div class="mode-toggle">
+                  <span class="switch"></span>
                 </div>
-                <div class="searchBox">
-                   <div class="searchToggle">
-                    <i class='bx bx-x cancel'></i>
-                    <i class='bx bx-search search'></i>
-                   </div>
-                    <div class="search-field">
-                        <input type="text" placeholder="Search...">
-                        <i class='bx bx-search'></i>
-                    </div>
-                </div>
-            </div>
+            </li>
+            </ul>
         </div>
     </nav>
 
-    <div class="Home Page">
-        <div class="left-sidebar">
-            <div class="profile-card">
-                <img src="../../images/user1.png.png" alt="Profile Picture" class="profile-pic">
-                <h3>Tanush Karane</h3>
-                <p class="rank">Rank:20</p>
-                <p class="location">MUMBAI <style font size = 32px></style></p>
-                <a href="#" class="username">08Tanush</a>
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
             </div>
-            <div class="community-stats">
-                <h4>Community Stats</h4>
-                <p>Projects Completed: <span>15</span></p>
-                <p>Certificates Earned: <span>10</span></p>
-                <p>Ongoing Porjects: <span>5</span></p>
-                <p>Skills Improved: <span>3</span></p>
-            </div>
+            
+            <!--<img src="images/profile.jpg" alt="">-->
         </div>
-    
-        <div class="main-content">
-            <div class="projects-overview">
-                <h4>Projects Overview</h4>
-                <div class="stats-circle">
-                    <p><strong>20</strong><br>Current Ranking</p>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Dashboard</span>
                 </div>
-                <div class="project-submissions">
-                    <h4>20 Submissions in the Past Year</h4>
-                    <!--ACTIVITY CALENDER-->
-                    <div class="calendar-activity">
-                        <div class="container">
-                            <div class="calendar">
-                              <div class="front">
-                                <div class="current-date">
-                                  <h1>Wednesday 18th</h1>
-                                  <h1>September</h1> 
-                                </div>
-                      
-                                <div class="current-month">
-                                  <ul class="week-days">
-                                    <li>MON</li>
-                                    <li>TUE</li>
-                                    <li>WED</li>
-                                    <li>THU</li>
-                                    <li>FRI</li>
-                                    <li>SAT</li>
-                                    <li>SUN</li>
-                                  </ul>
-                      
-                                  <div class="weeks">
-                                    <div class="first">
-                                      <span class="last-month">28</span>
-                                      <span class="last-month">29</span>
-                                      <span class="last-month">30</span>
-                                      <span class="last-month">31</span>
-                                      <span>01</span>
-                                      <span>02</span>
-                                      <span>03</span>
-                                    </div>
-                      
-                                    <div class="second">
-                                      <span>04</span>
-                                      <span>05</span>
-                                      <span class="event">06</span>
-                                      <span>07</span>
-                                      <span>08</span>
-                                      <span>09</span>
-                                      <span>10</span>
-                                    </div>
-                      
-                                    <div class="third">
-                                      <span>11</span>
-                                      <span>12</span>
-                                      <span>13</span>
-                                      <span>14</span>
-                                      <span class="active">15</span>
-                                      <span>16</span>
-                                      <span>17</span>
-                                    </div>
-                      
-                                    <div class="fourth">
-                                      <span>18</span>
-                                      <span>19</span>
-                                      <span>20</span>
-                                      <span>21</span>
-                                      <span>22</span>
-                                      <span>23</span>
-                                      <span>24</span>
-                                    </div>
-                      
-                                    <div class="fifth">
-                                      <span>25</span>
-                                      <span>26</span>
-                                      <span>27</span>
-                                      <span>28</span>
-                                      <span>29</span>
-                                      <span>30</span>
-                                      <span>31</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                      
-                              <div class="back">
-                                <input placeholder="Advance WEB-DEV course Completed">
-                                <div class="Learned Advance WEB-DEV">
-                                  <div class="date">
-                                    <p class="info-date">
-                                    Date: <span>Sep 15th, 2024</span>
-                                    </p>
-                                    <p class="info-time">
-                                      Time: <span>6:35 PM</span>
-                                    </p>
-                                  </div>
-                                  <div class="address">
-                                    <p>
-                                      Address: <span>IIT Mumbai,Powai,<Mumbai-78></Mumbai-78></span>
-                                    </p>
-                                  </div>
-                                  <div class="observations">
-                                    <p>
-                                      Observations: <span>Be there 15 minutes earlier</span>
-                                    </p>
-                                  </div>
-                                </div>
-                      
-                                <div class="actions">
-                                  <button class="save">
-                                    Save <i class="ion-checkmark"></i>
-                                  </button>
-                                  <button class="dismiss">
-                                    Dismiss <i class="ion-android-close"></i>
-                                  </button>
-                                </div>
-                              </div>
-                      
-                            </div>
-                          </div>
+
+                <div class="boxes">
+                    <div class="box box1">
+                        <i class="uil uil-thumbs-up"></i>
+                        <span class="text">Rank</span>
+                        <span class="number">20</span>
+                    </div>
+                    <div class="box box2">
+                        <i class="uil uil-comments"></i>
+                        <span class="text">Porject Completed</span>
+                        <span class="number">15</span>
+                    </div>
+                    <div class="box box3">
+                        <i class="uil uil-share"></i>
+                        <span class="text">Certificates</span>
+                        <span class="number">16</span>
                     </div>
                 </div>
             </div>
-    
-            <div class="recent-projects">
-                <h4>Recent Projects</h4>
-                <div class="project-list">
-                    <div class="project-item">
-                        <p>AquaSense</p>
-                        <small>Type: python Based Web project</small>
-                        <p><br>AquaSense is an web based GEO-SPATIAL analysis Project <br>
-                        Used for Monitoring water bodies their trends in water levels for analysts </p>
-
+            <!--skill bar section-->
+            <div class="Skills">
+              <title>Animated Skills Bar</title>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="skill-box">
+                        <span class="title">HTML</span>
+                        <div class="skill-bar">
+                            <span class="skill-per html">
+                                <span class="tooltip">90%</span>
+                            </span>
+                        </div>
                     </div>
-                    <div class="project-item">
-                        <p>GradPath</p>
-                        <small>Type: Management</small>
-                        <p>An educational platform where you can share your Skills sets your achivement and many more </p>
+                    <div class="skill-box">
+                        <span class="title">CSS</span>
+                        <div class="skill-bar">
+                            <span class="skill-per css">
+                                <span class="tooltip">70%</span>
+                            </span>
+                        </div>
                     </div>
-                    <div class="project-item">
-                        <p>Amazon clone</p>
-                        <small>Type: Front-end Development</small>
-                        <p>Made an amazon clone as a first step towards web developement </p>
+                    <div class="skill-box">
+                        <span class="title">JavaScript</span>
+                        <div class="skill-bar">
+                            <span class="skill-per javascript">
+                                <span class="tooltip">50%</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="skill-box">
+                        <span class="title">NodeJS</span>
+                        <div class="skill-bar">
+                            <span class="skill-per nodejs">
+                                <span class="tooltip">30%<span>
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
+                  
+            
         </div>
-    
-        <div class="right-sidebar">
-            <div class="skills-card">
-                <h4>Skills</h4>
-                <ul>
-                    <li>Python </li>
-                    <li>JavaScript</li>
-                    <li>React</li>
-                    <li>MongoDB</li>
-                    <li>C-PROGRAMNG</li>
-                    <li>HTML&CSS</li>
+    </section>
 
-                </ul>
-            </div>
-            <div class="badges-card">
-                <h4>Popular Categories</h4>
-                <p>Popular Category: Extracurricular Activities – 50+ students have submitted in this category</p>
-            </div> 
-        </div>
-    </div>
-    
-    </div>
-    
-    
-<script>
-
-const body = document.querySelector("body"),
-      nav = document.querySelector("nav"),
-      modeToggle = document.querySelector(".dark-light"),
-      searchToggle = document.querySelector(".searchToggle"),
-      sidebarOpen = document.querySelector(".sidebarOpen"),
-      siderbarClose = document.querySelector(".siderbarClose");
-
-      let getMode = localStorage.getItem("mode");
-          if(getMode && getMode === "dark-mode"){
-            body.classList.add("dark");
-          }
-
-// js code to toggle dark and light mode
-      modeToggle.addEventListener("click" , () =>{
-        modeToggle.classList.toggle("active");
-        body.classList.toggle("dark");
-
-        // js code to keep user selected mode even page refresh or file reopen
-        if(!body.classList.contains("dark")){
-            localStorage.setItem("mode" , "light-mode");
-        }else{
-            localStorage.setItem("mode" , "dark-mode");
-        }
-      });
-
-// js code to toggle search box
-        searchToggle.addEventListener("click" , () =>{
-        searchToggle.classList.toggle("active");
-      });
- 
-      
-//   js code to toggle sidebar
-sidebarOpen.addEventListener("click" , () =>{
-    nav.classList.add("active");
-});
-
-body.addEventListener("click" , e =>{
-    let clickedElm = e.target;
-
-    if(!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")){
-        nav.classList.remove("active");
-    }
-});
-
-var app = {
-  settings: {
-    container: $('.calendar'),
-    calendar: $('.front'),
-    days: $('.weeks span'),
-    form: $('.back'),
-    input: $('.back input'),
-    buttons: $('.back button')
-  },
-
-  init: function() {
-    instance = this;
-    settings = this.settings;
-    this.bindUIActions();
-  },
-
-  swap: function(currentSide, desiredSide) {
-    settings.container.toggleClass('flip');
-
-    currentSide.fadeOut(900);
-    currentSide.hide();
-    desiredSide.show();
-
-  },
-
-  bindUIActions: function() {
-    settings.days.on('click', function(){
-      instance.swap(settings.calendar, settings.form);
-      settings.input.focus();
-    });
-
-    settings.buttons.on('click', function(){
-      instance.swap(settings.form, settings.calendar);
-    });
-  }
-}
-
-app.init();
-</script>
-
+    <script src="../JS/facaultydashboard.js"></script>
 </body>
 </html>
