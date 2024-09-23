@@ -30,3 +30,13 @@ sidebarToggle.addEventListener("click", () => {
         localStorage.setItem("status", "open");
     }
 })
+// Assuming you already have some JS logic for fetching other data
+// Add this to dynamically update the notification count
+
+const notifications = [
+    { type: 'AI-ML Certificate', description: 'New activity uploaded by Prem Shahi', time: '10 minutes ago' },
+    { type: 'Sports Achievement', description: 'New activity uploaded by Deepa Chand', time: '30 minutes ago' },
+];
+
+const notificationCount = document.getElementById('notificationCount');
+notificationCount.textContent = notifications.length;
