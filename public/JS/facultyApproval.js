@@ -14,18 +14,10 @@ function disapproveActivity(activityId) {
     console.log(`Activity ${activityId} disapproved.`);
 }
 
-// Function to toggle profile dropdown visibility
-function toggleDropdown() {
-    const dropdown = document.getElementById("profile-dropdown");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-}
+// Sidebar toggle functionality
+const sidebarToggle = document.querySelector('.sidebar-toggle');
+const nav = document.querySelector('nav');
 
-// Close the dropdown if clicked outside
-window.onclick = function(event) {
-    if (!event.target.matches('.profile-icon')) {
-        const dropdown = document.getElementById("profile-dropdown");
-        if (dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-        }
-    }
-}
+sidebarToggle.addEventListener('click', () => {
+    nav.classList.toggle('close');
+});
