@@ -38,7 +38,7 @@
     </div>
     <script>
         // Fetch activities from server
-        fetch('/activities')
+        fetch('http://localhost:3000/activities')
         .then(response => response.json())
         .then(data => {
             const timeline = document.getElementById('timeline');

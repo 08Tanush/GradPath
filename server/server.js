@@ -14,7 +14,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/GradPath', {
 
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:5500', // Allow this specific origin
+  origin: 'http://127.0.0.1:5501', // Allow this specific origin
   optionsSuccessStatus: 200
 };
 

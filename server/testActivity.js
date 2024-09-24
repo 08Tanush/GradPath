@@ -1,4 +1,5 @@
 // Example activities
+const mongoose = require('mongoose');
 const activities = [
     // 2024
     { id:2, profile_id: 1, category_id: 1, start_dateTime: new Date('2024-01-15T09:00:00Z'), end_dateTime: new Date('2024-01-15T17:00:00Z'), title: 'Started a new project on AI-driven analytics', desc: 'Engaged in a project focusing on AI-driven analytics, exploring various machine learning techniques.', visibility: 'public', location: 'Remote', status: 'approved' },
