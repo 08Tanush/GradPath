@@ -7,8 +7,9 @@ const activityRatingSchema = new mongoose.Schema({
     faculty_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     score: { type: Number, required: true },
     rated_at: { type: Date, default: Date.now }
-});
-
-const ActivityRating = mongoose.model('ActivityRating', activityRatingSchema);
+  });
+  
+  const ActivityRating = mongoose.model('ActivityRating', activityRatingSchema);
+  
 
 export default ActivityRating;

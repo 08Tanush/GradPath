@@ -3,13 +3,13 @@
 const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
-    id: { type: String, unique: true }, // Explicitly defined 'id' field
-    name: { type: String, required: true },
-    description: { type: String },
-    created_at: { type: Date, default: Date.now }
+  name: { type: String, required: true },
+  description: { type: String },
+  created_at: { type: Date, default: Date.now }
 });
 
 const Category = mongoose.model('Category', categorySchema);
+
 
 module.exports = {Category};
 

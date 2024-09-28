@@ -7,8 +7,9 @@ const ratingCriteriaSchema = new mongoose.Schema({
     max_score: { type: Number, required: true },
     weight: { type: Number, required: true },
     created_at: { type: Date, default: Date.now }
-});
-
-const RatingCriteria = mongoose.model('RatingCriteria', ratingCriteriaSchema);
+  });
+  
+  const RatingCriteria = mongoose.model('RatingCriteria', ratingCriteriaSchema);
+  
 
 export default RatingCriteria;

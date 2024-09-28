@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const connectDB = require('../config/db');
 
-// Define the Activity schema
 const activitySchema = new mongoose.Schema({
-  id: { type: Number, unique: true },
-  profile_id: { type: Number, required: true },
-  category_id: { type: Number, required: true },
+  profile_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true },
+  category_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
   start_dateTime: { type: Date, required: true },
   end_dateTime: { type: Date, required: true },
   title: { type: String, required: true },
-  desc: { type: String },
+  description: { type: String },
   visibility: { type: String, enum: ['private', 'public', 'specific'], required: true },
   location: { type: String },
-  status: { type: String, enum: ['pending', 'reviewed', 'approved', 'rejected'], required: true },
+  approval_status: { type: String, enum: ['Pending', 'Approved', 'Rejected'], default: 'Pending' },
+  faculty_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  editable_until: { type: Date },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });

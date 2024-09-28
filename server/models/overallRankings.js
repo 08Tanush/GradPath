@@ -7,8 +7,9 @@ const overallRankingSchema = new mongoose.Schema({
     total_score: { type: Number, required: true },
     rank_position: { type: Number, required: true },
     calculated_at: { type: Date, default: Date.now }
-});
-
-const OverallRanking = mongoose.model('OverallRanking', overallRankingSchema);
+ });
+  
+  const OverallRanking = mongoose.model('OverallRanking', overallRankingSchema);
+  
 
 export default OverallRanking;
