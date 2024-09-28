@@ -7,10 +7,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
 // MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/GradPath', { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true 
-})
+mongoose.connect('mongodb://127.0.0.1:27017/GradPath', { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log('MongoDB connected!'))
 .catch(err => console.error('MongoDB connection error:', err));
 
@@ -23,9 +20,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/GradPath', {
 // app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads')); // Serve uploaded files
+const {activityController} = require('./routes/ActivityController');
+app.use('/uploadActivity', activityController);
 
-// Create the Activity model
+const {User} = require('./models/users');
+// JWT Secret Key (make sure this is stored securely in production)
+const JWT_SECRET = 'your-secret-key'; // Replace with an environment variable in production
 const {Activity} = require('./models/Activities');
+const {Category} = require('./models/categories');
+const {CategoryField} = require('./models/categoryFields');
 
 // Start the server
 const PORT = 3000;
@@ -98,13 +103,6 @@ app.delete('/activities/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
-// Import the User model
-const {User} = require('./models/users');
-
-// JWT Secret Key (make sure this is stored securely in production)
-const JWT_SECRET = 'your-secret-key'; // Replace with an environment variable in production
 
 // Hash the password before saving the user
 const hashPassword = async (password) => {
@@ -199,3 +197,51 @@ app.post('/login', async (req, res) => {
 //     res.status(401).json({ message: 'Invalid token' });
 //   }
 // });
+
+// Categories route - this will handle fetching categories dynamically
+app.get('/categories', async (req, res) => {
+  try {
+      const categories = await Category.find(); // Fetch all categories
+      res.json(categories);  // Send categories as JSON response
+  } catch (error) {
+      console.error('Error fetching categories:', error); // Log the error
+      res.status(500).json({ error: 'Failed to fetch categories' }); // Send 500 response with error message
+  }
+});
+
+
+// Endpoint to get fields for a specific category
+app.get('/categories/:categoryId/fields', async (req, res) => {
+  const categoryId = req.params.categoryId;
+  console.log('Received categoryId:', categoryId); // Log categoryId
+
+  try {
+      const fields = await CategoryField.find({ category_id: categoryId });
+      console.log('Fields found:', fields); // Log the fetched fields
+      res.json(fields);
+  } catch (error) {
+      console.error('Error fetching category fields:', error);
+      res.status(500).json({ error: 'Failed to fetch category fields' });
+  }
+});
+
+
+// Other routes (if you have more routes, you can define them here)
+// For example, if you're handling the form submission for adding an activity:
+
+app.post('/uploadActivity', async (req, res) => {
+  // Handle the form submission, save the activity data to MongoDB
+  try {
+      const { title, desc, category, startDateTime, endDateTime, location } = req.body;
+      // You can now save this data into an Activity model or handle the upload as needed.
+      // Example (assuming an Activity model):
+      // const activity = new Activity({
+      //     title, desc, category, startDateTime, endDateTime, location
+      // });
+      // await activity.save();
+      console.log('Activity Uploaded:', req.body);
+      res.send('Activity Uploaded Successfully');
+  } catch (error) {
+      res.status(500).send('Failed to upload activity');
+  }
+});

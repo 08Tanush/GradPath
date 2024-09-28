@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const connectDB = require('../config/db');
+
 const activityFieldSchema = new mongoose.Schema({
     activity_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Activity', required: true },
     field_id: { type: mongoose.Schema.Types.ObjectId, ref: 'CategoryField', required: true },

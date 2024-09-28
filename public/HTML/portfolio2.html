@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +8,7 @@
     
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="../styles/portfolio2.css">
+    <script src="../JS/portfolioToggler.js"></script>
      
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -75,7 +77,7 @@
                     <img src="../../images/user.png" alt="Profile Picture">
                 </div>
                 <div>
-                    <h1>Tanush Karane</h1>
+                    <h1>Name: Tanush Karane</h1>
                     <p class="title">Engineering Graduate</p>
                 </div>
             </div>
@@ -91,7 +93,6 @@
             </div>
         </div>
         <div class="right-section">
-            <h2>Portfolio Timeline</h2>
             <li class="timeline">
                 <div class="timeline-action">
                     <h3>Category</h3>
@@ -254,11 +255,44 @@
     </div>
     </script>
     <script>
+        
         function toggleDetails(element) {
             const details = element.nextElementSibling;
             details.classList.toggle('show');
         }
+        
+        const body = document.querySelector("body"),
+      modeToggle = body.querySelector(".mode-toggle");
+      sidebar = body.querySelector("nav");
+      sidebarToggle = body.querySelector(".sidebar-toggle");
 
+let getMode = localStorage.getItem("mode");
+if(getMode && getMode ==="dark"){
+    body.classList.toggle("dark");
+}
+
+let getStatus = localStorage.getItem("status");
+if(getStatus && getStatus ==="close"){
+    sidebar.classList.toggle("close");
+}
+
+modeToggle.addEventListener("click", () =>{
+    body.classList.toggle("dark");
+    if(body.classList.contains("dark")){
+        localStorage.setItem("mode", "dark");
+    }else{
+        localStorage.setItem("mode", "light");
+    }
+});
+
+sidebarToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+    if(sidebar.classList.contains("close")){
+        localStorage.setItem("status", "close");
+    }else{
+        localStorage.setItem("status", "open");
+    }
+})
     </script>
 </body>
 </html>

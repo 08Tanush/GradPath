@@ -6,15 +6,14 @@
     <title>Upload Activity</title>
     <link rel="stylesheet" href="../styles/addActivity2.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <script src="../JS/addActivity2.js"></script>
+    <script src="../JS/addActivity2.js" defer></script>
 </head>
 <body>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png.png" alt="">
+               <img src="../../images/user1.png.png" alt="User">
             </div>
-
             <span class="logo_name">GradPath</span>
         </div>
 
@@ -32,36 +31,18 @@
                     <i class=" uil-comment-download"></i> 
                     <span class="link-name">Portfolio</span>
                 </a></li>
-                
                 <li><a href="profile.html">
                     <i class="uil uil-browser"></i>
                     <span class="link-name">Profile</span>
-                </a></li> 
-
+                </a></li>
                 <li><a href="entryManagement.html">
                   <i class="uil uil-cog"></i>
                   <span class="link-name">Manage Activity</span>
               </a></li>
-            
-            <ul class="logout-mode">
-                <li><a href="#">
-                    <i class="uil uil-signout"></i>
-                    <span class="link-name">Logout</span>
-                </a></li>
-
-                <li class="mode">
-                    <a href="#">
-                        <i class="uil uil-moon"></i>
-                    <span class="link-name">Dark Mode</span>
-                </a>
-
-                <div class="mode-toggle">
-                  <span class="switch"></span>
-                </div>
-            </li>
             </ul>
         </div>
     </nav>
+
     <div class="container">
         <h1>Upload Activity</h1>
         <form id="activityForm" action="/uploadActivity" method="POST" enctype="multipart/form-data">
@@ -77,16 +58,15 @@
                 <textarea id="desc" name="desc" rows="4" required></textarea>
             </div>
 
-            <!-- Category -->
+            <!-- Category Selection -->
             <div class="form-group">
                 <label for="category">Category:</label>
                 <select id="category" name="category" required onchange="loadCategoryFields()">
                     <option value="" disabled selected>Select a category</option>
-                    <!-- Options dynamically loaded from DB -->
                 </select>
             </div>
 
-            <!-- Category-specific fields will be dynamically added here -->
+            <!-- Dynamic category-specific fields -->
             <div id="categoryFields"></div>
 
             <!-- Start Date and Time -->
@@ -120,4 +100,5 @@
         </form>
     </div>
 </body>
+<script src="../JS/addActivity2.js"></script>
 </html>
