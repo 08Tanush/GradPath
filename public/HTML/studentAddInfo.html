@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info Upload</title>
+    <link rel="stylesheet" href="../styles/studentAddInfo.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <script src="../JS/studentAddInfo.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="../../images/user1.png.png" alt="">
+            </div>
+
+            <span class="logo_name">GradPath</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="/public/HTML/studentDashboard.html">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Home</span>
+                </a></li>
+                <li><a href="addActivity2.html">
+                  <i class="uil uil-plus"></i>
+                    <span class="link-name">Post</span>
+                </a></li>
+                <li><a href="portfolio2.html">
+                    <i class=" uil-comment-download"></i> 
+                    <span class="link-name">Portfolio</span>
+                </a></li>
+                
+                <li><a href="profile.html">
+                    <i class="uil uil-browser"></i>
+                    <span class="link-name">Profile</span>
+                </a></li> 
+
+                <li><a href="entryManagement.html">
+                  <i class="uil uil-cog"></i>
+                  <span class="link-name">Manage Activity</span>
+              </a></li>
+            
+            <ul class="logout-mode">
+                <li><a href="#">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                    <span class="link-name">Dark Mode</span>
+                </a>
+
+                <div class="mode-toggle">
+                  <span class="switch"></span>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Upload Your Personal Information</h1>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <form id="studentInfoForm">
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <!-- Class -->
+            <div class="form-group">
+                <label for="class">Class:</label>
+                <input type="text" id="class" name="class" required>
+            </div>
+
+            <!-- Branch -->
+            <div class="form-group">
+                <label for="branch">Branch:</label>
+                <select id="branch" name="branch" required>
+                    <option value="" disabled selected>Select Branch</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="COMPS">Computer Science</option>
+                    <option value="EXTC">Electronics & Telecommunication</option>
+                    <option value="MECH">Mechanical Engineering</option>
+                </select>
+            </div>
+
+            <!-- Current Position -->
+            <div class="form-group">
+                <label for="currentPosition">Current Position:</label>
+                <input type="text" id="currentPosition" name="currentPosition" placeholder="E.g., Class Representative, Team Lead">
+            </div>
+
+            <!-- Since When -->
+            <div class="form-group">
+                <label for="sinceWhen">Since When:</label>
+                <input type="date" id="sinceWhen" name="sinceWhen" required>
+            </div>
+
+            <!-- About -->
+            <div class="form-group">
+                <label for="about">About You:</label>
+                <textarea id="about" name="about" rows="4" placeholder="Write something about yourself" required></textarea>
+            </div>
+
+            <!-- Skills -->
+            <div class="form-group">
+                <label for="skills">Skills:</label>
+                <input type="text" id="skills" name="skills" placeholder="E.g., JavaScript, Python, Machine Learning" required>
+            </div>
+
+            <!-- Email ID -->
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <!-- Profile Picture Upload -->
+            <div class="form-group">
+                <label for="profilePicture">Profile Picture:</label>
+                <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-group">
+                <label for="contactNumber">Contact Number:</label>
+                <input type="tel" id="contactNumber" name="contactNumber" placeholder="Enter your phone number" required>
+            </div>
+
+            <!-- GitHub Profile -->
+            <div class="form-group">
+                <label for="github">GitHub Profile Link:</label>
+                <input type="url" id="github" name="github" placeholder="Enter your GitHub profile link">
+            </div>
+
+            <!-- LinkedIn Profile -->
+            <div class="form-group">
+                <label for="linkedin">LinkedIn Profile Link:</label>
+                <input type="url" id="linkedin" name="linkedin" placeholder="Enter your LinkedIn profile link">
+            </div>
+
+            <!-- Personal Website -->
+            <div class="form-group">
+                <label for="website">Personal Website Link:</label>
+                <input type="url" id="website" name="website" placeholder="Enter your personal website link">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit">Submit Information</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -13,7 +13,7 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png.png" alt="">
+               <img src="../../images/user1.png.png" alt="User">
             </div>
 
             <span class="logo_name">GradPath</span>
@@ -32,11 +32,7 @@
                     <i class="uil uil-comments"></i> 
                     <span class="link-name">Assign Faculty</span>
                 </a></li>
-                
-                <li><a href="#">
-                    <i class="uil uil-thumbs-up"></i>
-                    <span class="link-name"></span>
-                </a></li> 
+            </ul>
             
             <ul class="logout-mode">
                 <li><a href="#">
@@ -58,80 +54,102 @@
         </div>
     </nav>
 
-        <!-- Main Dashboard -->
+    <!-- Main Dashboard -->
     <section class="dashboard">
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
-
             <div class="search-box">
                 <i class="uil uil-search"></i>
                 <input type="text" placeholder="Search here...">
             </div>
         </div>
+
         <div class="dash-content">
             <div class="title">
                 <i class="uil uil-user-plus"></i>
                 <span class="text">Assign Faculty to Activities</span>
             </div>
 
-            
+            <!-- Activities Table -->
+            <table>
+              <thead>
+                <tr>
+                  <th>Professor Name</th>
+                  <th>Branch</th>
+                  <th>Category</th>
+                  <th>Assign</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row for each professor with category dropdown and assign button -->
+                <tr>
+                  <td>Shiv Negi</td>
+                  <td>IT</td>
+                  <td>
+                    <select id="category-shiv" class="form-control">
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="academics">Academics</option>
+                        <option value="sports">Sports</option>
+                        <option value="technical">Technical</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="community">Community Outreach</option>
+                    </select>
+                  </td>
+                  <td><button class="assign-btn" onclick="assignFaculty('Shiv Negi', 'category-shiv')">Assign</button></td>
+                </tr>
 
-                <!-- Activities Table -->
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Activity Title</th>
-                            <th>Student Name</th>
-                            <th>Year</th>
-                            <th>Branch</th>
-                            <th>Category</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Research Project: AI Study</td>
-                            <td>Tanush Karane</td>
-                            <td>TE</td>
-                            <td>IT</td>
-                            <td>Academics</td>
-                            <td>12-08-2024</td>
-                            <td class="action-btns">
-                                <a href="#" class="view-btn">View</a>
-                                <a href="#" class="reject-btn">Reject</a>
-                                <select class="faculty-dropdown">
-                                    <option value="">Allot Faculty</option>
-                                    <option value="faculty1">Dr. A Smith</option>
-                                    <option value="faculty2">Dr. B Patel</option>
-                                    <option value="faculty3">Prof. C Roy</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Basketball Championship</td>
-                            <td>Aditi Mehta</td>
-                            <td>BE</td>
-                            <td>COMPS</td>
-                            <td>Sports</td>
-                            <td>17-09-2024</td>
-                            <td class="action-btns">
-                                <a href="#" class="view-btn">View</a>
-                                <a href="#" class="reject-btn">Reject</a>
-                                <select class="faculty-dropdown">
-                                    <option value="">Allot Faculty</option>
-                                    <option value="faculty1">Dr. D Williams</option>
-                                    <option value="faculty2">Dr. E Khan</option>
-                                    <option value="faculty3">Prof. F Sharma</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <tr>
+                  <td>Aditi Mehta</td>
+                  <td>COMPS</td>
+                  <td>
+                    <select id="category-aditi" class="form-control">
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="academics">Academics</option>
+                        <option value="sports">Sports</option>
+                        <option value="technical">Technical</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="community">Community Outreach</option>
+                    </select>
+                  </td>
+                  <td><button class="assign-btn" onclick="assignFaculty('Aditi Mehta', 'category-aditi')">Assign</button></td>
+                </tr>
+
+                <tr>
+                  <td>Devdas</td>
+                  <td>EXTC</td>
+                  <td>
+                    <select id="category-devdas" class="form-control">
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="academics">Academics</option>
+                        <option value="sports">Sports</option>
+                        <option value="technical">Technical</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="community">Community Outreach</option>
+                    </select>
+                  </td>
+                  <td><button class="assign-btn" onclick="assignFaculty('Devdas', 'category-devdas')">Assign</button></td>
+                </tr>
+
+                <!-- Add more rows as needed -->
+              </tbody>
+            </table>
         </div>
     </section>
 
     <script src="/public/scripts/adminAssignFaculty.js"></script>
+
+    <script>
+      // Function to handle faculty assignment
+      function assignFaculty(facultyName, categoryId) {
+        const selectedCategory = document.getElementById(categoryId).value;
+        if (selectedCategory) {
+          alert(`Assigned ${selectedCategory} to ${facultyName}`);
+          // Add your AJAX logic here for server-side assignment
+        } else {
+          alert('Please select a category before assigning.');
+        }
+      }
+    </script>
+
 </body>
 </html>

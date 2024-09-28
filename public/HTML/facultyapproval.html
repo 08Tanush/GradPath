@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Faculty Activity Approval</title>
   <link rel="stylesheet" href="/public/styles/facultyApproval.css"> <!-- Custom CSS for Activity Approval -->
-  <script src="/public/JS/facultyApproval.js" defer></script> <!-- JS for handling approval actions -->
+  <script src="/public/JS/facultyApproval.js" defer></script> <!-- JS for handling profile redirection -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 <body>
   <nav>
     <div class="logo-name">
         <div class="logo-image">
-           <img src="../../images/user1.png.png" alt="">
+           <img src="../../images/user1.png.png" alt="User">
         </div>
-
         <span class="logo_name">GradPath</span>
     </div>
 
@@ -61,7 +60,7 @@
   <!-- Main Content Section -->
   <section class="dashboard">
     <div class="top">
-      <i class="fas fa-bars sidebar-toggle"></i>
+      <i class="uil uil-bars sidebar-toggle"></i>
       <div class="search-box">
         <i class="uil uil-search"></i>
         <input type="text" placeholder="Search here...">
@@ -75,54 +74,44 @@
       </div>
 
       <div class="container">
-        <!-- Activity 1 -->
-        <div class="activity-container" id="activity-1">
-          <div class="student-info">
-            <strong>Name:</strong> Narendra Dukhande | <strong>Year:</strong> TE | <strong>Branch:</strong> IT
-          </div>
-          <div class="activity-header">Activity Title: Workshop on AI</div>
-          <div><strong>Description:</strong> Attended a workshop on Artificial Intelligence hosted by XYZ organization.</div>
-          <div><strong>Date:</strong> March 25, 2024</div>
-          <div><strong>Document:</strong> <a href="#">Certificate.pdf</a></div>
-          <div class="activity-status">Status: <span id="status-1">Pending</span></div>
-          <div class="activity-buttons">
-            <button class="approve" onclick="approveActivity(1)">Approve</button>
-            <button class="disapprove" onclick="disapproveActivity(1)">Disapprove</button>
-          </div>
+        <div class="motivation-message"></div>
+          <p>Great job reviewing the activities! Keep it up! Here are the activities to be reviewed.</p>
         </div>
-         <!-- Activity 2 -->
-        <div class="activity-container" id="activity-2">
-          <div class="student-info">
-            <strong>Name:</strong> Tanush Karane | <strong>Year:</strong> TE | <strong>Branch:</strong> IT
-          </div>
-          <div class="activity-header">Activity Title: Sports Event Participation</div>
-          <div><strong>Description:</strong> Participated in the inter-college football tournament.</div>
-          <div><strong>Date:</strong> April 10, 2024</div>
-          <div><strong>Document:</strong> <a href="#">Certificate.pdf</a></div>
-          <div class="activity-status">Status: <span id="status-2">Pending</span></div>
-          <div class="activity-buttons">
-            <button class="approve" onclick="approveActivity(2)">Approve</button>
-            <button class="disapprove" onclick="disapproveActivity(2)">Disapprove</button>
-          </div>
-        </div>
-
-        <!-- Activity 3 -->
-        <div class="activity-container" id="activity-3">
-          <div class="student-info">
-            <strong>Name:</strong> Lenoy Geo Thomas | <strong>Year:</strong> TE | <strong>Branch:</strong> IT
-          </div>
-          <div class="activity-header">Activity Title: Cultural Event Volunteer</div>
-          <div><strong>Description:</strong> Volunteered at the annual cultural festival.</div>
-          <div><strong>Date:</strong> May 15, 2024</div>
-          <div><strong>Document:</strong> <a href="#">Certificate.pdf</a></div>
-          <div class="activity-status">Status: <span id="status-3">Pending</span></div>
-          <div class="activity-buttons">
-            <button class="approve" onclick="approveActivity(3)">Approve</button>
-            <button class="disapprove" onclick="disapproveActivity(3)">Disapprove</button>
-          </div>
-        </div>
-
-        <!-- Add additional activities similarly if needed -->
+        <!-- Approval list with profile link only -->
+        <table class="approval-table">
+          <thead>
+            <tr>
+              <th>Serial No.</th>
+              <th>Student Name</th>
+              <th>Branch</th>
+              <th>Year</th>
+              <th>Profile Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Narendra Dukhande</td>
+              <td>IT</td>
+              <td>TE</td>
+              <td><a href="/public/HTML/portfolio2.html" class="view-profile">View Profile</a></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Tanush Karane</td>
+              <td>IT</td>
+              <td>TE</td>
+              <td><a href="/public/HTML/studentProfile.html?id=2" class="view-profile">View Profile</a></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Lenoy Geo Thomas</td>
+              <td>IT</td>
+              <td>TE</td>
+              <td><a href="/public/HTML/studentProfile.html?id=3" class="view-profile">View Profile</a></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>

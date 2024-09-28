@@ -1,203 +1,203 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ===== CSS ===== -->
+    
+    <!----======== CSS ======== -->
     <link rel="stylesheet" href="../styles/profile.css">
-        
-    <!-- ===== Boxicons CSS ===== -->
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script src="script.js"></script>
-
- <title>Responsive Navigation Menu Bar</title>
+    <title>Student Dashboard Panel</title>
 </head>
 <body>
     <nav>
-        <div class="nav-bar">
-            <i class='bx bx-menu sidebarOpen' ></i>
-            <span class="logo navLogo"><a href="#">GradPath</a></span>
-            <div class="menu">
-                <div class="logo-toggle">
-                    <span class="logo"><a href="#">GradPath</a></span>
-                    <i class='bx bx-x siderbarClose'></i>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="studentDashboard.html">Home</a></li>
-                    <li><a href="addActivity2.html">Post</a></li>
-                    <li><a href="portfolio2.html">Portfolio</a></li> <!-- Updated Portfolio link -->
-                    <li><a href="profile.html">Profile</a></li>
-                </ul>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="../../images/user1.png.png" alt="">
             </div>
-            <div class="darkLight-searchBox">
-                <div class="dark-light">
-                    <i class='bx bx-moon moon'></i>
-                    <i class='bx bx-sun sun'></i>
+
+            <span class="logo_name">GradPath</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="/public/HTML/studentDashboard.html">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Home</span>
+                </a></li>
+                <li><a href="addActivity2.html">
+                  <i class="uil uil-plus"></i>
+                    <span class="link-name">Post</span>
+                </a></li>
+                <li><a href="portfolio2.html">
+                    <i class=" uil-comment-download"></i> 
+                    <span class="link-name">Portfolio</span>
+                </a></li>
+                
+                <li><a href="profile.html">
+                    <i class="uil uil-browser"></i>
+                    <span class="link-name">Profile</span>
+                </a></li> 
+
+                <li><a href="entryManagement.html">
+                  <i class="uil uil-cog"></i>
+                  <span class="link-name">Manage Activity</span>
+              </a></li>
+            
+            <ul class="logout-mode">
+                <li><a href="#">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                    <span class="link-name">Dark Mode</span>
+                </a>
+
+                <div class="mode-toggle">
+                  <span class="switch"></span>
                 </div>
-                <div class="searchBox">
-                   <div class="searchToggle">
-                    <i class='bx bx-x cancel'></i>
-                    <i class='bx bx-search search'></i>
-                   </div>
-                    <div class="search-field">
-                        <input type="text" placeholder="Search...">
-                        <i class='bx bx-search'></i>
+            </li>
+            </ul>
+        </div>
+    </nav>
+<!--Code For Main section of student profile-->
+<section class="bg-light"></section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+                            </div>
+                            <div class="col-lg-6 px-xl-10">
+                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <h3 class="h2 text-white mb-0">Tanush Karane</h3>
+                                    <span class="text-primary">IT Engineer</span>
+                                </div>
+                                <ul class="list-unstyled mb-1-9">
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Position:</span> Front-end Developer</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Experience:</span> </li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> tanushkarane@gmail.com</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Website:</span> www.example.com</li>
+                                    <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> 8850852472</li>
+                                </ul>
+                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
+                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
+                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
+                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
+                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div>
+                    <span class="section-title text-primary mb-3 mb-sm-4">About Me</span>
+                    <p> am a passionate front-end developer with a strong focus on creating engaging, responsive, and user-friendly web interfaces. With experience in HTML, CSS, and JavaScript, I love transforming design concepts into seamless digital experiences. I’m dedicated to staying updated with the latest trends and best practices in front-end development to ensure that my work meets modern web standards.</p>
+                    <p class="mb-0">My journey in web development is driven by a deep curiosity for learning and a keen eye for detail. I enjoy collaborating with teams to bring creative ideas to life, ensuring that the final product not only looks great but also performs well across different platforms and devices.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12 mb-4 mb-sm-5">
+                        <div class="mb-4 mb-sm-5">
+                            <span class="section-title text-primary mb-3 mb-sm-4">Skill</span>
+                            <div class="progress-text">
+                                <div class="row">
+                                    <div class="col-6">JavaScript</div>
+                                    <div class="col-6 text-end">80%</div>
+                                </div>
+                            </div>
+                            <div class="custom-progress progress progress-medium mb-3" style="height: 4px;">
+                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:80%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
+                            </div>
+                            <div class="progress-text">
+                                <div class="row">
+                                    <div class="col-6">HTML/CSS/JS</div>
+                                    <div class="col-6 text-end">90%</div>
+                                </div>
+                            </div>
+                            <div class="custom-progress progress progress-medium mb-3" style="height: 4px;">
+                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:90%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+                            </div>
+                            <div class="progress-text">
+                                <div class="row">
+                                    <div class="col-6">Mongo-DB,MySQL</div>
+                                    <div class="col-6 text-end">50%</div>
+                                </div>
+                            </div>
+                            <div class="custom-progress progress progress-medium mb-3" style="height: 4px;">
+                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+                            </div>
+                            <div class="progress-text">
+                                <div class="row">
+                                    <div class="col-6">Python,JavaScript</div>
+                                    <div class="col-6 text-end">60%</div>
+                                </div>
+                            </div>
+                            <div class="custom-progress progress progress-medium" style="height: 4px;">
+                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:60%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="section-title text-primary mb-3 mb-sm-4">Education</span>
+                            <p>Bachelor of Engineering in Information Technology
+                                Don Bosco Institute of Technology
+                                Third Year (2026 Expected Graduation)</p>
+                            <p class="mb-1-9">Currently pursuing my degree in IT Engineering, I am building a strong foundation in software development, web technologies, and computer science fundamentals. Through coursework and hands-on projects, I am gaining valuable technical skills and practical experience that complement my passion for front-end development.</p>
+              
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </nav>
-
-<!--Code For Main section of student profile-->
-<section id="profile" class="animate">
-    <img src="../../images/user1.png.png" alt="Student Photo">
-    <h2 style="color: #FFD700;">Tanush Karane</h2>
-    <p style="color: #2c3e50; font-style: italic;">Information Technology TE Stusent</p>
-    <p style="color: #2c3e50;">Design Head At GDGC-DBIT</p>
-    <p style="color: #2c3e50;">Contact: tanushkarane@gmail.com</p>
-  </section>
-  <section id="skills" class="animate">
-    <h2 style="color: #FFD700;">Skills</h2>
-    <ul>
-      <li>Programming</li>
-      <li>Web Development</li>
-      <li>Data Structures</li>
-      <li>JavaScript</li>
-      <li>HTML/CSS</li>
-      <li>Python</li>
-    </ul>
-  </section>
-  <section id="education" class="animate">
-    <h2 style="color: #FFD700;">Education</h2>
-    <p style="color: #2c3e50;">Bachelor of Engineering In Information Technology </p>
-    <p style="color: #2c3e50;">Mumbai UniversityS</p>
-    <p style="color: #2c3e50;">Graduation: July 2026</p>
-  </section>
-  <section id="experience" class="animate">
-    <h2 style="color: #FFD700;">Experience</h2>
-    <h3 style="color: #2c3e50;">Software Developer Intern</h3>
-    <p style="color: #2c3e50;">XYZ Tech Solutions, Summer 2022</p>
-    <p style="color: #2c3e50;">Worked on web application development and collaborated with cross-functional teams.</p>
-  </section>
-  <section id="projects" class="animate">
-    <h2 style="color: #FFD700;">Projects</h2>
-    <h3 style="color: #2c3e50;">Portfolio Website</h3>
-    <li><a href="portfolio2.html">Portfolio</a></li>
-    <p style="color: #2c3e50;">Designed and developed a personal portfolio website to showcase skills and projects.</p>
-    <h3 style="color: #2c3e50;">Chat Application</h3>
-    <p style="color: #2c3e50;">Built a real-time chat application using Socket.io and Node.js for a class project.</p>
-  </section>
-  <section id="contact" class="animate">
-    <h2 style="color: #FFD700;">Contact</h2>
-    <p style="color: #2c3e50;">Email:tanushkarane@gmail.com</p>
-    <p style="color: #2c3e50;">LinkedIn: https://www.linkedin.com/in/tanush-karane-75994a31a </p>
-    <p style="color: #2c3e50;">GitHub:   github.com/08Tanush</p>
-  </section>
-
-  <div class="footer-basic">
-    <footer>
-        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Home</a></li>
-            <li class="list-inline-item"><a href="#">Services</a></li>
-            <li class="list-inline-item"><a href="#">About</a></li>
-            <li class="list-inline-item"><a href="#">Terms</a></li>
-            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-        </ul>
-        <p class="copyright">Company Name © 2018</p>
-    </footer>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-<script>
-
-    const body = document.querySelector("body"),
-          nav = document.querySelector("nav"),
-          modeToggle = document.querySelector(".dark-light"),
-          searchToggle = document.querySelector(".searchToggle"),
-          sidebarOpen = document.querySelector(".sidebarOpen"),
-          siderbarClose = document.querySelector(".siderbarClose");
-    
-          let getMode = localStorage.getItem("mode");
-              if(getMode && getMode === "dark-mode"){
-                body.classList.add("dark");
-              }
-    
-    // js code to toggle dark and light mode
-          modeToggle.addEventListener("click" , () =>{
-            modeToggle.classList.toggle("active");
-            body.classList.toggle("dark");
-    
-            // js code to keep user selected mode even page refresh or file reopen
-            if(!body.classList.contains("dark")){
-                localStorage.setItem("mode" , "light-mode");
-            }else{
-                localStorage.setItem("mode" , "dark-mode");
-            }
-          });
-    
-    // js code to toggle search box
-            searchToggle.addEventListener("click" , () =>{
-            searchToggle.classList.toggle("active");
-          });
-     
-          
-    //   js code to toggle sidebar
-    sidebarOpen.addEventListener("click" , () =>{
-        nav.classList.add("active");
-    });
-    
-    body.addEventListener("click" , e =>{
-        let clickedElm = e.target;
-    
-        if(!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")){
-            nav.classList.remove("active");
-        }
-    });
-    
-    var app = {
-      settings: {
-        container: $('.calendar'),
-        calendar: $('.front'),
-        days: $('.weeks span'),
-        form: $('.back'),
-        input: $('.back input'),
-        buttons: $('.back button')
-      },
-    
-      init: function() {
-        instance = this;
-        settings = this.settings;
-        this.bindUIActions();
-      },
-    
-      swap: function(currentSide, desiredSide) {
-        settings.container.toggleClass('flip');
-    
-        currentSide.fadeOut(900);
-        currentSide.hide();
-        desiredSide.show();
-    
-      },
-    
-      bindUIActions: function() {
-        settings.days.on('click', function(){
-          instance.swap(settings.calendar, settings.form);
-          settings.input.focus();
-        });
-    
-        settings.buttons.on('click', function(){
-          instance.swap(settings.form, settings.calendar);
-        });
+        <script>const body = document.querySelector("body"),
+            modeToggle = body.querySelector(".mode-toggle");
+            sidebar = body.querySelector("nav");
+            sidebarToggle = body.querySelector(".sidebar-toggle");
+      
+      let getMode = localStorage.getItem("mode");
+      if(getMode && getMode ==="dark"){
+          body.classList.toggle("dark");
       }
-    }
-    
-    app.init();
-    </script>
-</body>
-</html>
+      
+      let getStatus = localStorage.getItem("status");
+      if(getStatus && getStatus ==="close"){
+          sidebar.classList.toggle("close");
+      }
+      
+      modeToggle.addEventListener("click", () =>{
+          body.classList.toggle("dark");
+          if(body.classList.contains("dark")){
+              localStorage.setItem("mode", "dark");
+          }else{
+              localStorage.setItem("mode", "light");
+          }
+      });
+      
+      sidebarToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("close");
+          if(sidebar.classList.contains("close")){
+              localStorage.setItem("status", "close");
+          }else{
+              localStorage.setItem("status", "open");
+          }
+      })</script>
+    </div>
+</section>
