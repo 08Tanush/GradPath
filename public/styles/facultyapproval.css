@@ -483,98 +483,117 @@ nav.close ~ .dashboard .top{
         width: 100%;
     }
 }
+/* css for main */
+/* General container styling */
 .container {
     max-width: 900px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 30px; /* Increased padding for more spacing */
     background-color: var(--panel-color);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px; /* More rounded corners for a modern look */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow effect */
 }
 
+/* Heading styling */
 h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px; /* More spacing below heading */
     color: var(--text-color);
+    font-family: 'Arial', sans-serif; /* Font family for a cleaner look */
 }
 
 /* Activity container */
 .activity-container {
     border: 1px solid var(--border-color);
-    padding: 20px;
+    padding: 25px; /* Increased padding */
     margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 10px; /* More rounded corners */
     background-color: var(--box3-color);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
 }
 
+/* Student info styling */
 .student-info {
     font-weight: bold;
     color: var(--black-light-color);
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Increased margin for spacing */
 }
 
+/* Activity header styling */
 .activity-header {
     font-weight: bold;
     color: var(--text-color);
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Increased margin for spacing */
 }
 
+/* Activity status */
 .activity-status {
-    margin: 10px 0;
+    margin: 15px 0; /* More spacing */
 }
 
+/* Button styling */
 .activity-buttons {
-    margin-top: 10px;
+    margin-top: 15px; /* Increased margin */
 }
 
+/* Individual button styles */
 .activity-buttons button {
     margin-right: 10px;
-    padding: 8px 12px;
+    padding: 10px 15px; /* Larger padding for buttons */
     border: none;
-    border-radius: 4px;
+    border-radius: 5px; /* Slightly larger radius */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px; /* Increased font size */
+    transition: background-color 0.3s ease, transform 0.2s; /* Smooth transitions */
 }
 
+/* Approve button style */
 .activity-buttons button.approve {
-    background-color: green;
+    background-color: #28a745; /* Green for approve */
     color: white;
 }
 
+/* Disapprove button style */
 .activity-buttons button.disapprove {
-    background-color: red;
+    background-color: #dc3545; /* Red for disapprove */
     color: white;
 }
 
+/* Button hover effect */
 .activity-buttons button:hover {
     opacity: 0.9;
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
-/* Profile picture */
+/* Profile picture styling */
 .profile-pic {
-    width: 40px;
-    height: 40px;
+    width: 50px; /* Increased size for visibility */
+    height: 50px; /* Increased size for visibility */
     border-radius: 50%;
-    margin-left: 20px;
+    margin-left: 15px; /* Adjusted margin */
+    border: 2px solid var(--border-color); /* Added border for profile pic */
 }
 
+/* Save changes section */
 .save-changes {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px; /* Increased margin */
 }
 
+/* Save button styling */
 .save-btn {
-    padding: 10px 20px;
+    padding: 12px 25px; /* Larger padding */
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* More rounded corners */
     cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
+    font-size: 18px; /* Increased font size */
+    transition: background-color 0.3s ease, transform 0.2s; /* Smooth transitions */
 }
 
+/* Save button hover effect */
 .save-btn:hover {
-    background-color: #0c3db9;
+    background-color: var(--hover-color); /* Defined hover color */
+    transform: translateY(-2px); /* Slight lift effect */
 }

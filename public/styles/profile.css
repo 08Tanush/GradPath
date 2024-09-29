@@ -385,12 +385,13 @@ nav.close ~ .dashboard .top {
 
 /* ===== Google Font Import - Poppins ===== */
 /*Css for Main*/
-body{
-    margin-top:0px;
-    padding-right: 100px;}
-.border-0 {
-    border: 0!important;
+body {
+    margin-top: 0px;
+    padding-right: 100px;
 }
+.border-0 { 
+    border: 0!important; 
+} 
 .card {
     position: relative;
     display: flex;
@@ -399,14 +400,28 @@ body{
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 0.25rem;
+}
+@media (max-width: 768px) {
+    .right-section {
+        width: 100%; /* or adjust as needed */
+        margin-left: 0; /* remove any left margin */
+    }
+}
+.container {
+    display: flex; /* or display: grid; */
+}
+.left-nav {
+    flex: 0 0 20%; /* adjust width */
+}
+.right-section {
+    flex: 1; /* takes the remaining space */
 }
 
 .mb-2-3, .my-2-3 {
     margin-bottom: 2.3rem;
 }
-
 .section-title {
     font-weight: 600;
     letter-spacing: 2px;
@@ -427,18 +442,26 @@ body{
 .display-26 {
     font-size: 1.3rem;
 }
+@media screen and (min-width: 992px) {
+    nav {
+        width: 250px;
+    }
 
-@media screen and (min-width: 992px){
+    nav .menu-items li a .link-name {
+        font-size: 18px;
+    }
+}
+@media screen and (min-width: 992px) {
     .p-lg-7 {
         padding: 4rem;
     }
 }
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
     .p-md-6 {
         padding: 3.5rem;
     }
 }
-@media screen and (min-width: 576px){
+@media screen and (min-width: 576px) {
     .p-sm-2-3 {
         padding: 2.3rem;
     }
@@ -446,16 +469,15 @@ body{
 .p-1-9 {
     padding: 1.9rem;
 }
-
 .bg-secondary {
     background: #15395A !important;
 }
-@media screen and (min-width: 576px){
+@media screen and (min-width: 576px) {
     .pe-sm-6, .px-sm-6 {
         padding-right: 3.5rem;
     }
 }
-@media screen and (min-width: 576px){
+@media screen and (min-width: 576px) {
     .ps-sm-6, .px-sm-6 {
         padding-left: 3.5rem;
     }
@@ -475,11 +497,48 @@ body{
 .mb-1-9, .my-1-9 {
     margin-bottom: 1.9rem;
 }
-@media (min-width: 992px){
+@media (min-width: 992px) {
     .d-lg-inline-block {
         display: inline-block!important;
     }
 }
-.rounded {
-    border-radius: 0.25rem!important;
+.rounded { 
+    border-radius: 0.25rem!important; 
+}
+
+.switch {
+    -webkit-border-radius: 25px; /* Safari and Chrome */
+    -moz-border-radius: 25px; /* Firefox */
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+}
+
+.switch:before {
+    -webkit-transition: var(--tran-03); /* Safari and Chrome */
+    -moz-transition: var(--tran-03); /* Firefox */
+    transition: var(--tran-03);
+}
+
+
+/* Button Styles and Hover Effects */
+.Editprofile{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #15395A;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.Editprofile:hover {
+    background-color: #ceaa4d;
+    transform: scale(1.05);
+}
+
+.Editprofile:active {
+    background-color: #a58335;
+    transform: scale(1);
 }

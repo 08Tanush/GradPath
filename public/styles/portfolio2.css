@@ -1,4 +1,3 @@
-/* ===== Google Font Import - Poppins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 * {
@@ -10,17 +9,17 @@
 
 :root {
     /* ===== Colors ===== */
-    --primary-color: #dcdfe5;
-    --panel-color: #FFF;
-    --text-color: #000;
-    --black-light-color: #707070;
-    --border-color: #e6e5e5;
-    --toggle-color: #DDD;
-    --box1-color: #4DA3FF;
-    --box2-color: #FFE6AC;
-    --box3-color: #E7D1FC;
-    --title-icon-color: #fff;
-    
+       --primary-color: #0E4BF1;
+       --panel-color: #FFF;
+       --text-color: #000;
+       --black-light-color: #707070;
+       --border-color: #e6e5e5;
+       --toggle-color: #DDD;
+       --box1-color: #4DA3FF;
+       --box2-color: #FFE6AC;
+       --box3-color: #E7D1FC;
+       --title-icon-color: #fff;
+       
     /* ====== Transition ====== */
     --tran-05: all 0.5s ease;
     --tran-03: all 0.3s ease;
@@ -29,10 +28,9 @@
 /* Body Styles */
 body {
     min-height: 100vh;
-    background-color: var(--primary-color);
+    background-color:#e9ecf2;
     display: flex;
-    flex-direction: column; /* Set to column for top-to-bottom layout */
-    align-items: center; /* Center align for horizontal layout */
+    align-items: flex-start; /* Ensure alignment */
 }
 
 body.dark {
@@ -70,7 +68,6 @@ body.dark {
 body.dark::-webkit-scrollbar-thumb:hover {
     background: #3A3B3C;
 }
-
 /* Navigation Styles */
 nav {
     position: fixed;
@@ -231,31 +228,29 @@ body.dark .nav-links li a:hover .link-name {
 body.dark .switch:before {
     left: 20px;
 }
-
 /* CSS for main body */
 .container {
     display: flex;
-    flex-direction: column; /* Stack vertically */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 20px 0; /* Adjust margin for spacing */
+    margin: 20px 0;
 }
 
 .left-section {
     margin-left: 250px;
     width: 80%;
-   
     background-color: #ffffff;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Spacing below the left section */
+    margin-bottom: 20px;
 }
 
 .right-section {
     margin-left: 250px;
-    width: 85%; /* Match the left section's width */
+    width: 85%;
     background-color: #ffffff00;
     padding: 40px;
     border-radius: 10px;
@@ -266,8 +261,8 @@ body.dark .switch:before {
 .profile-container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start; /* or space-between if you want spacing */
-    align-items: flex-start; /* to align the items at the top */
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .profile-picture img {
@@ -278,15 +273,10 @@ body.dark .switch:before {
     margin-right: 15px;
 }
 
-.profile-container h1 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #333;
-}
-
 .title {
     font-size: 20px;
     color: #555;
+    font-weight:700 ;
 }
 
 .social-links {
@@ -325,27 +315,22 @@ body.dark .switch:before {
     font-size: 20px;
 }
 
-.about h2 {
-    margin-bottom: 15px;
-    font-size: 1.3em;
-    color: #333;
-}
-
 .about p {
     line-height: 1.6;
     color: #666;
+    font-weight: 900;
+    font-size: 18px;
 }
-
-
-
-
-
-
 
 .timeline {
     list-style-type: none;
     padding: 0px;
-    margin:0;
+    margin: 0;
+}
+.activity-details {
+    display: none;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
 }
 
 .timeline-item {
@@ -355,7 +340,7 @@ body.dark .switch:before {
 .timeline-content {
     background-color: #ffffff;
     padding: 20px;
-    border-radius:20px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -367,6 +352,8 @@ body.dark .switch:before {
     padding-left: 40px;
     border-bottom: 5px solid #007bff;
     padding-bottom: 10px;
+    font-weight: 900;
+    font-size: 28px;
 }
 
 .dot {
@@ -375,59 +362,100 @@ body.dark .switch:before {
     top: 50%;
     width: 15px;
     height: 15px;
-    background-color: #007bff;
     border-radius: 50%;
+    background-color: #007bff;
     transform: translateY(-50%);
 }
-
-.activity-title {
-    font-weight: bold;
-    cursor: pointer;
-    margin: 15px 0;
-    position: relative;
-    padding-left: 25px;
-    color: #333;
+.timeline-content p{
+    margin:0;
+    font-size:20px;
 }
-
-.activity-title::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #007bff;
-    font-size: 20px;
-    line-height: 1;
-}
-
-.activity-details {
-    display: none;
+.timeline-content p {
+    margin: 0;
+    color: #666;
     margin-top: 10px;
-}
-
-.activity-details.show {
-    display: block;
-}
-
-.activity-details p {
-    margin: 5px 0;
-    color: #555;
-}
-
-.doc-icon {
-    display: none;
-    margin-top: 10px;
-}
-
-.doc-icon a {
-    text-decoration: none;
-    color: #007bff;
     font-size: 18px;
 }
 
-.doc-icon a:hover {
-    text-decoration: underline;
+hr {
+    margin: 40px 0px;
+    border-top: 1px solid #ccc;
 }
 
-.activity-title + .activity-details .doc-icon {
-    display: block;
+/* Responsive Media Queries */
+@media screen and (max-width: 768px) {
+    nav {
+        width: 100px;
+    }
+
+    .left-section,
+    .right-section {
+        margin-left: 100px;
+        width: 90%;
+    }
+
+    nav.close {
+        width: 60px;
+    }
+
+    .profile-container h1 {
+        font-size: 1.2em;
+    }
+
+    .profile-picture img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .social-links img {
+        width: 25px;
+        height: 25px;
+    }
 }
 
+@media screen and (max-width: 480px) {
+    nav {
+        display: none;
+    }
+
+    .left-section,
+    .right-section {
+        margin: 0;
+        width: 95%;
+    }
+
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-picture img {
+        width: 100px;
+        height: 70px;
+    }
+
+    .profile-container h1 {
+        font-size: 1.1em;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .about {
+        font-size: 16px;
+    }
+
+    .timeline-content {
+        padding: 15px;
+    }
+
+    .timeline-content h3 {
+        font-size: 20px;
+    }
+
+    .email-button {
+        padding: 10px 20px;
+    }
+}

@@ -673,8 +673,26 @@ body {
   }
 
   .assign-btn {
-    background-color: #007bff;
-  }
+    background-color: #007bff; /* Primary blue color */
+    color: #fff; /* White text */
+    font-size: 16px; /* Decent font size */
+    padding: 10px 15px; /* Padding for button size */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Hover effect */
+.assign-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Active state (when clicked) */
+.assign-btn:active {
+    background-color: #004080; /* Even darker blue on click */
+}
+
 
   .faculty-dropdown {
     padding: 5px;
@@ -701,25 +719,59 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Clip corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow for elevation */
 }
 
 .table th {
-    background-color: #4AA1F3;
+    background-color: #4AA1F3; /* Header background color */
     color: white;
-    padding: 12px;
+    padding: 15px; /* Increased padding for a spacious feel */
     text-align: left;
     font-weight: bold;
+    font-size: 16px; /* Header font size */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 0.5px; /* Spacing for letters */
 }
 
 .table td {
-    padding: 12px;
+    padding: 15px; /* Increased padding */
     border-bottom: 1px solid #ddd;
     text-align: left;
+    transition: background-color 0.3s ease, transform 0.2s; /* Smooth transitions */
+}
+
+.table tr {
+    transition: background-color 0.3s; /* Smooth transition for row */
 }
 
 .table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f8f8f8; /* Light gray for even rows */
 }
+
+.table tr:nth-child(odd) {
+    background-color: #ffffff; /* White for odd rows */
+}
+
+.table tr:hover {
+    background-color: #e0f7fa; /* Light blue on hover */
+    transform: translateY(-1px); /* Slight lift effect on hover */
+}
+
+.table td:last-child {
+    border-bottom: none; /* Remove border from last cell for a cleaner look */
+}
+
+.table td {
+    position: relative; /* For tooltip positioning if needed */
+}
+
+/* Optional: Add a subtle hover effect to table cells */
+.table td:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Lighten background on hover */
+}
+
 
 /* Buttons styles */
 .btn-view {
