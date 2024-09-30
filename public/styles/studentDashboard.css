@@ -377,14 +377,14 @@ nav.close ~ .dashboard .top {
 .boxes .box.box5 {
     background-color: #ff7f50; /* Coral */
 }
-
 .boxes .box.box6 {
-    background-color: #4a90e2; /* Blue */
+    background-color: #e764f5; /* Coral */
 }
 
-.boxes .box i {
-    font-size: 35px;
-    margin-bottom: 10px;
+.box i {
+    font-size: 24px;
+    margin-right: 10px;
+    vertical-align: middle; /* Align the icon with text */
 }
 
 .boxes .box .text {
