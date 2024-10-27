@@ -167,6 +167,48 @@ body.dark li a:hover:before {
     color: var(--black-light-color);
     transition: var(--tran-05);
 }
+/* Style the dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the dropdown button (Switch user) */
+.dropbtn {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Dropdown content links */
+.dropdown-content li a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content li a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown content when hovering */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 
 nav.close li a .link-name {
     opacity: 0;
@@ -203,15 +245,6 @@ body.dark .nav-links li a:hover .link-name {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-}
-
-.mode-toggle .switch {
-    position: relative;
-    display: inline-block;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
 }
 
 .switch:before {
@@ -266,42 +299,18 @@ nav.close ~ .dashboard .top {
     width: calc(100% - 73px);
 }
 
-.dashboard .top .sidebar-toggle {
+.dashboard .top  {
     font-size: 26px;
     color: var(--text-color);
     cursor: pointer;
 }
 
-.dashboard .top .search-box {
+.dashboard .top  {
     position: relative;
     height: 45px;
     max-width: 600px;
     width: 100%;
     margin: 0 30px;
-}
-
-.top .search-box input {
-    position: absolute;
-    border: 1px solid var(--border-color);
-    background-color: var(--panel-color);
-    padding: 0 25px 0 50px;
-    border-radius: 5px;
-    height: 100%;
-    width: 100%;
-    color: var(--text-color);
-    font-size: 15px;
-    font-weight: 400;
-    outline: none;
-}
-
-.top .search-box i {
-    position: absolute;
-    left: 15px;
-    font-size: 22px;
-    z-index: 10;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--black-light-color);
 }
 
 .top img {
@@ -377,22 +386,38 @@ nav.close ~ .dashboard .top {
 .boxes .box.box5 {
     background-color: #ff7f50; /* Coral */
 }
+
 .boxes .box.box6 {
-    background-color: #e764f5; /* Coral */
+    background-color: #e764f5; /* Light Purple */
 }
 
+.boxes .box.box7 {
+    background-color: #3498db; /* Blue */
+}
+
+.boxes .box.box8 {
+    background-color: #f39c12; /* Orange */
+}
+
+.boxes .box.box9 {
+    background-color: #9b59b6; /* Purple */
+}
+
+/* Icon styling */
 .box i {
     font-size: 24px;
     margin-right: 10px;
     vertical-align: middle; /* Align the icon with text */
 }
 
+/* Text styling */
 .boxes .box .text {
     font-size: 18px;
     font-weight: 500;
     color: var(--text-color);
 }
 
+/* Number styling */
 .boxes .box .number {
     font-size: 40px;
     font-weight: 500;

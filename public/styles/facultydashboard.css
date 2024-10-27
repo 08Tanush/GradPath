@@ -148,6 +148,47 @@ body.dark li a:hover:before{
     color: var(--black-light-color);    
     transition: var(--tran-05);
 }
+/* Style for the dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style for the dropdown button */
+.dropbtn {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+/* Style for the dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+}
+
+/* Style for each item in the dropdown */
+.dropdown-content li a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change color of dropdown button on hover */
+.dropdown:hover .dropbtn {
+    background-color: #fcfffd;
+}
+
 nav.close li a .link-name{
     opacity: 0;
     pointer-events: none;

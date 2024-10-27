@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +16,7 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png.png" alt="">
+               <img src="../../images/user.png" alt="">
             </div>
 
             <span class="logo_name">GradPath</span>
@@ -25,25 +24,25 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="/public/HTML/studentDashboard.html">
+                <li><a href="#" id="homeLink">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Home</span>
                 </a></li>
-                <li><a href="../HTML/addActivity.html">
-                  <i class="uil uil-plus"></i>
+                <li><a href="#" id="postLink">
+                    <i class="uil uil-plus"></i>
                     <span class="link-name">Post</span>
                 </a></li>
-                <li><a href="../HTML/portfolio2.html">
-                    <i class=" uil-comment-download"></i> 
+                <li><a href="#" id="portfolioLink">
+                    <i class="uil uil-comment-download"></i> 
                     <span class="link-name">Portfolio</span>
                 </a></li>
-                
-                <li><a href="../HTML/Profile.html">
+                <li><a href="#" id="profileLink">
                     <i class="uil uil-browser"></i>
                     <span class="link-name">Profile</span>
-                </a></li> 
-            <ul class="logout-mode">
-                <li><a href="../HTML/loginPage.html">
+                </a></li>
+            </ul>
+            <ul id="logout-mode" class="logout-mode">
+                <li><a href="#" id="logoutLink">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
@@ -52,9 +51,6 @@
     </nav>
 
     <section class="dashboard">      
-            <!--<img src="images/profile.jpg" alt="">-->
-        </div>
-
         <div class="dash-content">
             <div class="overview">
                 <div class="title">
@@ -63,40 +59,139 @@
                 </div>
         
                 <div class="boxes">
-                    <div class="box box1">
-                        <i class="uil uil-analytics"></i>
-                        <span class="text">Extra-curricular Activities</span>
-                        <span class="number">7</span>
-                    </div>
-                    <div class="box box2">
-                        <i class="uil  uil-github"></i>
-                        <span class="text">Projects Completed</span>
-                        <span class="number">15</span>
-                    </div>
-                    <div class="box box3">
-                        <i class="uil  uil-diary"></i>
-                        <span class="text">Certificates</span>
-                        <span class="number">16</span>
-                    </div>
-                    <div class="box box4">
-                        <i class="uil uil-suitcase"></i>
-                        <span class="text">Internships</span>
-                        <span class="number">6</span>
-                    </div>
-                    <div class="box box5">
-                        <i class="uil uil-microphone"></i>
-                        <span class="text">Events & Talks attended</span>
-                        <span class="number">15</span>
-                    </div>
-                    <div class="box box6">
-                        <i class="uil uil-cloud-upload"></i>
-                        <span class="text">Research & Innovations</span>
-                        <span class="number">10</span> 
-                    </div>    
-                </div>
+                  <div class="box box1">
+                      <i class="uil uil-book-open"></i>
+                      <span class="text">Academic Achievements</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box2">
+                      <i class="uil uil-trophy"></i>
+                      <span class="text">Competitions & Hackathons</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box3">
+                      <i class="uil uil-award"></i>
+                      <span class="text">Extracurricular Activities</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box4">
+                      <i class="uil uil-hands"></i>
+                      <span class="text">Volunteering & Social Work</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box5">
+                      <i class="uil-user-circle"></i>
+                      <span class="text">Leadership Roles</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box6">
+                      <i class="uil uil-suitcase"></i>
+                      <span class="text">Internships</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box7">
+                      <i class="uil uil-flask"></i>
+                      <span class="text">Research & Publications</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box8">
+                      <i class="uil uil-dumbbell"></i>
+                      <span class="text">Sports & Fitness</span>
+                      <span class="number">0</span>
+                  </div>
+                  <div class="box box9">
+                      <i class="uil uil-github"></i>
+                      <span class="text">Projects Completed</span>
+                      <span class="number">0</span>
+                  </div>
+              </div>
             </div>
         </div>
-        
+        <div id="userData"></div>
     </section>
 </body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
+    if (!token || !userId) {
+      alert('Session expired or invalid. Please log in again.');
+      window.location.href = '../HTML/loginPage.html';  
+      return;
+    }
+  
+    // Function to fetch activity counts for each category based on userId
+    const fetchActivityCounts = async (userId) => {
+      try {
+        const response = await fetch(`http://localhost:3000/activityCounts/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`, 
+            'Content-Type': 'application/json'
+          }
+        });
+  
+        const result = await response.json();
+        if (response.ok) {
+          console.log('Activity counts:', result);
+          // Call function to populate the dashboard
+          updateActivityCounts(result);
+        } else {
+          console.error('Error fetching activity counts:', result.message);
+          if (result.message === 'Invalid token' || result.message === 'No token provided') {
+            localStorage.removeItem('token');
+            window.location.href = '../HTML/loginPage.html'; 
+          }
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+  
+    // Function to map category_ids to boxes and update their counts
+    const updateActivityCounts = (activityCounts) => {
+    const categoryMapping = {
+        "671bcb775e56001bc014f089": "box1",  // Academic Achievements
+        "671bcb775e56001bc014f08a": "box2",  // Competitions & Hackathons
+        "671bcb775e56001bc014f08b": "box3",  // Extracurricular Activities
+        "671bcb775e56001bc014f08c": "box4",  // Volunteering & Social Work
+        "671bcb775e56001bc014f08d": "box5",  // Leadership Roles
+        "671bcb775e56001bc014f08e": "box6",  // Internships
+        "671bcb775e56001bc014f08f": "box7",  // Research & Publications
+        "671bcb775e56001bc014f090": "box8",  // Sports & Fitness
+        "671bcb775e56001bc014f09": "box91"   // Projects
+    };
+
+      activityCounts.forEach(({ _id, count }) => {
+        console.log(`Mapping category ${_id} with count ${count}`);
+        const boxClass = categoryMapping[_id];
+        
+        if (boxClass) {
+          console.log(`Updating ${boxClass} with count ${count}`);
+          document.querySelector(`.${boxClass} .number`).textContent = count;
+        } else {
+          console.warn(`No box found for category_id ${_id}`);
+        }
+      });
+    };
+  
+    // Call fetchActivityCounts to load the data
+    fetchActivityCounts(userId);
+  
+    // Update navbar links to remove userId from the URL
+    document.getElementById('homeLink').href = './studentDashboard.html';
+    document.getElementById('postLink').href = './addActivity.html';
+    document.getElementById('portfolioLink').href = './portfolio2.html';
+    document.getElementById('profileLink').href = './Profile.html';
+    
+    // Add logout functionality
+    document.getElementById('logoutLink').addEventListener('click', () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId'); // Optionally clear userId on logout
+      window.location.href = './loginPage.html';
+    });
+  });
+</script>
+
 </html>

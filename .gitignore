@@ -44,122 +44,247 @@ activity_id from Activity
 uploaded_at
 
 
-Enhanced Database Schema:
-1. Users
-This table stores user credentials and roles (e.g., student, faculty, admin), essential for authentication and role-based access control.
+Here's the complete database schema for the *Portfolio Management System* with the added dynamic fields, rating system, and ranking:
 
-Column Name	Data Type	Description
-id	INT (PK)	Unique user identifier (auto-incremented).
-user_name	VARCHAR	Username for login.
-pass_hash	VARCHAR	Hashed password for security.
-email	VARCHAR	User's email address for communication.
-role	ENUM	Role type: student, faculty, admin.
-created_at	TIMESTAMP	Account creation timestamp.
-updated_at	TIMESTAMP	Last update timestamp (e.g., password updates).
+---
 
+### *1. Users Table*
+This stores the details of all users (students, faculty, admin).
 
-2. Profile
-This table holds personal details linked to users.
+| Field         | Type          | Description                     |
+|---------------|---------------|---------------------------------|
+| id            | INT (PK)      | Primary Key                     |
+| user_name     | VARCHAR       | Username                        |
+| pass_hash     | VARCHAR       | Password (hashed)               |
+| email         | VARCHAR       | User email                      |
+| role          | ENUM          | Role (admin, faculty, student)  |
+| created_at    | TIMESTAMP     | User creation timestamp         |
+| updated_at    | TIMESTAMP     | User update timestamp           |
 
-Column Name	Data Type	Description
-id	INT (PK)	Unique profile identifier.
-user_id	INT (FK)	Foreign key referencing Users.id.
-name	VARCHAR	Full name of the user.
-dob	DATE	Date of birth.
-created_at	TIMESTAMP	Profile creation timestamp.
-updated_at	TIMESTAMP	Last profile update timestamp.
+---
 
+### *2. Profile Table*
+This stores the profile details for each user (student or faculty).
 
-3. Category
-This table stores activity categories, allowing for scalability and easy management of activity types.
+| Field         | Type          | Description                                   |
+|---------------|---------------|----------------------------------------------|
+| id            | INT (PK)      | Primary Key                                  |
+| user_id       | INT (FK)      | Foreign Key to Users                       |
+| name          | VARCHAR       | Full name                                    |
+| dob           | DATE          | Date of birth                                |
+| start_year    | YEAR          | Year student/faculty joined the institution  |
+| current_year  | INT           | Current year of study or employment          |
+| position      | VARCHAR       | Position or designation (for faculty/admin)  |
+| about         | TEXT          | Brief bio                                    |
+| created_at    | TIMESTAMP     | Profile creation timestamp                   |
+| updated_at    | TIMESTAMP     | Profile update timestamp                     |
 
-Column Name	Data Type	Description
-id	INT (PK)	Unique category identifier.
-name	VARCHAR	Category name (e.g., Workshops, Sports).
-description	TEXT (Optional)	Description of the category.
-created_at	TIMESTAMP	Timestamp for when the category was created.
+---
 
+### *3. Category Table*
+This stores the categories for student activities (e.g., academic, extracurricular).
 
-4. Activity
-Represents activities performed by students, linked to profiles and categories.
+| Field         | Type          | Description                                  |
+|---------------|---------------|---------------------------------------------|
+| id            | INT (PK)      | Primary Key                                 |
+| name          | VARCHAR       | Category name                               |
+| description   | TEXT          | Category description                        |
+| created_at    | TIMESTAMP     | Category creation timestamp                 |
 
-Column Name	Data Type	Description
-id	INT (PK)	Unique activity identifier.
-profile_id	INT (FK)	Foreign key referencing Profile.id.
-category_id	INT (FK)	Foreign key referencing Category.id.
-start_dateTime	DATETIME	Activity start date and time.
-end_dateTime	DATETIME	Activity end date and time.
-title	VARCHAR	Title of the activity.
-desc	TEXT	Description of the activity.
-visibility	ENUM	Public, Restricted, Private.
-location	VARCHAR	Physical location where the activity occurred.
-status	ENUM	Draft, Submitted, Approved, Rejected.
-created_at	TIMESTAMP	Activity creation timestamp.
-updated_at	TIMESTAMP	Last update timestamp.
+---
 
+### *4. Category Fields Table*
+This defines the dynamic fields for each category.
 
-5. Approval
-Tracks the approval status of activities by faculty members.
+| Field         | Type          | Description                                      |
+|---------------|---------------|-------------------------------------------------|
+| id            | INT (PK)      | Primary Key                                     |
+| category_id   | INT (FK)      | Foreign Key to Category                       |
+| field_name    | VARCHAR       | The name of the dynamic field                   |
+| field_type    | ENUM          | Field type (text, number, file, dropdown, etc.) |
+| options       | TEXT          | JSON for dropdown options (if needed)           |
+| is_required   | BOOLEAN       | Whether the field is required                   |
+| created_at    | TIMESTAMP     | Timestamp of creation                           |
 
-Column Name	Data Type	Description
-id	INT (PK)	Unique approval identifier.
-approval_dateTime	TIMESTAMP	Date and time of approval or rejection.
-activity_id	INT (FK)	Foreign key referencing Activity.id.
-faculty_id	INT (FK)	Foreign key referencing Users.id (faculty role).
-status	ENUM	Pending, Approved, Rejected.
-remark	TEXT	Faculty feedback or reason for rejection.
+---
 
+### *5. Activity Table*
+This stores student activities.
 
-6. Document
-This table stores supporting documents uploaded for activities.
+| Field         | Type          | Description                                     |
+|---------------|---------------|------------------------------------------------|
+| id            | INT (PK)      | Primary Key                                    |
+| profile_id    | INT (FK)      | Foreign Key to Profile                       |
+| category_id   | INT (FK)      | Foreign Key to Category                      |
+| start_dateTime| DATETIME      | Start date and time of the activity            |
+| end_dateTime  | DATETIME      | End date and time of the activity              |
+| title         | VARCHAR       | Title of the activity                          |
+| desc          | TEXT          | Description of the activity                    |
+| visibility    | ENUM          | Visibility status (private, public, specific)  |
+| location      | VARCHAR       | Location of the activity                       |
+| status        | ENUM          | Status (pending, reviewed, approved, rejected) |
+| created_at    | TIMESTAMP     | Activity creation timestamp                    |
+| updated_at    | TIMESTAMP     | Activity update timestamp                      |
 
-Column Name	Data Type	Description
-id	INT (PK)	Unique document identifier.
-doc_path	VARCHAR	Path or URL to the uploaded document.
-activity_id	INT (FK)	Foreign key referencing Activity.id.
-doc_type	ENUM	Type of document: Certificate, Image, PDF, etc.
-uploaded_at	TIMESTAMP	Timestamp when the document was uploaded.
+---
 
+### *6. Activity Fields Table*
+This stores the values of dynamic fields for each activity.
 
-sem5Project/
-│
-├── server/                   # Backend (Node.js + Express)
-│   ├── config/               # Configuration files
-│   │   └── db.js             # MongoDB connection setup
-│   ├── controllers/          # Route logic (CRUD operations)
-│   │   ├── userController.js
-│   │   ├── profileController.js
-│   │   ├── activityController.js
-│   │   ├── approvalController.js
-│   │   └── documentController.js
-│   ├── models/               # Mongoose schemas/models
-│   │   ├── User.js
-│   │   ├── Profile.js
-│   │   ├── Activity.js
-│   │   ├── Approval.js
-│   │   └── Document.js
-│   ├── routes/               # Express routes
-│   │   └── api.js
-│   ├── middleware/           # Middleware functions (e.g., auth)
-│   ├── utils/                # Utility functions (e.g., hashing)
-│   ├── public/               # Public assets for backend (if any)
-│   │   ├── styles/           # CSS stylesheets
-│   │   ├── images/           # Image files
-│   │   └── scripts/          # Client-side JS scripts (if needed)
-│   ├── views/                # HTML view templates (if using templating engine like EJS)
-│   │   ├── index.ejs         # Main HTML file for the app
-│   │   ├── profile.ejs       # Profile page template
-│   │   ├── activity.ejs      # Activity page template
-│   │   └── login.ejs         # Login page template
-│   ├── server.js             # Main entry point for the backend
-│   └── .env                  # Environment variables (e.g., DB connection string)
-│
-├── public/                   # Public assets for frontend
-│   ├── index.html            # Main HTML file for the frontend
-│   ├── styles/               # CSS stylesheets
-│   ├── images/               # Image files
-│   └── scripts/              # JavaScript files (if needed for frontend functionality)
-│
-├── package.json              # Main project dependencies and scripts
-├── README.md                 # Project documentation
-└── .gitignore                # Files to ignore in Git
+| Field         | Type          | Description                                      |
+|---------------|---------------|-------------------------------------------------|
+| id            | INT (PK)      | Primary Key                                     |
+| activity_id   | INT (FK)      | Foreign Key to Activity                       |
+| field_id      | INT (FK)      | Foreign Key to Category Fields                |
+| field_value   | TEXT          | Value of the dynamic field                      |
+| uploaded_at   | TIMESTAMP     | Field value submission timestamp                |
+
+---
+
+### *7. Approval Table*
+This tracks the approval process for each activity by faculty.
+
+| Field             | Type          | Description                                |
+|-------------------|---------------|-------------------------------------------|
+| id                | INT (PK)      | Primary Key                               |
+| approval_dateTime | DATETIME      | Date and time of approval                 |
+| activity_id       | INT (FK)      | Foreign Key to Activity                 |
+| faculty_id        | INT (FK)      | Foreign Key to Users                    |
+| status            | ENUM          | Status (pending, approved, rejected)      |
+| remark            | TEXT          | Faculty comments                          |
+
+---
+
+### *8. Document Table*
+This stores documents uploaded as part of an activity.
+
+| Field         | Type          | Description                                  |
+|---------------|---------------|---------------------------------------------|
+| id            | INT (PK)      | Primary Key                                 |
+| doc_path      | VARCHAR       | Path to the document on the server          |
+| activity_id   | INT (FK)      | Foreign Key to Activity                   |
+| field_id      | INT (FK)      | Foreign Key to Category Fields (optional) |
+| doc_type      | ENUM          | Type of document (image, PDF, etc.)         |
+| uploaded_at   | TIMESTAMP     | Timestamp of document upload                |
+
+---
+
+### *9. Faculty Assignment Table*
+This tracks faculty assignments for activity reviews.
+
+| Field         | Type          | Description                                  |
+|---------------|---------------|---------------------------------------------|
+| id            | INT (PK)      | Primary Key                                 |
+| activity_id   | INT (FK)      | Foreign Key to Activity                   |
+| faculty_id    | INT (FK)      | Foreign Key to Users (faculty)            |
+| assigned_by   | INT (FK)      | Foreign Key to Users (admin/student)       |
+| assigned_at   | TIMESTAMP     | Timestamp of faculty assignment             |
+
+---
+
+### *10. Rating Criteria Table*
+This defines the parameters for rating activities.
+
+| Field         | Type          | Description                                  |
+|---------------|---------------|---------------------------------------------|
+| id            | INT (PK)      | Primary Key                                 |
+| category_id   | INT (FK)      | Foreign Key to Category                   |
+| criteria_name | VARCHAR       | Rating criteria name (e.g., Originality)    |
+| max_score     | INT           | Maximum score for this criterion            |
+| weight        | FLOAT         | Weight of this criterion in total score     |
+| created_at    | TIMESTAMP     | Creation timestamp                          |
+
+---
+
+### *11. Activity Rating Table*
+This stores the scores given to an activity based on the criteria.
+
+| Field         | Type          | Description                                  |
+|---------------|---------------|---------------------------------------------|
+| id            | INT (PK)      | Primary Key                                 |
+| activity_id   | INT (FK)      | Foreign Key to Activity                   |
+| criteria_id   | INT (FK)      | Foreign Key to Rating Criteria            |
+| faculty_id    | INT (FK)      | Foreign Key to Users (faculty)            |
+| score         | FLOAT         | Score assigned based on the criteria        |
+| rated_at      | TIMESTAMP     | Rating timestamp                            |
+
+---
+
+### *12. Overall Ranking Table*
+This stores the total scores and rankings of students.
+
+| Field         | Type          | Description                                  |
+|---------------|---------------|---------------------------------------------|
+| id            | INT (PK)      | Primary Key                                 |
+| profile_id    | INT (FK)      | Foreign Key to Profile                    |
+| category_id   | INT (FK)      | Foreign Key to Category                   |
+| total_score   | FLOAT         | Total weighted score                        |
+| rank_position | INT           | Rank position                               |
+| calculated_at | TIMESTAMP     | Timestamp of rank calculation               |
+
+---
+
+## Web Pages for Implementation
+
+### *User-related Pages:*
+1. *Login Page:*  
+   For students, faculty, and admins to log in.
+
+2. *User Registration Page (Admin Only):*  
+   For admins to create new users (students, faculty).
+
+### *Admin Pages:*
+3. *Admin Dashboard:*  
+   Overview of pending activities, review requests, and user management options.
+
+4. *User Management Page:*  
+   For creating and managing student and faculty profiles.
+
+5. *Activity Management Page (Admin):*  
+   View, edit, or delete activities; assign faculty for review.
+
+6. *Category and Field Management Page:*  
+   For creating and managing categories and dynamic fields.
+
+7. *Faculty Assignment Page:*  
+   Assign faculty to review student activities.
+
+8. *Settings Page:*  
+   Admin-only system settings for deadlines, notifications, etc.
+
+### *Student Pages:*
+9. *Student Dashboard:*  
+   View rankings, submitted activities, and status (pending, reviewed, etc.).
+
+10. *Activity Submission Page:*  
+    Upload new activities, fill dynamic fields, and set visibility.
+
+11. *Activity Edit Page:*  
+    Edit activities (if within the allowed window for changes).
+
+12. *Portfolio Page (Timeline View):*  
+    View student activities in a hierarchical or timeline-based format.
+
+13. *Contact Admin Page:*  
+    Request faculty allotment for off-campus activities.
+
+### *Faculty Pages:*
+14. *Faculty Dashboard:*  
+    View and
+
+ manage assigned activities for review.
+
+15. *Activity Review Page:*  
+    Rate and provide feedback on student activities based on set criteria.
+
+16. *Approval Page:*  
+    Approve or reject activities with comments.
+
+### *Ranking Pages:*
+17. *Ranking Overview Page:*  
+    View student rankings based on total scores.
+
+18. *Detailed Ranking Page:*  
+    Drill-down view of rankings by category and individual activity scores.
+
+This structure covers all functionalities, including activity management, faculty review, dynamic fields, and rankings.

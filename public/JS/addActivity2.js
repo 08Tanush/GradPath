@@ -1,4 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('token');
+    let userId = localStorage.getItem('userId') || new URLSearchParams(window.location.search).get('userId');
+
+    // Store userId in localStorage if it's retrieved from URL
+    if (userId) {
+        localStorage.setItem('userId', userId);
+    }
+
+    if (!token || !userId) {
+        alert('Session expired or invalid. Please log in again.');
+        window.location.href = '../HTML/loginPage.html';  
+        return;
+    }
+
+    // Add userId to links in the navbar
+    document.getElementById('homeLink').href = `./studentDashboard.html`;
+    document.getElementById('postLink').href = `./addActivity.html`;
+    document.getElementById('portfolioLink').href = `./portfolio2.html`;
+    document.getElementById('profileLink').href = `./Profile.html`;
+    
+    document.getElementById('logoutLink').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId'); // Clear userId on logout
+        window.location.href = './loginPage.html';
+    });
+
     loadCategories();
 });
 
@@ -85,9 +111,10 @@ async function loadCategoryFields() {
                     input.name = field.field_name;
                     if (field.is_required) input.required = true;
                     break;
+
                 case 'date':
                 case 'datetime':
-                case 'datetime-local':  // You can use 'datetime-local' for better browser support
+                case 'datetime-local':
                     input = document.createElement('input');
                     input.type = 'datetime-local';
                     input.id = field.field_name;
@@ -150,37 +177,60 @@ async function loadCategoryFields() {
     }
 }
 
-document.getElementById('activityForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent default form submission
+// Load categories on page load
+window.addEventListener('DOMContentLoaded', loadCategories);
 
-    const categoryFields = [];
-    // Collect all category fields
-    const fields = document.querySelectorAll('#categoryFields input, #categoryFields select');
-    fields.forEach(field => {
-        const fieldId = field.name.split('_')[1]; // Extract field ID from name
-        categoryFields.push({
-            field_id: fieldId,
-            field_value: field.value
+// Handle form submission
+document.getElementById('activity-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    // Fetch the category fields and include them in the formData
+    const fields = [];
+    document.querySelectorAll('.category-field').forEach(field => {
+        fields.push({
+            field_id: field.getAttribute('data-field-id'), // Get field_id from data-field-id
+            field_value: field.value // Get field value
         });
     });
 
-    // Prepare the form data
-    const formData = new FormData(this);
-    formData.append('categoryFields', JSON.stringify(categoryFields)); // Append category fields
+    // Append the fields array to the formData
+    formData.append('fields', JSON.stringify(fields));
 
-    // Send the form data to the server
-    fetch('/uploadActivity', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        // Optionally redirect or reset the form
-    })
-    .catch(error => console.error('Error submitting form:', error));
+    // Append visibility to formData
+    const visibility = document.querySelector('input[name="visibility"]:checked');
+    if (visibility) {
+        formData.append('visibility', visibility.value);
+    }
+
+    try {
+        // Get the token from localStorage
+        const token = localStorage.getItem('token'); // Assumes the token is stored under 'token'
+
+        // Make sure the token exists before making the request
+        if (!token) {
+            alert('You are not authenticated. Please log in first.');
+            return;
+        }
+
+        const response = await fetch('http://localhost:3000/activities/create', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${token}` // Attach the token in the Authorization header
+            }
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Activity created successfully!');
+            window.location.href = '/public/HTML/studentDashboard.html'; // Redirect to the dashboard
+        } else {
+            alert(result.message || 'Error creating activity');
+        }
+    } catch (error) {
+        alert('An error occurred: ' + error.message);
+    }
 });
-
-
-// Load categories on page load
-window.addEventListener('DOMContentLoaded', loadCategories);

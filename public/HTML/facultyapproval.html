@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Faculty Activity Approval</title>
-  <link rel="stylesheet" href="/public/styles/facultyApproval.css"> <!-- Custom CSS for Activity Approval -->
+  <link rel="stylesheet" href="../styles/facultyApproval.css"> <!-- Custom CSS for Activity Approval -->
   <script src="/public/JS/facultyApproval.js" defer></script> <!-- JS for handling profile redirection -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
@@ -19,24 +19,16 @@
 
     <div class="menu-items">
         <ul class="nav-links">
-            <li><a href="/public/HTML/facultyDashboard.html">
+            <li><a href="../HTML/facultyDashboard.html">
                 <i class="uil uil-estate"></i>
                 <span class="link-name">Home</span>
             </a></li>
-            <li><a href="/public/HTML/facultyNotifications.html">
-                <i class="uil uil-bell"></i>
-                <span class="link-name">Notifications <span class="badge" id="notificationCount"></span></span>
-            </a></li>
-            <li><a href="facultyApproval.html">
+
+            <li><a href="../HTML/facultyapproval.html">
                 <i class="uil uil-check-circle"></i> 
                 <span class="link-name">Approval</span>
-            </a></li>
-            
-            <li><a href="#">
-                <i class="uil uil-browser"></i>
-                <span class="link-name">Profile</span>
             </a></li> 
-        
+            </ul>
         <ul class="logout-mode">
             <li><a href="../HTML/loginPage.html">
                 <i class="uil uil-signout"></i>
@@ -48,14 +40,6 @@
 
   <!-- Main Content Section -->
   <section class="dashboard">
-    <div class="top">
-      <i class="uil uil-bars sidebar-toggle"></i>
-      <div class="search-box">
-        <i class="uil uil-search"></i>
-        <input type="text" placeholder="Search here...">
-      </div>
-    </div>
-
     <div class="dash-content">
       <div class="title">
         <i class="uil uil-check-circle"></i>
@@ -64,7 +48,7 @@
 
       <div class="container">
         <div class="motivation-message"></div>
-          <p>Great job reviewing the activities! Keep it up! Here are the activities to be reviewed.</p>
+          <p>Great job reviewing the activities Shiv Negi! Keep it up! Here are the activities to be reviewed.</p>
         </div>
         <!-- Approval list with profile link only -->
         <table class="approval-table">

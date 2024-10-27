@@ -22,14 +22,14 @@ async function run() {
 
     // Insert users
     const userResult = await db.collection('users').insertMany([
-      { user_name: 'student1', pass_hash: 'hashed_pass1', email: 'student1@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
-      { user_name: 'student2', pass_hash: 'hashed_pass2', email: 'student2@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
-      { user_name: 'student3', pass_hash: 'hashed_pass3', email: 'student3@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
-      { user_name: 'student4', pass_hash: 'hashed_pass4', email: 'student4@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
-      { user_name: 'teacher1', pass_hash: 'hashed_pass5', email: 'teacher1@example.com', role: 'faculty', created_at: new Date(), updated_at: new Date() },
-      { user_name: 'teacher2', pass_hash: 'hashed_pass6', email: 'teacher2@example.com', role: 'faculty', created_at: new Date(), updated_at: new Date() },
-      { user_name: 'teacher3', pass_hash: 'hashed_pass7', email: 'teacher3@example.com', role: 'faculty', created_at: new Date(), updated_at: new Date() },
-      { user_name: 'admin', pass_hash: 'hashed_pass8', email: 'admin@example.com', role: 'admin', created_at: new Date(), updated_at: new Date() }
+      { user_name: 'student1', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'student1@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
+      { user_name: 'student2', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'student2@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
+      { user_name: 'student3', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'student3@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
+      { user_name: 'student4', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'student4@example.com', role: 'student', created_at: new Date(), updated_at: new Date() },
+      { user_name: 'teacher1', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'teacher1@example.com', role: 'faculty', created_at: new Date(), updated_at: new Date() },
+      { user_name: 'teacher2', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'teacher2@example.com', role: 'faculty', created_at: new Date(), updated_at: new Date() },
+      { user_name: 'teacher3', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'teacher3@example.com', role: 'faculty', created_at: new Date(), updated_at: new Date() },
+      { user_name: 'admin', pass_hash: '$2b$10$7AvZyoB4Jhn8Kpnh1yThR.wu2wxNUI0n3A/ufaADQ3cl3pA41p3Ou', email: 'admin@example.com', role: 'admin', created_at: new Date(), updated_at: new Date() }
     ]);
     const userIds = userResult.insertedIds;
 // Insert profiles
@@ -193,90 +193,187 @@ const profileResult = await db.collection('profiles').insertMany([
 
 const profileIds = profileResult.insertedIds;
 
+// Insert categories
+const categoryResult = await db.collection('categories').insertMany([
+  { name: 'Academic Achievements', description: 'Records students\' accomplishments in academics.', created_at: new Date() },
+  { name: 'Competitions & Hackathons', description: 'Logs student participation in contests and hackathons.', created_at: new Date() },
+  { name: 'Extracurricular Activities', description: 'Tracks involvement in non-academic activities.', created_at: new Date() },
+  { name: 'Volunteering & Social Work', description: 'Logs community service and volunteering activities.', created_at: new Date() },
+  { name: 'Leadership Roles', description: 'Documents leadership roles in various organizations.', created_at: new Date() },
+  { name: 'Internships', description: 'Records internships and work experiences.', created_at: new Date() },
+  { name: 'Research & Publications', description: 'Logs research work and publications.', created_at: new Date() },
+  { name: 'Sports & Fitness', description: 'Tracks participation in sports and fitness activities.', created_at: new Date() },
+  { name: 'Projects', description: 'Logs project work and related details.', created_at: new Date() }  // New category added here
+]);
+const categoryIds = categoryResult.insertedIds;
 
-    // Insert categories
-    const categoryResult = await db.collection('categories').insertMany([
-      { name: 'Academic Achievements', description: 'Records students\' accomplishments in academics.', created_at: new Date() },
-      { name: 'Competitions & Hackathons', description: 'Logs student participation in contests and hackathons.', created_at: new Date() },
-      { name: 'Extracurricular Activities', description: 'Tracks involvement in non-academic activities.', created_at: new Date() },
-      { name: 'Volunteering & Social Work', description: 'Logs community service and volunteering activities.', created_at: new Date() },
-      { name: 'Leadership Roles', description: 'Documents leadership roles in various organizations.', created_at: new Date() },
-      { name: 'Internships', description: 'Records internships and work experiences.', created_at: new Date() },
-      { name: 'Research & Publications', description: 'Logs research work and publications.', created_at: new Date() },
-      { name: 'Sports & Fitness', description: 'Tracks participation in sports and fitness activities.', created_at: new Date() }
-    ]);
-    const categoryIds = categoryResult.insertedIds;
+// Insert category fields for all categories including "Projects"
+const categoryFieldResult = await db.collection('categoryFields').insertMany([
+  // Fields for "Academic Achievements"
+  { category_id: categoryIds[0].toString(), field_name: 'Title', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[0].toString(), field_name: 'Type of Achievement', field_type: 'dropdown', options: JSON.stringify(['Course', 'Research Paper', 'Workshop', 'Certification']), is_required: true, created_at: new Date() },
+  { category_id: categoryIds[0].toString(), field_name: 'Institution', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[0].toString(), field_name: 'Completion Date', field_type: 'date', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[0].toString(), field_name: 'Grade/Score', field_type: 'text', is_required: false, created_at: new Date() },
+  { category_id: categoryIds[0].toString(), field_name: 'Remarks', field_type: 'textarea', is_required: false, created_at: new Date() },
 
-    // Insert category fields for all categories
-    const categoryFieldResult = await db.collection('categoryFields').insertMany([
-      // Fields for "Academic Achievements"
-      { category_id: categoryIds[0].toString(), field_name: 'Title', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[0].toString(), field_name: 'Type of Achievement', field_type: 'dropdown', options: JSON.stringify(['Course', 'Research Paper', 'Workshop', 'Certification']), is_required: true, created_at: new Date() },
-      { category_id: categoryIds[0].toString(), field_name: 'Institution', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[0].toString(), field_name: 'Completion Date', field_type: 'date', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[0].toString(), field_name: 'Grade/Score', field_type: 'text', is_required: false, created_at: new Date() },
+  // Fields for "Competitions & Hackathons"
+  { category_id: categoryIds[1].toString(), field_name: 'Competition Name', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[1].toString(), field_name: 'Type of Competition', field_type: 'dropdown', options: JSON.stringify(['Hackathon', 'Contest', 'Quiz', 'Coding Challenge']), is_required: true, created_at: new Date() },
+  { category_id: categoryIds[1].toString(), field_name: 'Position', field_type: 'text', is_required: false, created_at: new Date() },
+  { category_id: categoryIds[1].toString(), field_name: 'Date of Participation', field_type: 'date', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[1].toString(), field_name: 'Team/Individual', field_type: 'dropdown', options: JSON.stringify(['Individual', 'Team']), is_required: true, created_at: new Date() },
+  
+  // Fields for "Extracurricular Activities"
+  { category_id: categoryIds[2].toString(), field_name: 'Activity Name', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[2].toString(), field_name: 'Type of Activity', field_type: 'dropdown', options: JSON.stringify(['Cultural Event', 'Club Activity', 'Workshop', 'Seminar']), is_required: true, created_at: new Date() },
+  { category_id: categoryIds[2].toString(), field_name: 'Role', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[2].toString(), field_name: 'Date of Activity', field_type: 'date', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[2].toString(), field_name: 'Location', field_type: 'text', is_required: false, created_at: new Date() },
 
-      // Fields for "Competitions & Hackathons"
-      { category_id: categoryIds[1].toString(), field_name: 'Competition Name', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[1].toString(), field_name: 'Type of Competition', field_type: 'dropdown', options: JSON.stringify(['Hackathon', 'Contest', 'Quiz', 'Coding Challenge']), is_required: true, created_at: new Date() },
-      { category_id: categoryIds[1].toString(), field_name: 'Position', field_type: 'text', is_required: false, created_at: new Date() },
-      { category_id: categoryIds[1].toString(), field_name: 'Date of Participation', field_type: 'date', is_required: true, created_at: new Date() },
+  // Fields for "Volunteering & Social Work"
+  { category_id: categoryIds[3].toString(), field_name: 'Organization Name', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[3].toString(), field_name: 'Type of Volunteering', field_type: 'dropdown', options: JSON.stringify(['Community Service', 'Fundraising', 'Event Support', 'Teaching']), is_required: true, created_at: new Date() },
+  { category_id: categoryIds[3].toString(), field_name: 'Impact Description', field_type: 'textarea', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[3].toString(), field_name: 'Duration', field_type: 'text', is_required: false, created_at: new Date() },
+  
+  // Fields for "Leadership Roles"
+  { category_id: categoryIds[4].toString(), field_name: 'Organization Name', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[4].toString(), field_name: 'Role', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[4].toString(), field_name: 'Responsibilities', field_type: 'textarea', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[4].toString(), field_name: 'Duration', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[4].toString(), field_name: 'Impact Achieved', field_type: 'textarea', is_required: false, created_at: new Date() },
 
-      // Fields for "Extracurricular Activities"
-      { category_id: categoryIds[2].toString(), field_name: 'Activity Name', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[2].toString(), field_name: 'Type of Activity', field_type: 'dropdown', options: JSON.stringify(['Cultural Event', 'Club Activity', 'Workshop', 'Seminar']), is_required: true, created_at: new Date() },
-      { category_id: categoryIds[2].toString(), field_name: 'Role', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[2].toString(), field_name: 'Date of Activity', field_type: 'date', is_required: true, created_at: new Date() },
+  // Fields for "Internships"
+  { category_id: categoryIds[5].toString(), field_name: 'Company Name', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[5].toString(), field_name: 'Role', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[5].toString(), field_name: 'Duration', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[5].toString(), field_name: 'Skills Gained', field_type: 'textarea', is_required: false, created_at: new Date() },
+  { category_id: categoryIds[5].toString(), field_name: 'Project/Assignment Description', field_type: 'textarea', is_required: false, created_at: new Date() },
 
-      // Fields for "Volunteering & Social Work"
-      { category_id: categoryIds[3].toString(), field_name: 'Organization Name', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[3].toString(), field_name: 'Type of Volunteering', field_type: 'dropdown', options: JSON.stringify(['Community Service', 'Fundraising', 'Event Support', 'Teaching']), is_required: true, created_at: new Date() },
-      { category_id: categoryIds[3].toString(), field_name: 'Start Date', field_type: 'date', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[3].toString(), field_name: 'End Date', field_type: 'date', is_required: false, created_at: new Date() },
+  // Fields for "Research & Publications"
+  { category_id: categoryIds[6].toString(), field_name: 'Research Title', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[6].toString(), field_name: 'Type of Publication', field_type: 'dropdown', options: JSON.stringify(['Journal', 'Conference Paper', 'Thesis', 'Technical Report']), is_required: true, created_at: new Date() },
+  { category_id: categoryIds[6].toString(), field_name: 'Publisher/Institution', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[6].toString(), field_name: 'Date of Publication', field_type: 'date', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[6].toString(), field_name: 'DOI/Link', field_type: 'text', is_required: false, created_at: new Date() },
+  { category_id: categoryIds[6].toString(), field_name: 'Research Abstract', field_type: 'textarea', is_required: false, created_at: new Date() },
 
-      // Fields for "Leadership Roles"
-      { category_id: categoryIds[4].toString(), field_name: 'Organization Name', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[4].toString(), field_name: 'Role', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[4].toString(), field_name: 'Responsibilities', field_type: 'textarea', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[4].toString(), field_name: 'Start Date', field_type: 'date', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[4].toString(), field_name: 'End Date', field_type: 'date', is_required: false, created_at: new Date() },
+  // Fields for "Sports & Fitness"
+  { category_id: categoryIds[7].toString(), field_name: 'Sport/Event Name', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[7].toString(), field_name: 'Level of Participation', field_type: 'dropdown', options: JSON.stringify(['School', 'College', 'State', 'National', 'International']), is_required: true, created_at: new Date() },
+  { category_id: categoryIds[7].toString(), field_name: 'Position/Award', field_type: 'text', is_required: false, created_at: new Date() },
+  { category_id: categoryIds[7].toString(), field_name: 'Date of Event', field_type: 'date', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[7].toString(), field_name: 'Team/Individual', field_type: 'dropdown', options: JSON.stringify(['Individual', 'Team']), is_required: true, created_at: new Date() },
 
-      // Fields for "Internships"
-      { category_id: categoryIds[5].toString(), field_name: 'Company Name', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[5].toString(), field_name: 'Role', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[5].toString(), field_name: 'Start Date', field_type: 'date', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[5].toString(), field_name: 'End Date', field_type: 'date', is_required: false, created_at: new Date() },
-      { category_id: categoryIds[5].toString(), field_name: 'Skills Gained', field_type: 'textarea', is_required: false, created_at: new Date() },
+  // Fields for "Projects" - New Category
+  { category_id: categoryIds[8].toString(), field_name: 'Project Title', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[8].toString(), field_name: 'Project Description', field_type: 'textarea', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[8].toString(), field_name: 'Technologies Used', field_type: 'textarea', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[8].toString(), field_name: 'Role in Project', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[8].toString(), field_name: 'Duration', field_type: 'text', is_required: true, created_at: new Date() },
+  { category_id: categoryIds[8].toString(), field_name: 'Link/Repository', field_type: 'text', is_required: false, created_at: new Date() },
+  { category_id: categoryIds[8].toString(), field_name: 'Impact/Outcome', field_type: 'textarea', is_required: false, created_at: new Date() }
+]);
 
-      // Fields for "Research & Publications"
-      { category_id: categoryIds[6].toString(), field_name: 'Research Title', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[6].toString(), field_name: 'Type of Publication', field_type: 'dropdown', options: JSON.stringify(['Journal', 'Conference Paper', 'Thesis', 'Technical Report']), is_required: true, created_at: new Date() },
-      { category_id: categoryIds[6].toString(), field_name: 'Publisher/Institution', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[6].toString(), field_name: 'Date of Publication', field_type: 'date', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[6].toString(), field_name: 'DOI/Link', field_type: 'text', is_required: false, created_at: new Date() },
+const categoryFieldIds = categoryFieldResult.insertedIds;
 
-      // Fields for "Sports & Fitness"
-      { category_id: categoryIds[7].toString(), field_name: 'Sport/Event Name', field_type: 'text', is_required: true, created_at: new Date() },
-      { category_id: categoryIds[7].toString(), field_name: 'Level of Participation', field_type: 'dropdown', options: JSON.stringify(['School', 'College', 'State', 'National', 'International']), is_required: true, created_at: new Date() },
-      { category_id: categoryIds[7].toString(), field_name: 'Position/Award', field_type: 'text', is_required: false, created_at: new Date() },
-      { category_id: categoryIds[7].toString(), field_name: 'Date of Event', field_type: 'date', is_required: true, created_at: new Date() }
-    ]);
-
-    const categoryFieldIds = categoryFieldResult.insertedIds;
 
 
     // Insert activities
-    const activityResult = await db.collection('activities').insertMany([
-      { user_id: userIds[0].toString(), category_id: categoryIds[0].toString(), title: 'Completed Advanced Calculus', details: 'Finished course with A grade', created_at: new Date(), updated_at: new Date() },
-      { user_id: userIds[0].toString(), category_id: categoryIds[1].toString(), title: 'Won Hackathon 2022', details: 'Team won the first prize at a local hackathon', created_at: new Date(), updated_at: new Date() },
-      { user_id: userIds[1].toString(), category_id: categoryIds[0].toString(), title: 'Completed Data Structures', details: 'Achieved a high score', created_at: new Date(), updated_at: new Date() },
-      { user_id: userIds[1].toString(), category_id: categoryIds[2].toString(), title: 'Participated in Cultural Fest', details: 'Danced in the annual cultural fest', created_at: new Date(), updated_at: new Date() },
-      { user_id: userIds[2].toString(), category_id: categoryIds[3].toString(), title: 'Volunteered at Local NGO', details: 'Helped organize events for underprivileged children', created_at: new Date(), updated_at: new Date() },
-      { user_id: userIds[2].toString(), category_id: categoryIds[4].toString(), title: 'Leader of Science Club', details: 'Organized various science events', created_at: new Date(), updated_at: new Date() },
-      { user_id: userIds[3].toString(), category_id: categoryIds[5].toString(), title: 'Intern at Tech Corp', details: 'Worked on machine learning projects', created_at: new Date(), updated_at: new Date() },
-      { user_id: userIds[3].toString(), category_id: categoryIds[6].toString(), title: 'Published Research Paper', details: 'Published a paper on AI in a reputed journal', created_at: new Date(), updated_at: new Date() }
-    ]);
-    const activityIds = activityResult.insertedIds;
+// Assuming `userIds` and `categoryIds` are populated correctly
+const activityResult = await db.collection('activities').insertMany([
+  {
+    profile_id: userIds[0].toString(),
+    category_id: categoryIds[0].toString(),
+    title: 'Completed Advanced Calculus',
+    description: 'Finished course with A grade',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public', // Set visibility (private, public, or specific)
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    profile_id: userIds[0].toString(),
+    category_id: categoryIds[1].toString(),
+    title: 'Won Hackathon 2022',
+    description: 'Team won the first prize at a local hackathon',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    profile_id: userIds[1].toString(),
+    category_id: categoryIds[0].toString(),
+    title: 'Completed Data Structures',
+    description: 'Achieved a high score',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    profile_id: userIds[1].toString(),
+    category_id: categoryIds[2].toString(),
+    title: 'Participated in Cultural Fest',
+    description: 'Danced in the annual cultural fest',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    profile_id: userIds[2].toString(),
+    category_id: categoryIds[3].toString(),
+    title: 'Volunteered at Local NGO',
+    description: 'Helped organize events for underprivileged children',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    profile_id: userIds[2].toString(),
+    category_id: categoryIds[4].toString(),
+    title: 'Leader of Science Club',
+    description: 'Organized various science events',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    profile_id: userIds[3].toString(),
+    category_id: categoryIds[5].toString(),
+    title: 'Intern at Tech Corp',
+    description: 'Worked on machine learning projects',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    profile_id: userIds[3].toString(),
+    category_id: categoryIds[6].toString(),
+    title: 'Published Research Paper',
+    description: 'Published a paper on AI in a reputed journal',
+    start_dateTime: new Date(), // Set appropriate start date
+    end_dateTime: new Date(), // Set appropriate end date
+    visibility: 'public',
+    created_at: new Date(),
+    updated_at: new Date()
+  }
+]);
+
+const activityIds = activityResult.insertedIds;
 
     // Insert activity fields
     const activityFieldResult = await db.collection('activityFields').insertMany([

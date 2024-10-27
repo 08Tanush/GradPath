@@ -22,20 +22,11 @@ body{
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
 .wrapper h2{
+  text-align: center;
   position: relative;
   font-size: 22px;
   font-weight: 600;
   color: #333;
-}
-.wrapper h2::before{
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 28px;
-  border-radius: 12px;
-  background: #4070f4;
 }
 .wrapper form{
   margin-top: 30px;
@@ -43,6 +34,18 @@ body{
 .wrapper form .input-box{
   height: 52px;
   margin: 18px 0;
+}
+/* Style for the logo container */
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Style for the logo image */
+.logo {
+  width: 300px;
+  max-width: 350px; /* Adjust the size of the logo */
+  height: auto;
 }
 form .input-box input{
   height: 100%;

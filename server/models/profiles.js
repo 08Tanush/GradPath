@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
-    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Refers to the user
+    user_id: {type: String,required: true }, // Refers to the user
     name: { type: String, required: true }, // Full Name
     class: { type: String }, // Class of the student
     branch: { type: String }, // Branch or Department
@@ -31,4 +31,4 @@ profileSchema.pre('save', function(next) {
 
 const Profile = mongoose.model('Profile', profileSchema);
 
-module.exports = Profile;
+module.exports = {Profile};

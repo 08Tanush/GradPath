@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const connectDB = require('../config/db');
 
 const activitySchema = new mongoose.Schema({
-  profile_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true },
-  category_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+  profile_id: { type: String, required: true },  // Refers to the user
+  category_id: { type: String, required: true }, // Refers to the category
   start_dateTime: { type: Date, required: true },
   end_dateTime: { type: Date, required: true },
   title: { type: String, required: true },
@@ -11,7 +11,7 @@ const activitySchema = new mongoose.Schema({
   visibility: { type: String, enum: ['private', 'public', 'specific'], required: true },
   location: { type: String },
   approval_status: { type: String, enum: ['Pending', 'Approved', 'Rejected'], default: 'Pending' },
-  faculty_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  faculty_id: { type: String }, // Refers to the faculty/user
   editable_until: { type: Date },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
@@ -19,4 +19,4 @@ const activitySchema = new mongoose.Schema({
 
 const Activity = mongoose.model('Activity', activitySchema);
 
-module.exports = {Activity};
+module.exports = { Activity };

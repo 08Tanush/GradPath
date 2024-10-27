@@ -333,6 +333,7 @@ body.dark .switch:before {
     transition: max-height 0.3s ease-out;
 }
 
+.ul {
 .timeline-item {
     margin-bottom: 20px;
 }
@@ -376,7 +377,7 @@ body.dark .switch:before {
     margin-top: 10px;
     font-size: 18px;
 }
-
+}
 hr {
     margin: 40px 0px;
     border-top: 1px solid #ccc;
@@ -458,4 +459,42 @@ hr {
     .email-button {
         padding: 10px 20px;
     }
+}
+.activity-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.3s;
+}
+
+.activity-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activity-title {
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+}
+
+.activity-details {
+    margin-top: 12px;
+}
+
+.activity-desc {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.activity-approver {
+    font-weight: bold;
+    color: #007BFF; /* Blue for approver status */
+}
+
+.activity-date, .activity-updated {
+    font-size: 0.9em;
+    color: #777; /* Gray for date texts */
+    margin-top: 6px;
 }

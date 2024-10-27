@@ -1,12 +1,12 @@
 /* Google Fonts Link */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 /* Resetting default styling and setting font-family */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
     min-height: 100vh;
     padding: 0 10px;
     display: flex;
-    background: #626cd6;
+    background: #4070f4;
     justify-content: center;
     align-items: center;
 }
@@ -33,7 +33,18 @@ body {
     font-size: 20px;
     text-align: center;
 }
+/* Style for the logo container */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
+/* Style for the logo image */
+.logo {
+    width: 300px;
+    max-width: 350px; /* Adjust the size of the logo */
+    height: auto;
+}
 /* Google & Apple button styling */
 
 .login_form .login_option {
@@ -152,11 +163,10 @@ form button {
     border-radius: 5px;
     border: none;
     outline: none;
-    background: #626CD6;
+    background: #4070f4;
     color: #fff;
     font-size: 18px;
     font-weight: 500;
-    text-transform: uppercase;
     cursor: pointer;
     margin-bottom: 28px;
     transition: 0.3s ease;

@@ -1,36 +1,35 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const path = require('path');
+require('dotenv').config(); // Load environment variables
+
+const app = express();
 
 // MongoDB connection
 mongoose.connect('mongodb://127.0.0.1:27017/GradPath', { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log('MongoDB connected!'))
-.catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('MongoDB connected!'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
-
-// const corsOptions = {
-//   origin: 'http://127.0.0.1:5501', // Allow this specific origin
-//   optionsSuccessStatus: 200
-// };
-
-// app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static('uploads')); // Serve uploaded files
-const {activityController} = require('./routes/ActivityController');
-app.use('/uploadActivity', activityController);
+app.use(express.static(path.join(__dirname, 'public')));
 
-const {User} = require('./models/users');
-// JWT Secret Key (make sure this is stored securely in production)
-const JWT_SECRET = 'your-secret-key'; // Replace with an environment variable in production
-const {Activity} = require('./models/Activities');
-const {Category} = require('./models/categories');
-const {CategoryField} = require('./models/categoryFields');
+const { User } = require('./models/users');
+const { Activity } = require('./models/Activities');
+const { ActivityField } = require('./models/activity_fields');
+const { Category } = require('./models/categories');
+const { CategoryField } = require('./models/categoryFields');
+const { Profile } = require('./models/profiles');
+
+// JWT Secret Key (store this securely in production)
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Global variable for tracking the current user session
+let currUser = null;
 
 // Start the server
 const PORT = 3000;
@@ -38,11 +37,165 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
+// Utility function to hash passwords
+const hashPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return bcrypt.hash(password, salt);
+};
 
+// Middleware to check if the user is logged in by verifying the JWT token
+const isLoggedIn = async (req, res, next) => {
+  const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1]; // Bearer token
+  
+  if (!token) {
+    return res.status(403).json({ message: 'No token provided' });
+  }
 
-// POST: Create a new activity
-app.post('/activities', async (req, res) => {
   try {
+    // Verify the token using the JWT_SECRET
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    // Find the user by decoded userId
+    const user = await User.findById(decoded.userId);
+    
+    if (!user) {
+      return res.status(403).json({ message: 'User not found' });
+    }
+
+    // Attach user information to req for further usage in routes
+    req.user = {
+      userId: user._id,
+      email: user.email,
+      role: user.role,
+    };
+
+    next(); // Proceed to the next middleware or route handler
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+// POST: Register a new user (Signup)
+app.post('/signup', async (req, res) => {
+  try {
+    const { user_name, email, password } = req.body;
+
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User with this email already exists' });
+    }
+
+    // Determine the role based on email pattern
+    let userRole;
+    if (/^\d/.test(email)) {
+      userRole = 'student';
+    } else {
+      const roleCheck = await User.findOne({ role: { $in: ['faculty', 'admin'] } });
+      if (roleCheck) {
+        return res.status(400).json({ message: 'Faculty/Admin already exists' });
+      }
+      userRole = 'faculty';
+    }
+
+    // Hash the password before saving
+    const pass_hash = await hashPassword(password);
+
+    // Create a new user
+    const newUser = new User({ user_name, email, pass_hash, role: userRole });
+    const savedUser = await newUser.save();
+
+    res.status(201).json({ message: 'User registered successfully', user: savedUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// POST: Login (Authenticate the user)
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.pass_hash);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Incorrect password' });
+    }
+
+    // Create JWT token using the secret from .env
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.json({ token, userId: user._id });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Route to get the count of activities for each category based on profile_id
+app.get('/activityCounts/:userId', async (req, res) => {
+  const { userId } = req.params;
+  
+  try {
+    const activityCounts = await Activity.aggregate([
+      { $match: { profile_id: userId.toString() } }, // Filter by user ID
+      { $group: { _id: "$category_id", count: { $sum: 1 } } } // Group by category and count activities
+    ]);
+
+    res.status(200).json(activityCounts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching activity counts" });
+  }
+});
+
+// GET: User data (requires user to be logged in)
+app.get('/users/:userId', isLoggedIn, async (req, res) => {
+  const userId = req.params.userId;
+
+  // Ensure that both IDs are compared as strings
+  if (req.user.userId.toString() !== userId.toString()) {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      email: user.email,
+      createdAt: user.created_at,
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// GET: Fetch current logged-in user details
+app.get('/users/me', isLoggedIn, (req, res) => {
+  res.json({ email: currUser.email, role: currUser.role });
+});
+
+// POST: Logout (Clear currUser)
+app.post('/logout', (req, res) => {
+  currUser = null;
+  res.json({ message: 'Logged out successfully' });
+});
+
+// POST: Create a new activity (only faculty can create)
+app.post('/activities', isLoggedIn, async (req, res) => {
+  try {
+    if (currUser.role !== 'faculty') {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
     const newActivity = new Activity(req.body);
     const result = await newActivity.save();
     res.status(201).json(result);
@@ -51,7 +204,7 @@ app.post('/activities', async (req, res) => {
   }
 });
 
-// GET: Fetch all activities
+// GET: Fetch all activities (accessible to everyone)
 app.get('/activities', async (req, res) => {
   try {
     const activities = await Activity.find();
@@ -61,187 +214,227 @@ app.get('/activities', async (req, res) => {
   }
 });
 
-// GET: Fetch an activity by ID
-app.get('/activities/:id', async (req, res) => {
+// PUT: Update an activity by ID (only faculty can update)
+app.put('/activities/:id', isLoggedIn, async (req, res) => {
   try {
-    const activity = await Activity.findOne({ id: req.params.id });
-    if (!activity) {
-      return res.status(404).json({ message: 'Activity not found' });
+    if (currUser.role !== 'faculty') {
+      return res.status(403).json({ message: 'Unauthorized' });
     }
-    res.status(200).json(activity);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+    const updatedActivity = await Activity.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedActivity) return res.status(404).json({ message: 'Activity not found' });
 
-// PUT: Update an activity by ID
-app.put('/activities/:id', async (req, res) => {
-  try {
-    const updatedActivity = await Activity.findOneAndUpdate(
-      { id: req.params.id },
-      req.body,
-      { new: true }
-    );
-    if (!updatedActivity) {
-      return res.status(404).json({ message: 'Activity not found' });
-    }
     res.status(200).json(updatedActivity);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
 
-// DELETE: Delete an activity by ID
-app.delete('/activities/:id', async (req, res) => {
+// DELETE: Delete an activity by ID (only faculty can delete)
+app.delete('/activities/:id', isLoggedIn, async (req, res) => {
   try {
-    const deletedActivity = await Activity.findOneAndDelete({ id: req.params.id });
-    if (!deletedActivity) {
-      return res.status(404).json({ message: 'Activity not found' });
+    if (currUser.role !== 'faculty') {
+      return res.status(403).json({ message: 'Unauthorized' });
     }
+    const deletedActivity = await Activity.findByIdAndDelete(req.params.id);
+    if (!deletedActivity) return res.status(404).json({ message: 'Activity not found' });
+
     res.status(200).json({ message: 'Activity deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Hash the password before saving the user
-const hashPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return bcrypt.hash(password, salt);
-};
-
-// POST: Register a new user (Signup)
-app.post('/signup', async (req, res) => {
-  try {
-      const { user_name, email, password, role } = req.body;
-
-      // Check if the user already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-          return res.status(400).json({ message: 'User with this email already exists' });
-      }
-
-      // Determine the role based on the email
-      let userRole;
-      if (/^\d/.test(email)) { // Check if the email starts with a number
-          userRole = 'student';
-      } else {
-          const roleCheck = await User.findOne({ role: { $in: ['faculty', 'admin'] } });
-          if (roleCheck) {
-              return res.status(400).json({ message: 'Faculty and Admin cannot be created after the first one.' });
-          }
-          userRole = 'faculty'; // Default role if not a student
-      }
-
-      // Hash the password before saving
-      const pass_hash = await hashPassword(password);
-
-      // Create a new user
-      const newUser = new User({
-          user_name,
-          email,
-          pass_hash,
-          role: userRole
-      });
-
-      // Save the user to the database
-      const savedUser = await newUser.save();
-      res.status(201).json({ message: 'User registered successfully', user: savedUser });
-
-  } catch (error) {
-      res.status(500).json({ message: error.message });
-  }
-});
-
-// POST: Login (Authenticate the user)
-app.post('/login', async (req, res) => {
-  try {
-    console.log('Login request received:', req.body)
-    const { email, password } = req.body;
-
-    // Check if the user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Compare the password with the stored hash
-    // const isMatch = user.pass_hash==password;
-    const isMatch = await bcrypt.compare(password, user.pass_hash);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid password' });
-    }
-
-    // Generate a JWT token
-    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-
-    res.status(200).json({ message: 'Login successful', token });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-
-// // Protected route (example, requires JWT token)
-// app.get('/dashboard', async (req, res) => {
-//   const token = req.headers['authorization'];
-
-//   if (!token) {
-//     return res.status(403).json({ message: 'Token is required' });
-//   }
-
-//   try {
-//     const decoded = jwt.verify(token, JWT_SECRET);
-//     res.status(200).json({ message: 'Welcome to the dashboard', user: decoded });
-//   } catch (error) {
-//     res.status(401).json({ message: 'Invalid token' });
-//   }
-// });
-
-// Categories route - this will handle fetching categories dynamically
+// GET: Fetch categories (accessible to everyone)
 app.get('/categories', async (req, res) => {
   try {
-      const categories = await Category.find(); // Fetch all categories
-      res.json(categories);  // Send categories as JSON response
+    const categories = await Category.find();
+    res.json(categories);
   } catch (error) {
-      console.error('Error fetching categories:', error); // Log the error
-      res.status(500).json({ error: 'Failed to fetch categories' }); // Send 500 response with error message
+    res.status(500).json({ message: 'Failed to fetch categories' });
   }
 });
 
-
-// Endpoint to get fields for a specific category
+// GET: Fetch fields for a specific category (accessible to everyone)
 app.get('/categories/:categoryId/fields', async (req, res) => {
-  const categoryId = req.params.categoryId;
-  console.log('Received categoryId:', categoryId); // Log categoryId
+  try {
+    const fields = await CategoryField.find({ category_id: req.params.categoryId });
+    res.json(fields);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch category fields' });
+  }
+});
+
+// POST endpoint for adding/updating user profiles
+app.post('/api/profile', isLoggedIn, async (req, res) => {
+  const { name, skills, about } = req.body;
+  try {
+    const newProfile = new Profile({
+      user_id: currUser.userId,
+      name,
+      email: currUser.email,
+      skills,
+      about,
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+
+    await newProfile.save();
+    res.status(201).json({ message: 'Profile created successfully!' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error saving profile. Please try again.' });
+  }
+});
+
+// Route to fetch the profile for the logged-in user
+app.get('/api/profile/:userId', isLoggedIn, async (req, res) => {
+  const userId = req.params.userId;
+  console.log(userId.toString())
+
+  // Check if the logged-in user's ID matches the requested user ID
+  if (req.user.userId.toString() !== userId.toString()) {
+    return res.status(403).json({ message: 'Access denied' });
+  }
 
   try {
-      const fields = await CategoryField.find({ category_id: categoryId });
-      console.log('Fields found:', fields); // Log the fetched fields
-      res.json(fields);
+    // Find the user profile using the userId
+    const userProfile = await Profile.findOne({ user_id: userId.toString() });
+    if (!userProfile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    // Return the user's profile data
+    res.json(userProfile);
   } catch (error) {
-      console.error('Error fetching category fields:', error);
-      res.status(500).json({ error: 'Failed to fetch category fields' });
+    res.status(500).json({ message: 'Failed to retrieve profile' });
+  }
+});
+
+// Route to update user profile
+app.put('/api/profile/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+      // Update the profile
+      const updatedProfile = await Profile.findOneAndUpdate(
+          { user_id: userId }, // Find the profile by user_id
+          {
+              ...req.body, // The updated data from the request
+              updated_at: Date.now(), // Update the timestamp
+          },
+          { new: true, runValidators: true } // Options: return the updated document and run validators
+      );
+
+      if (!updatedProfile) {
+          return res.status(404).json({ message: 'Profile not found.' });
+      }
+
+      res.status(200).json(updatedProfile);
+  } catch (error) {
+      console.error('Error updating profile:', error);
+      res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+const multer = require('multer');
+
+// Set up storage location and file naming
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Set the destination folder where files will be stored
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`); // Unique filename with timestamp
+  }
+});
+
+// Initialize multer middleware
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    if (ext !== '.pdf' && ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
+      return cb(new Error('Only PDFs and images are allowed'));
+    }
+    cb(null, true);
+  }
+});
+
+app.post('/activities/create', upload.array('documents', 10), async (req, res) => {
+  try {
+    // Get token from headers
+    const token = req.headers.authorization.split(' ')[1]; // Assuming the token is passed as "Bearer <token>"
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET); // Verify and decode token
+    const userId = decodedToken.userId; // Extract userId from token
+
+    // Fetch the profile using userId
+    const userProfile = await Profile.findOne({ user_id: userId });
+
+    if (!userProfile) {
+      return res.status(404).json({ message: 'Profile not found for the user' });
+    }
+
+    // Get the profile ID from the profile
+    const profileId = userProfile._id;
+
+    // Destructure incoming request body
+    const { category, startDateTime, endDateTime, title, desc, visibility, location } = req.body;
+
+    console.log(req.body)
+
+    // Ensure that start_dateTime and end_dateTime are in a valid format
+    const parsedStartDateTime = new Date(startDateTime);
+    const parsedEndDateTime = new Date(endDateTime);
+
+    // Check if dates are valid
+    if (isNaN(parsedStartDateTime) || isNaN(parsedEndDateTime)) {
+      return res.status(400).json({ message: 'Invalid date format' });
+    }
+
+    // Save the activity
+    const newActivity = new Activity({
+      profile_id: String(profileId), // Use the profile ID obtained from userId
+      category_id: String(category), // Ensure category_id is a string
+      start_dateTime: parsedStartDateTime, // Set parsed start date
+      end_dateTime: parsedEndDateTime, // Set parsed end date
+      title,
+      description: desc,
+      visibility: visibility || "public", // Default to public if visibility is not provided
+      location,
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+
+    const savedActivity = await newActivity.save();
+
+    // Save activity fields
+    const fields = JSON.parse(req.body.fields); // Parse the fields from the request body
+    const activityFields = fields.map(field => ({
+      activity_id: String(savedActivity._id), // Ensure activity_id is a string
+      field_id: String(field.field_id), // Ensure field_id is a string
+      field_value: field.field_value
+    }));
+
+    await ActivityField.insertMany(activityFields);
+
+    // Respond with a success message and activity data
+    res.status(201).json({ message: 'Activity created successfully', activity: savedActivity });
+
+  } catch (error) {
+    console.error('Error in activity creation:', error);
+    res.status(500).json({ message: 'Failed to create activity', error: error.message });
   }
 });
 
 
-// Other routes (if you have more routes, you can define them here)
-// For example, if you're handling the form submission for adding an activity:
 
-app.post('/uploadActivity', async (req, res) => {
-  // Handle the form submission, save the activity data to MongoDB
-  try {
-      const { title, desc, category, startDateTime, endDateTime, location } = req.body;
-      // You can now save this data into an Activity model or handle the upload as needed.
-      // Example (assuming an Activity model):
-      // const activity = new Activity({
-      //     title, desc, category, startDateTime, endDateTime, location
-      // });
-      // await activity.save();
-      console.log('Activity Uploaded:', req.body);
-      res.send('Activity Uploaded Successfully');
-  } catch (error) {
-      res.status(500).send('Failed to upload activity');
-  }
-});
+
+    // Save uploaded documents
+    // const documents = req.files.map(file => ({
+    //   doc_path: file.path,
+    //   activity_id: savedActivity._id,
+    //   doc_type: file.mimetype.includes('image') ? 'image' : 'pdf',
+    //   uploaded_at: new Date()
+    // }));
+    
+    // await Document.insertMany(documents);

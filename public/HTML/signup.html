@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Sign Up</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="../styles/signup.css">
 </head>
 <body>
 <div class="wrapper">
-    <h2>Registration</h2>
+    <!-- Logo container for the website logo -->
+    <div class="logo-container">
+        <img src="../../images/gradPath_Logo.png" alt="Website Logo" class="logo">
+    </div>
+    <h2>Sign Up</h2>
     <form id="signupForm">
-        <!-- <div class="input-box">
-            <input type="text" id="studentId" placeholder="Enter student ID" required>
-        </div> -->
         <div class="input-box">
             <input type="text" id="userName" placeholder="Enter your name" required>
         </div>
@@ -27,18 +27,16 @@
             <input type="password" id="confirmPassword" placeholder="Confirm password" required>
         </div>
         <div class="input-box button">
-            <input type="submit" value="Register Now">
+            <input type="submit" value="Sign Up">
         </div>
         <div class="text">
-            <h3>Already have an account? <a href="/public/HTML/loginPage.html">Login now</a></h3>
+            <h3>Already have an account? <a href="../HTML/loginPage.html">Log In</a></h3>
         </div>
     </form>
 </div>
 
 <!-- JavaScript to handle form submission -->
 <script>
-    // In your signup.js or inline script in your HTML file
-
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
