@@ -148,4 +148,103 @@
         </form>
     </div>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId'); // Assuming userId is stored in local storage
+
+        if (!token || !userId) {
+            alert('Session expired or invalid. Please log in again.');
+            window.location.href = '../HTML/loginPage.html';  
+            return;
+        }
+
+        // Update links in the navbar
+        document.getElementById('homeLink').href = './studentDashboard.html';
+        document.getElementById('postLink').href = './addActivity.html';
+        document.getElementById('portfolioLink').href = './portfolio2.html';
+        document.getElementById('profileLink').href = './Profile.html';
+
+        document.getElementById('logoutLink').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId'); // Clear userId on logout
+            window.location.href = './loginPage.html';
+        });
+
+        // Fetch and populate the current user's profile data
+        const response = await fetch(`http://localhost:3000/api/profile/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const profile = await response.json();
+            populateFormData(profile);
+        } else {
+            console.error('Error fetching profile data:', response.statusText);
+        }
+    });
+
+    function populateFormData(profile) {
+        document.getElementById('userId').value = profile.user_id;
+        document.getElementById('name').value = profile.name || '';
+        document.getElementById('class').value = profile.class || '';
+        document.getElementById('branch').value = profile.branch || '';
+        document.getElementById('currentPosition').value = profile.current_position || '';
+        document.getElementById('sinceWhen').value = profile.since_when ? new Date(profile.since_when).toISOString().split('T')[0] : '';
+        document.getElementById('about').value = profile.about || '';
+        document.getElementById('skills').value = profile.skills ? profile.skills.join(', ') : '';
+        document.getElementById('email').value = profile.email || '';
+        document.getElementById('contactNumber').value = profile.contact_number || '';
+        document.getElementById('github').value = profile.github || '';
+        document.getElementById('linkedin').value = profile.linkedin || '';
+        document.getElementById('website').value = profile.website || '';
+        document.getElementById('startYear').value = profile.start_year || '';
+        document.getElementById('currentYear').value = profile.current_year || '';
+    }
+
+    document.getElementById('studentInfoForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent form submission
+
+        // Collect form data
+        const formData = new FormData(e.target);
+        const profileData = {};
+
+        formData.forEach((value, key) => {
+            profileData[key] = value;
+        });
+
+        // Get JWT token from local storage
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in localStorage');
+            alert('You are not authenticated. Please log in again.');
+            return;
+        }
+
+        // Make the fetch call to submit the profile update
+        const response = await fetch(`http://localhost:3000/api/profile/${profileData.userId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Send JWT token in Authorization header
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(profileData),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            console.log('Profile updated successfully:', result);
+            window.location.href = './studentDashboard.html'; // Redirect to dashboard
+        } else {
+            console.error('Error updating profile:', result.message);
+            alert('Failed to update profile: ' + result.message);
+        }
+    });
+</script>
 </html>

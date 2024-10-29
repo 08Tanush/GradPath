@@ -75,6 +75,24 @@ const isLoggedIn = async (req, res, next) => {
   }
 };
 
+// Function to get profile ID from user ID
+async function getProfileIdFromUserId(userId) {
+  try {
+      // Find the profile with the specified user_id
+      const profile = await Profile.findOne({ user_id: userId }).select('_id');
+      
+      // Check if profile was found
+      if (profile) {
+          return profile._id; // Return the profile's ObjectId (profile_id)
+      } else {
+          throw new Error('Profile not found for the given user_id');
+      }
+  } catch (error) {
+      console.error("Error retrieving profile ID:", error.message);
+      throw error;
+  }
+}
+
 // POST: Register a new user (Signup)
 app.post('/signup', async (req, res) => {
   try {
@@ -309,31 +327,31 @@ app.get('/api/profile/:userId', isLoggedIn, async (req, res) => {
   }
 });
 
-// Route to update user profile
-app.put('/api/profile/:userId', async (req, res) => {
-  const { userId } = req.params;
+// // Route to update user profile
+// app.put('/api/profile/:userId', async (req, res) => {
+//   const { userId } = req.params;
 
-  try {
-      // Update the profile
-      const updatedProfile = await Profile.findOneAndUpdate(
-          { user_id: userId }, // Find the profile by user_id
-          {
-              ...req.body, // The updated data from the request
-              updated_at: Date.now(), // Update the timestamp
-          },
-          { new: true, runValidators: true } // Options: return the updated document and run validators
-      );
+//   try {
+//       // Update the profile
+//       const updatedProfile = await Profile.findOneAndUpdate(
+//           { user_id: userId }, // Find the profile by user_id
+//           {
+//               ...req.body, // The updated data from the request
+//               updated_at: Date.now(), // Update the timestamp
+//           },
+//           { new: true, runValidators: true } // Options: return the updated document and run validators
+//       );
 
-      if (!updatedProfile) {
-          return res.status(404).json({ message: 'Profile not found.' });
-      }
+//       if (!updatedProfile) {
+//           return res.status(404).json({ message: 'Profile not found.' });
+//       }
 
-      res.status(200).json(updatedProfile);
-  } catch (error) {
-      console.error('Error updating profile:', error);
-      res.status(500).json({ message: 'Internal server error.' });
-  }
-});
+//       res.status(200).json(updatedProfile);
+//   } catch (error) {
+//       console.error('Error updating profile:', error);
+//       res.status(500).json({ message: 'Internal server error.' });
+//   }
+// });
 
 const multer = require('multer');
 
@@ -426,7 +444,37 @@ app.post('/activities/create', upload.array('documents', 10), async (req, res) =
   }
 });
 
+// GET profile by student ID
+app.get('/profile/:studentId', async (req, res) => {
+  const studentId = req.params.studentId; // Extract studentId from URL parameter
 
+  try {
+      // Fetch the profile by `user_id` matching `studentId`
+      const profile = await Profile.findOne({ user_id: studentId });
+
+      // Check if profile exists
+      if (!profile) {
+          return res.status(404).json({ message: 'Profile not found' });
+      }
+
+      // Respond with the profile data
+      res.json(profile);
+  } catch (error) {
+      console.error('Error fetching profile:', error);
+      res.status(500).json({ message: 'Server error while fetching profile' });
+  }
+});
+
+
+app.get('/activities/:studentId', async (req, res) => {
+  try {
+      const studentId  = req.params.studentId;
+      const activities = await Activity.find({ profile_id: studentId }); // Assuming activities are filtered by studentId
+      res.status(200).json(activities);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+});
 
 
     // Save uploaded documents

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="../styles/profile.css">
-     
+
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -21,9 +20,8 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png.png" alt="">
+               <img src="../../images/user1.png" alt="User Image" id="logo-pic">
             </div>
-
             <span class="logo_name">GradPath</span>
         </div>
 
@@ -34,7 +32,7 @@
                     <span class="link-name">Home</span>
                 </a></li>
                 <li><a href="../HTML/addActivity.html">
-                  <i class="uil uil-plus"></i>
+                    <i class="uil uil-plus"></i>
                     <span class="link-name">Post</span>
                 </a></li>
                 <li><a href="../HTML/portfolio2.html">
@@ -48,53 +46,132 @@
                 </a></li>
             </ul> 
             <ul class="logout-mode">
-                <li><a href="../HTML/loginPage.html">
+                <li><a href="../HTML/loginPage.html" id="logoutLink">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
             </ul>
         </div>
     </nav>
-<!--Code For Main section of student profile-->
-<body>
-  <div class="profile-container">
-      <div class="profile-header">
-          <div class="profile-info">
-              <img src="../../images/image.png" alt="Profile Picture" class="profile-pic">
-              <div>
-                  <h2>Tanush Karane</h2>
-                  <p>Information Technology Student | Front-end Developer</p>
-              </div>
-              <div>
-                <a href="../HTML/studentAddInfo.html">
-                    <button class="edit-btn">Edit Profile</button>
-                </a>
+
+    <!-- Main Profile Section -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-info">
+                <img src="../../images/image.png" alt="Profile Picture" class="profile-pic" id="profile-pic">
+                <div>
+                    <h2 id="profile-name">Tanush Karane</h2>
+                    <p id="profile-branch">Information Technology Student | Front-end Developer</p>
+                </div>
+                <div>
+                    <a href="../HTML/studentAddInfo.html">
+                        <button class="edit-btn">Edit Profile</button>
+                    </a>
+                </div>
             </div>
-            
+        </div>
+        
+        <div class="intro-section">
+            <h3>About Me</h3>
+            <p id="about-me">I'm a passionate IT student with a keen interest in front-end development, video editing, and UI/UX design. Always eager to learn new technologies and take on challenges.</p>
+        </div>
 
-      <div class="intro-section">
-          <h3>About Me</h3>
-          <p>I'm a passionate IT student with a keen interest in front-end development, video editing, and UI/UX design. Always eager to learn new technologies and take on challenges.</p>
-      </div>
+        <div class="skills-section">
+            <h3>Skills</h3>
+            <ul id="skills-list">
+                <li>Front-end Development</li>
+                <li>UI/UX Design</li>
+                <li>Data Analysis</li>
+                <li>Python</li>
+                <li>Video Editing</li>
+            </ul>
+        </div>
 
-      <div class="skills-section">
-          <h3>Skills</h3>
-          <ul>
-              <li>Front-end Development </li>
-              <li>UI/UX Design </li>
-              <li>Data Analysis</li>
-              <li>Python </li>
-              <li>Video Editing </li>
-          </ul>
-      </div>
+        <div class="experience-section">
+            <h3>Extra-curricular</h3>
+            <ul id="experience-list">
+                <li>Design Head at GDSC DBIT</li>
+                <li>Front-end Developer at AQUASENSE Project</li>
+                <li>Internship at Tata - Data Analysis Certification</li>
+                <li>1st Prize at Hysteria in Cricket</li>
+            </ul>
+        </div>
+    </div>
 
-      <div class="experience-section">
-          <h3>Extra-curricular</h3>
-          <p>Design Head at GDSC DBIT</p>
-          <p>Front-end Developer at AQUASENSE Project</p>
-          <p>Internship at Tata - Data Analysis Certification</p>
-          <p>1st Prize at Hysteria in Cricket </p>
-      </div>
-  </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId');
+
+            if (!token || !userId) {
+                alert('Session expired or invalid. Please log in again.');
+                window.location.href = '../HTML/loginPage.html';
+                return;
+            }
+
+            // Function to fetch the profile data based on userId
+            const fetchProfile = async () => {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/profile/${userId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (!response.ok) {
+                        const result = await response.json();
+                        console.error('Error fetching profile:', result.message);
+                        if (result.message === 'Invalid token' || result.message === 'No token provided') {
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('userId');
+                            window.location.href = '../HTML/loginPage.html';
+                        }
+                        return;
+                    }
+
+                    const profile = await response.json();
+                    populateProfileData(profile);
+                } catch (error) {
+                    console.error('Error fetching profile:', error);
+                }
+            };
+
+            // Function to populate profile data into the UI
+            const populateProfileData = (profile) => {
+                document.getElementById('profile-pic').src = profile.profile_picture || '../../images/user1.png';
+                document.getElementById('profile-name').innerText = profile.name || 'No Name Provided';
+                document.getElementById('profile-branch').innerText = `${profile.class || 'Class'} | ${profile.branch || 'Branch'}`;
+                document.getElementById('about-me').innerText = profile.about || 'No information provided.';
+
+                const skillsList = document.getElementById('skills-list');
+                skillsList.innerHTML = ''; // Clear previous skills
+                (profile.skills || []).forEach(skill => {
+                    const li = document.createElement('li');
+                    li.innerText = skill;
+                    skillsList.appendChild(li);
+                });
+
+                const experienceList = document.getElementById('experience-list');
+                experienceList.innerHTML = ''; // Clear previous experience
+                if (profile.current_position) {
+                    const li = document.createElement('li');
+                    li.innerText = `Current Position: ${profile.current_position}`;
+                    experienceList.appendChild(li);
+                }
+            };
+
+            // Call fetchProfile to load the data
+            fetchProfile();
+
+            // Add logout functionality
+            document.getElementById('logoutLink').addEventListener('click', () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId'); // Clear userId on logout
+                window.location.href = './loginPage.html';
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!----======== CSS ======== -->
+    <!-- CSS Link -->
     <link rel="stylesheet" href="../styles/portfolio2.css">
     <script src="../JS/portfolioToggler.js"></script>
-     
-    <!----===== Iconscout CSS ===== -->
+    
+    <!-- Iconscout CSS -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
     <title>Portfolio</title>
@@ -19,10 +18,9 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png.png" alt="">
+                <img src="../../images/user1.png.png" alt="User Logo">
             </div>
-
-            <span class="logo_name">GradPath</span>
+            <span class="logo_name" id="app-name">GradPath</span>
         </div>
 
         <div class="menu-items">
@@ -32,18 +30,18 @@
                     <span class="link-name">Home</span>
                 </a></li>
                 <li><a href="../HTML/addActivity.html">
-                  <i class="uil uil-plus"></i>
+                    <i class="uil uil-plus"></i>
                     <span class="link-name">Post</span>
                 </a></li>
                 <li><a href="portfolio2.html">
-                    <i class=" uil-comment-download"></i> 
+                    <i class="uil uil-comment-download"></i>
                     <span class="link-name">Portfolio</span>
                 </a></li>
-                
                 <li><a href="profile.html">
                     <i class="uil uil-browser"></i>
                     <span class="link-name">Profile</span>
-                </a></li> 
+                </a></li>
+            </ul>
             <ul class="logout-mode">
                 <li><a href="../HTML/loginPage.html">
                     <i class="uil uil-signout"></i>
@@ -52,120 +50,109 @@
             </ul>
         </div>
     </nav>
-<body>
+
     <div class="container">
         <div class="left-section">
             <div class="profile-container">
                 <div class="profile-picture">
-                    <img src="../../images/user1.png.png" alt="Profile Picture">
+                    <img id="profile-picture" src="../../images/default-profile.png" alt="Profile Picture">
                 </div>
                 <div>
-                    <h1>Tanush Karane</h1>
-                    <p class="title">Engineering Graduate</p>
+                    <h1 id="profile-name">Tanush Karane</h1>
+                    <p class="title" id="profile-desc">Engineering Graduate</p>
                 </div>
             </div>
             <div class="social-links">
-                <a href="#"><img src="../../images/Linkdin.png" alt="LinkedIn"></a>
-                <a href="#"><img src="../../images/Twitter.png" alt="Twitter"></a>
-                <a href="#"><img src="../../images/instagram.jpg" alt="Instagram"></a>
+                <a href="#" id="linkedin-link"><img src="../../images/Linkedin.png" alt="LinkedIn"></a>
+                <a href="#" id="twitter-link"><img src="../../images/Twitter.png" alt="Twitter"></a>
+                <a href="#" id="instagram-link"><img src="../../images/Instagram.jpg" alt="Instagram"></a>
             </div>
         </div>
+
         <div class="right-section">
             <h2>Portfolio Timeline</h2>
             <ul class="timeline" id="timeline">
-            <!-- Timeline items will be dynamically inserted here -->
+                <!-- Timeline items will be dynamically inserted here -->
             </ul>
         </div>
     </div>
+
     <script>
         // Function to retrieve student ID from the token in localStorage
-        function getstudentId() {
+        function getStudentId() {
             const token = localStorage.getItem('token');
-            if (!token) {
-                console.error('No token found in localStorage');
+            const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
+            if (!token || !userId) {
+                alert('Session expired or invalid. Please log in again.');
+                window.location.href = '../HTML/loginPage.html';  
                 return null;
             }
-            try {
-                const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
-                console.log('Student ID received:', payload.id);
-                return payload.id; // Extract student ID from the payload
-            } catch (error) {
-                console.error('Error decoding token:', error);
-                return null;
-            }
+            console.log('Student ID received:', userId);
+            return userId;
         }
     
-        // Fetch activities for a specific student ID
-        const studentId = getstudentId();
-        if (studentId) {
-            fetch(`http://localhost:3000/activities/${studentId}`)  // Replace :id with actual studentId
+        // Fetch the profile data for the student and update UI
+        function fetchProfileData(studentId) {
+            fetch(`http://localhost:3000/profile/${studentId}`)
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Network response was not ok: ${response.statusText}`);
-                    }
+                    if (!response.ok) throw new Error(`Failed to fetch profile: ${response.statusText}`);
                     return response.json();
                 })
-                .then(data => {
+                .then(profileData => {
+                    document.getElementById('profile-name').innerText = profileData.name || 'Name not available';
+                    document.getElementById('profile-desc').innerText = profileData.about || 'Description not available';
+                    document.getElementById('profile-picture').src = profileData.profile_picture || '../../images/default-profile.png';
+                    document.getElementById('linkedin-link').href = profileData.linkedin || '#';
+                    document.getElementById('twitter-link').href = profileData.twitter || '#';
+                    document.getElementById('instagram-link').href = profileData.instagram || '#';
+                })
+                .catch(error => console.error('Error fetching profile data:', error));
+        }
+
+        // Fetch the student's activities and populate timeline
+        function fetchActivities(studentId) {
+            fetch(`http://localhost:3000/activities/${studentId}`)
+                .then(response => {
+                    if (!response.ok) throw new Error(`Failed to fetch activities: ${response.statusText}`);
+                    return response.json();
+                })
+                .then(activities => {
                     const timeline = document.getElementById('timeline');
-                    data.forEach(activity => {
-                        const activityElement = document.createElement('div');
+                    timeline.innerHTML = ''; // Clear any previous content
+                    activities.forEach(activity => {
+                        const activityElement = document.createElement('li');
+                        activityElement.className = 'activity-card';
                         activityElement.innerHTML = `
-                        <div class="activity-card">
                             <h3 class="activity-title" onclick="toggleDetails(this)">
-                                ${activity.title} <span class="dot"></span>
+                                ${activity.title || 'Untitled Activity'} <span class="dot"></span>
                             </h3>
-                            <div class="activity-details">
-                                <p class="activity-desc">${activity.details}</p>
-                                <p class="activity-approver">Approved by: ${activity.approver || 'Approval is pending.  '}</p>
-                                <p class="activity-date">Uploaded on: ${new Date(activity.created_at).toLocaleDateString()}</p>
-                                <p class="activity-updated">Last updated: ${new Date(activity.updated_at).toLocaleDateString()}</p>
+                            <div class="activity-details" style="display: none;">
+                                <p class="activity-desc">${activity.details || 'No description available'}</p>
+                                <p class="activity-approver">Approved by: ${activity.approver || 'Approval pending'}</p>
+                                <p class="activity-date">Uploaded on: ${new Date(activity.created_at).toLocaleDateString() || 'Date unavailable'}</p>
+                                <p class="activity-updated">Last updated: ${new Date(activity.updated_at).toLocaleDateString() || 'Date unavailable'}</p>
                             </div>
-                        </div>
                         `;
                         timeline.appendChild(activityElement);
                     });
                 })
-                .catch(err => console.error('Error fetching activities:', err));
+                .catch(error => console.error('Error fetching activities:', error));
+        }
+
+        // Initialize the page content
+        const studentId = getStudentId();
+        if (studentId) {
+            fetchProfileData(studentId);
+            fetchActivities(studentId);
         }
     
         // Toggle function to show/hide activity details
         function toggleDetails(element) {
-            const details = element.nextElementSibling; // Get the next sibling, which is the details div
+            const details = element.nextElementSibling;
             if (details) {
-                details.style.display = details.style.display === "none" || details.style.display === "" ? "block" : "none";
+                details.style.display = details.style.display === 'none' || details.style.display === '' ? 'block' : 'none';
             }
         }
-    </script>
-    
-
-<script>
-// let getMode = localStorage.getItem("mode");
-// if(getMode && getMode ==="dark"){
-//     body.classList.toggle("dark");
-// }
-
-// let getStatus = localStorage.getItem("status");
-// if(getStatus && getStatus ==="close"){
-//     sidebar.classList.toggle("close");
-// }
-
-// modeToggle.addEventListener("click", () =>{
-//     body.classList.toggle("dark");
-//     if(body.classList.contains("dark")){
-//         localStorage.setItem("mode", "dark");
-//     }else{
-//         localStorage.setItem("mode", "light");
-//     }
-// });
-
-// sidebarToggle.addEventListener("click", () => {
-//     sidebar.classList.toggle("close");
-//     if(sidebar.classList.contains("close")){
-//         localStorage.setItem("status", "close");
-//     }else{
-//         localStorage.setItem("status", "open");
-//     }
-// })
     </script>
 </body>
 </html>
