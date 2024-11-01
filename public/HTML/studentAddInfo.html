@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Info Upload</title>
+    <title>Edit Student Profile</title>
     <link rel="stylesheet" href="../styles/studentAddInfo.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script src="../JS/studentAddInfo.js"></script>
@@ -12,7 +12,7 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png.png" alt="">
+               <img src="../../images/user.png" alt="">
             </div>
 
             <span class="logo_name">GradPath</span>
@@ -20,43 +20,43 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="../HTML/studentDashboard.html">
+                <li><a href="#" id="homeLink">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Home</span>
                 </a></li>
-                <li><a href="../HTML/addActivity.html">
-                  <i class="uil uil-plus"></i>
+                <li><a href="#" id="postLink">
+                    <i class="uil uil-plus"></i>
                     <span class="link-name">Post</span>
                 </a></li>
-                <li><a href="../HTML/portfolio2.html">
-                    <i class=" uil-comment-download"></i> 
+                <li><a href="#" id="portfolioLink">
+                    <i class="uil uil-comment-download"></i> 
                     <span class="link-name">Portfolio</span>
                 </a></li>
-                
-                <li><a href="../HTML/Profile.html">
+                <li><a href="#" id="profileLink">
                     <i class="uil uil-browser"></i>
                     <span class="link-name">Profile</span>
-                </a></li> 
-
-            </ul> 
-            <ul class="logout-mode">
-                <li><a href="../HTML/loginPage.html">
+                </a></li>
+            </ul>
+            <ul id="logout-mode" class="logout-mode">
+                <li><a href="#" id="logoutLink">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
-            </li>
             </ul>
         </div>
     </nav>
 
     <!-- Header -->
     <div class="header">
-        <h1>Upload Your Personal Information</h1>
+        <h1>Edit Your Personal Information</h1>
     </div>
 
     <!-- Main Container -->
     <div class="container">
         <form id="studentInfoForm">
+            <!-- User ID (Hidden Field) -->
+            <input type="hidden" id="userId" name="userId">
+
             <!-- Name -->
             <div class="form-group">
                 <label for="name">Full Name:</label>
@@ -141,110 +141,140 @@
                 <input type="url" id="website" name="website" placeholder="Enter your personal website link">
             </div>
 
+            <!-- Start Year -->
+            <div class="form-group">
+                <label for="startYear">Start Year:</label>
+                <input type="text" id="startYear" name="startYear" placeholder="Enter your admission year" required>
+            </div>
+
+            <!-- Current Year -->
+            <div class="form-group">
+                <label for="currentYear">Current Year:</label>
+                <input type="text" id="currentYear" name="currentYear" placeholder="E.g., 2nd Year">
+            </div>
+
             <!-- Submit Button -->
             <div class="form-group">
-                <button type="submit">Submit Information</button>
+                <button type="submit">Update Information</button>
             </div>
         </form>
     </div>
-</body>
 
-<script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId'); // Assuming userId is stored in local storage
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
+    const role = localStorage.getItem('role');
+    if (!token || !userId) {
+      alert('Session expired or invalid. Please log in again.');
+      window.location.href = '../HTML/loginPage.html';  
+      return;
+    }
+  
+    // Define allowed roles for each page
+    const dashboards = {
+      'student':'/public/HTML/studentDashboard.html',
+      'faculty':'/public/HTML/facultyDashboard.html',
+      'admin':'/public/HTML/adminDashboard.html',
+    };
 
-        if (!token || !userId) {
-            alert('Session expired or invalid. Please log in again.');
-            window.location.href = '../HTML/loginPage.html';  
-            return;
-        }
+    // Get current page path
+    const currentPage = window.location.pathname;
 
-        // Update links in the navbar
-        document.getElementById('homeLink').href = './studentDashboard.html';
-        document.getElementById('postLink').href = './addActivity.html';
-        document.getElementById('portfolioLink').href = './portfolio2.html';
-        document.getElementById('profileLink').href = './Profile.html';
-
-        document.getElementById('logoutLink').addEventListener('click', () => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId'); // Clear userId on logout
-            window.location.href = './loginPage.html';
-        });
-
-        // Fetch and populate the current user's profile data
-        const response = await fetch(`http://localhost:3000/api/profile/${userId}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (response.ok) {
-            const profile = await response.json();
-            populateFormData(profile);
-        } else {
-            console.error('Error fetching profile data:', response.statusText);
-        }
-    });
-
-    function populateFormData(profile) {
-        document.getElementById('userId').value = profile.user_id;
-        document.getElementById('name').value = profile.name || '';
-        document.getElementById('class').value = profile.class || '';
-        document.getElementById('branch').value = profile.branch || '';
-        document.getElementById('currentPosition').value = profile.current_position || '';
-        document.getElementById('sinceWhen').value = profile.since_when ? new Date(profile.since_when).toISOString().split('T')[0] : '';
-        document.getElementById('about').value = profile.about || '';
-        document.getElementById('skills').value = profile.skills ? profile.skills.join(', ') : '';
-        document.getElementById('email').value = profile.email || '';
-        document.getElementById('contactNumber').value = profile.contact_number || '';
-        document.getElementById('github').value = profile.github || '';
-        document.getElementById('linkedin').value = profile.linkedin || '';
-        document.getElementById('website').value = profile.website || '';
-        document.getElementById('startYear').value = profile.start_year || '';
-        document.getElementById('currentYear').value = profile.current_year || '';
+    // Check if the role has access to the current page
+    const allowedRole = 'student';
+    if (allowedRole !== role) {
+      // Redirect to the user's dashboard if they are not authorized for this page
+      alert('You are not allowed to view this page.');
+      window.location.href = dashboards[role]||'../HTML/loginPage.html';
     }
 
-    document.getElementById('studentInfoForm').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Prevent form submission
+            // Update links in the navbar
+            document.getElementById('homeLink').href = './studentDashboard.html';
+            document.getElementById('postLink').href = './addActivity.html';
+            document.getElementById('portfolioLink').href = './portfolio2.html';
+            document.getElementById('profileLink').href = './Profile.html';
 
-        // Collect form data
-        const formData = new FormData(e.target);
-        const profileData = {};
+            document.getElementById('logoutLink').addEventListener('click', () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId'); // Clear userId on logout
+                window.location.href = './loginPage.html';
+            });
 
-        formData.forEach((value, key) => {
-            profileData[key] = value;
+            // Fetch and populate the current user's profile data
+            const response = await fetch(`http://localhost:3000/api/profile/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const profile = await response.json();
+                populateFormData(profile);
+            } else {
+                console.error('Error fetching profile data:', response.statusText);
+            }
         });
 
-        // Get JWT token from local storage
-        const token = localStorage.getItem('token');
-
-        if (!token) {
-            console.error('Token not found in localStorage');
-            alert('You are not authenticated. Please log in again.');
-            return;
+        function populateFormData(profile) {
+            document.getElementById('userId').value = profile.user_id;
+            document.getElementById('name').value = profile.name || '';
+            document.getElementById('class').value = profile.class || '';
+            document.getElementById('branch').value = profile.branch || '';
+            document.getElementById('currentPosition').value = profile.current_position || '';
+            document.getElementById('sinceWhen').value = profile.since_when ? new Date(profile.since_when).toISOString().split('T')[0] : '';
+            document.getElementById('about').value = profile.about || '';
+            document.getElementById('skills').value = profile.skills ? profile.skills.join(', ') : '';
+            document.getElementById('email').value = profile.email || '';
+            document.getElementById('contactNumber').value = profile.contact_number || '';
+            document.getElementById('github').value = profile.github || '';
+            document.getElementById('linkedin').value = profile.linkedin || '';
+            document.getElementById('website').value = profile.website || '';
+            document.getElementById('startYear').value = profile.start_year || '';
+            document.getElementById('currentYear').value = profile.current_year || '';
         }
 
-        // Make the fetch call to submit the profile update
-        const response = await fetch(`http://localhost:3000/api/profile/${profileData.userId}`, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${token}`, // Send JWT token in Authorization header
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(profileData),
+        document.getElementById('studentInfoForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent form submission
+
+            // Collect form data
+            const formData = new FormData(e.target);
+            const profileData = {};
+
+            formData.forEach((value, key) => {
+                profileData[key] = value;
+            });
+
+            // Get JWT token from local storage
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                console.error('Token not found in localStorage');
+                alert('You are not authenticated. Please log in again.');
+                return;
+            }
+
+            // Make the fetch call to submit the profile update
+            const response = await fetch(`http://localhost:3000/api/profile/${profileData.userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`, // Send JWT token in Authorization header
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(profileData),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log('Profile updated successfully:', result);
+                window.location.href = './studentDashboard.html'; // Redirect to dashboard
+            } else {
+                console.error('Error updating profile:', result.message);
+                alert('Failed to update profile: ' + result.message);
+            }
         });
-
-        const result = await response.json();
-        if (response.ok) {
-            console.log('Profile updated successfully:', result);
-            window.location.href = './studentDashboard.html'; // Redirect to dashboard
-        } else {
-            console.error('Error updating profile:', result.message);
-            alert('Failed to update profile: ' + result.message);
-        }
-    });
-</script>
+    </script>
+</body>
 </html>

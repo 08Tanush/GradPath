@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const activityController = require('../controllers/activityController');
+// const activityController = require('../controllers/activityController');
 
 // Fetch categories and fields
 router.get('/categories', activityController.getCategories);
 router.get('/categoryFields/:categoryId', activityController.getCategoryFields);
 
 // Upload activity
-router.post('/uploadActivity', activityController.uploadActivity);
+// router.post('/uploadActivity', activityController.uploadActivity);
 
 module.exports = router;
 const port=3000

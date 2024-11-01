@@ -12,44 +12,43 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png.png" alt="User">
+               <img src="../../images/user.png" alt="">
             </div>
+
             <span class="logo_name">GradPath</span>
         </div>
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="../HTML/studentDashboard.html">
+                <li><a href="#" id="homeLink">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Home</span>
                 </a></li>
-                <li><a href="../HTML/addActivity.html">
-                  <i class="uil uil-plus"></i>
+                <li><a href="#" id="postLink">
+                    <i class="uil uil-plus"></i>
                     <span class="link-name">Post</span>
                 </a></li>
-                <li><a href="portfolio2.html">
-                    <i class=" uil-comment-download"></i> 
+                <li><a href="#" id="portfolioLink">
+                    <i class="uil uil-comment-download"></i> 
                     <span class="link-name">Portfolio</span>
                 </a></li>
-                <li><a href="profile.html">
+                <li><a href="#" id="profileLink">
                     <i class="uil uil-browser"></i>
                     <span class="link-name">Profile</span>
                 </a></li>
             </ul>
-            <ul class="logout-mode">
-                <li><a href="../HTML/loginPage.html">
+            <ul id="logout-mode" class="logout-mode">
+                <li><a href="#" id="logoutLink">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
-            </ul>
-        </div>
             </ul>
         </div>
     </nav>
 
     <div class="container">
         <h1>Upload Activity</h1>
-        <form id="activityForm" action="/uploadActivity" method="POST" enctype="multipart/form-data">
+        <form id="activity-form" action="" method="POST" enctype="multipart/form-data">
             <!-- Activity Title -->
             <div class="form-group">
                 <label for="title">Activity Title:</label>
@@ -94,7 +93,7 @@
             <!-- Document Upload -->
             <div class="form-group">
                 <label for="document">Document:</label>
-                <input type="file" id="document" name="document">
+                <input type="file" id="documents" name="document">
             </div>
 
             <!-- Submit Button -->

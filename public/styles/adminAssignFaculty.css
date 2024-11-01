@@ -145,6 +145,65 @@ tr:nth-child(even) {
     justify-content: space-around;
     align-items: center;
 }
+
+.view-btn, .reject-btn {
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.reject-btn {
+    margin-right: 0;
+}
+
+.view-btn {
+    background-color: #4CAF50;
+}
+
+.reject-btn {
+    background-color: #f44336;
+}
+
+.view-btn:hover {
+    background-color: #45a049;
+}
+
+.reject-btn:hover {
+    background-color: #d32f2f;
+}
+
+.search-bar {
+    padding: 8px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.search-btn {
+    padding: 8px 12px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #555;
+}
+
 .faculty-dropdown {
     padding: 5px;
     border: 1px solid #ccc;
@@ -160,6 +219,18 @@ tr:nth-child(even) {
 body{
     min-height: 100vh;
     background-color: var(--primary-color);
+}
+body.dark{
+    --primary-color: #3A3B3C;
+    --panel-color: #242526;
+    --text-color: #CCC;
+    --black-light-color: #CCC;
+    --border-color: #4D4C4C;
+    --toggle-color: #FFF;
+    --box1-color: #3A3B3C;
+    --box2-color: #3A3B3C;
+    --box3-color: #3A3B3C;
+    --title-icon-color: #CCC;
 }
 /* === Custom Scroll Bar CSS === */
 ::-webkit-scrollbar {
@@ -230,7 +301,6 @@ nav .menu-items{
     flex-direction: column;
     justify-content: space-between;
 }
-
 .menu-items li{
     list-style: none;
 }
@@ -268,15 +338,6 @@ body.dark li a:hover:before{
     color: var(--black-light-color);    
     transition: var(--tran-05);
 }
-.menu-items {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-}
-
-.logout-mode {
-    margin-top: 20px; /* Add space between Assign Faculty and Logout */
-}
-
 nav.close li a .link-name{
     opacity: 0;
     pointer-events: none;
@@ -289,15 +350,10 @@ body.dark .nav-links li a:hover i,
 body.dark .nav-links li a:hover .link-name{
     color: var(--text-color);
 }
-.menu-items {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
+.menu-items .logout-mode{
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
 }
-
-.logout-mode {
-    margin-top: 20px; /* Add space between Assign Faculty and Logout */
-}
-
 .menu-items .mode{
     display: flex;
     align-items: center;
@@ -752,3 +808,32 @@ body {
 .select-faculty:hover {
     border-color: #4AA1F3;
 }
+#facultyAssignmentTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  #facultyAssignmentTable th, #facultyAssignmentTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  .categoryDropdown {
+    padding: 5px;
+    cursor: pointer;
+  }
+  .assignButton {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .assignButton:hover {
+    background-color: #005805;
+  }
+  .assignButton:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+  }
+  

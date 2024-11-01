@@ -67,11 +67,29 @@ loginForm.addEventListener('submit', async (event) => {
     if (response.ok) {
       // Successful login, store the JWT token and userId in localStorage
       localStorage.setItem('token', result.token); // Store the token
-      localStorage.setItem('userId', result.userId); // Store the userId
+      localStorage.setItem('userId', result.user._id); // Store the userId
+      localStorage.setItem('role', result.user.role); // Store the userId
       alert('Login successful! Redirecting to dashboard...');
 
-      // Redirect to the user-specific dashboard without query parameters
-      window.location.href = '/public/HTML/studentDashboard.html';
+      // Determine redirect URL based on role
+      let dashboardUrl='public/HTML/loginPage.html';
+        switch (result.user.role) {
+          case 'student':
+            dashboardUrl = '/public/HTML/studentDashboard.html';
+            break;
+          case 'faculty':
+            dashboardUrl = '/public/HTML/facultyDashboard.html';
+            break;
+          case 'admin':
+            dashboardUrl = '/public/HTML/adminDashboard.html';
+            break;
+          default:
+            alert('No valid role found.');
+            return;
+        }
+
+        // Redirect to appropriate dashboard
+        window.location.href = dashboardUrl;
     } else {
       // Show error message
       alert(result.message || 'Login failed. Please check your credentials.');

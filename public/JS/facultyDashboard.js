@@ -40,3 +40,30 @@ const notifications = [
 
 const notificationCount = document.getElementById('notificationCount');
 notificationCount.textContent = notifications.length;
+
+// const token = localStorage.getItem('token');
+//     const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
+//     const role = localStorage.getItem('role');
+//     if (!token || !userId) {
+//       alert('Session expired or invalid. Please log in again.');
+//       window.location.href = '../HTML/loginPage.html';  
+//       return;
+//     }
+  
+//     // Define allowed roles for each page
+//     const dashboards = {
+//       'student':'/public/HTML/studentDashboard.html',
+//       'faculty':'/public/HTML/facultyDashboard.html',
+//       'admin':'/public/HTML/adminDashboard.html',
+//     };
+
+//     // Get current page path
+//     const currentPage = window.location.pathname;
+
+//     // Check if the role has access to the current page
+//     const allowedRole = 'faculty';
+//     if (allowedRole !== role) {
+//       // Redirect to the user's dashboard if they are not authorized for this page
+//       alert('You are not allowed to view this page.');
+//       window.location.href = dashboards[role]||'../HTML/loginPage.html';
+//     }

@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="../styles/profile.css">
-
+     
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
     <title>Student Dashboard Panel</title>
 </head>
@@ -20,11 +20,10 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-               <img src="../../images/user1.png" alt="User Image" id="logo-pic">
+                <img src="../../images/user1.png.png" alt="">
             </div>
             <span class="logo_name">GradPath</span>
         </div>
-
         <div class="menu-items">
             <ul class="nav-links">
                 <li><a href="../HTML/studentDashboard.html">
@@ -32,36 +31,34 @@
                     <span class="link-name">Home</span>
                 </a></li>
                 <li><a href="../HTML/addActivity.html">
-                    <i class="uil uil-plus"></i>
+                  <i class="uil uil-plus"></i>
                     <span class="link-name">Post</span>
                 </a></li>
                 <li><a href="../HTML/portfolio2.html">
-                    <i class=" uil-comment-download"></i> 
+                    <i class="uil-comment-download"></i> 
                     <span class="link-name">Portfolio</span>
                 </a></li>
-                
                 <li><a href="../HTML/Profile.html">
                     <i class="uil uil-browser"></i>
                     <span class="link-name">Profile</span>
                 </a></li>
             </ul> 
             <ul class="logout-mode">
-                <li><a href="../HTML/loginPage.html" id="logoutLink">
+                <li><a href="#" id="logoutLink">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
             </ul>
         </div>
     </nav>
-
-    <!-- Main Profile Section -->
-    <div class="profile-container">
+    
+    <div class="profile-container" id="profile-container">
         <div class="profile-header">
             <div class="profile-info">
                 <img src="../../images/image.png" alt="Profile Picture" class="profile-pic" id="profile-pic">
                 <div>
-                    <h2 id="profile-name">Tanush Karane</h2>
-                    <p id="profile-branch">Information Technology Student | Front-end Developer</p>
+                    <h2 id="profile-name">Loading...</h2>
+                    <p id="profile-branch">Loading...</p>
                 </div>
                 <div>
                     <a href="../HTML/studentAddInfo.html">
@@ -69,45 +66,56 @@
                     </a>
                 </div>
             </div>
-        </div>
-        
-        <div class="intro-section">
-            <h3>About Me</h3>
-            <p id="about-me">I'm a passionate IT student with a keen interest in front-end development, video editing, and UI/UX design. Always eager to learn new technologies and take on challenges.</p>
-        </div>
 
-        <div class="skills-section">
-            <h3>Skills</h3>
-            <ul id="skills-list">
-                <li>Front-end Development</li>
-                <li>UI/UX Design</li>
-                <li>Data Analysis</li>
-                <li>Python</li>
-                <li>Video Editing</li>
-            </ul>
-        </div>
+            <div class="intro-section">
+                <h3>About Me</h3>
+                <p id="about-me">Loading...</p>
+            </div>
 
-        <div class="experience-section">
-            <h3>Extra-curricular</h3>
-            <ul id="experience-list">
-                <li>Design Head at GDSC DBIT</li>
-                <li>Front-end Developer at AQUASENSE Project</li>
-                <li>Internship at Tata - Data Analysis Certification</li>
-                <li>1st Prize at Hysteria in Cricket</li>
-            </ul>
+            <div class="skills-section">
+                <h3>Skills</h3>
+                <ul id="skills-list">
+                    <li>Loading...</li>
+                </ul>
+            </div>
+
+            <div class="experience-section">
+                <h3>Extra-curricular</h3>
+                <ul id="experience-list">
+                    <li>Loading...</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('token');
-            const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
+    const role = localStorage.getItem('role');
+    if (!token || !userId) {
+      alert('Session expired or invalid. Please log in again.');
+      window.location.href = '../HTML/loginPage.html';  
+      return;
+    }
+  
+    // Define allowed roles for each page
+    const dashboards = {
+      'student':'/public/HTML/studentDashboard.html',
+      'faculty':'/public/HTML/facultyDashboard.html',
+      'admin':'/public/HTML/adminDashboard.html',
+    };
 
-            if (!token || !userId) {
-                alert('Session expired or invalid. Please log in again.');
-                window.location.href = '../HTML/loginPage.html';
-                return;
-            }
+    // Get current page path
+    const currentPage = window.location.pathname;
+
+    // Check if the role has access to the current page
+    const allowedRole = 'student';
+    if (allowedRole !== role) {
+      // Redirect to the user's dashboard if they are not authorized for this page
+      alert('You are not allowed to view this page.');
+      window.location.href = dashboards[role]||'../HTML/loginPage.html';
+    }
 
             // Function to fetch the profile data based on userId
             const fetchProfile = async () => {
@@ -135,19 +143,20 @@
                     populateProfileData(profile);
                 } catch (error) {
                     console.error('Error fetching profile:', error);
+                    // Handle error (e.g., show a message)
                 }
             };
 
             // Function to populate profile data into the UI
             const populateProfileData = (profile) => {
-                document.getElementById('profile-pic').src = profile.profile_picture || '../../images/user1.png';
+                document.getElementById('profile-pic').src = profile.profile_picture || '../../images/user1.png.png';
                 document.getElementById('profile-name').innerText = profile.name || 'No Name Provided';
-                document.getElementById('profile-branch').innerText = `${profile.class || 'Class'} | ${profile.branch || 'Branch'}`;
+                document.getElementById('profile-branch').innerText = `${profile.class} | ${profile.branch}`;
                 document.getElementById('about-me').innerText = profile.about || 'No information provided.';
 
                 const skillsList = document.getElementById('skills-list');
                 skillsList.innerHTML = ''; // Clear previous skills
-                (profile.skills || []).forEach(skill => {
+                profile.skills.forEach(skill => {
                     const li = document.createElement('li');
                     li.innerText = skill;
                     skillsList.appendChild(li);
@@ -160,6 +169,7 @@
                     li.innerText = `Current Position: ${profile.current_position}`;
                     experienceList.appendChild(li);
                 }
+                // Add other experience details similarly...
             };
 
             // Call fetchProfile to load the data

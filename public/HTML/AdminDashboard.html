@@ -12,7 +12,9 @@
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>Admin Dashboard Panel</title>
+    <script src="../JS/adminDashboard.js"></script>
+
+    <title>Admin Dashboard</title>
 </head>
 <body>
     <nav>
@@ -26,33 +28,17 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="../HTML/AdminDashboard.html">
+                <li><a href="adminDashboard.html">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                
-                <!-- Assign Faculty link -->
-<li>
-    <a href="../HTML/adminAssignFaculty.html">
-        <i class="uil uil-comments"></i>
-        <span class="link-name">Assign Faculty</span>
-    </a>
-</li>
-
-<!-- Dropdown menu for Switch user -->
-<li class="dropdown">
-    <a href="javascript:void(0);" class="dropbtn">
-        <i class="uil uil-refresh"></i>
-        <span class="link-name">Switch user</span>
-    </a>
-    <ul class="dropdown-content">
-        <li><a href="../HTML/studentDashboard.html">Student</a></li>
-        <li><a href="../HTML/facultydashboard.html">Faculty</a></li>
-    </ul>
-</li>
- </ul>
+                <li><a href="adminAssignFaculty.html">
+                    <i class="uil uil-comments"></i> 
+                    <span class="link-name">Assign Faculty</span>
+                </a></li>
+            </ul>
             <ul class="logout-mode">
-                <li><a href="../HTML/loginPage.html">
+                <li><a href="loginPage.html">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
@@ -60,7 +46,8 @@
         </div>
     </nav>
 
-    <section class="dashboard">    
+    <section class="dashboard">
+        <div class="top">
             <!--<img src="images/profile.jpg" alt="">-->
         </div>
 
@@ -75,28 +62,28 @@
                     <div class="box box1">
                         <i class="uil uil-thumbs-up"></i>
                         <span class="text">Students</span>
-                        <span class="number">1080</span>
+                        <span class="number"></span>
                     </div>
                     <div class="box box2">
                         <i class="uil uil-comments"></i>
-                        <span class="text">Total Reviews</span>
-                        <span class="number">950</span>
+                        <span class="text">Faculties</span>
+                        <span class="number"></span>
                     </div>
                     <div class="box box3">
                         <i class="uil uil-share"></i>
                         <span class="text">Assigned Faculty</span>
-                        <span class="number">50</span>
+                        <span class="number"></span>
                     </div>
                 </div>
             </div>
 
             <div class="activity">
-                <div class="title">
+                <!-- <div class="title">
                     <i class="uil uil-clock-three"></i>
                     <span class="text">Recent Activity</span>
-                </div>
+                </div> -->
 
-                <div class="activity-data">
+                <!-- <div class="activity-data">
                     <div class="data names">
                         <span class="data-title">Name</span>
                         <span class="data-list">Prem Shahi</span>
@@ -137,11 +124,9 @@
                         <span class="data-list">Not Assigned</span>
                         <span class="data-list">Assigned</span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
-
-    <script src="../JS/facaultydashboard.js"></script>
 </body>
 </html>

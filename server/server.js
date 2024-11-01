@@ -149,7 +149,7 @@ app.post('/login', async (req, res) => {
     // Create JWT token using the secret from .env
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.json({ token, userId: user._id });
+    res.json({ token, user: user });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -188,6 +188,7 @@ app.get('/users/:userId', isLoggedIn, async (req, res) => {
     }
 
     res.json({
+      role: user.role,
       email: user.email,
       createdAt: user.created_at,
     });
@@ -327,31 +328,31 @@ app.get('/api/profile/:userId', isLoggedIn, async (req, res) => {
   }
 });
 
-// // Route to update user profile
-// app.put('/api/profile/:userId', async (req, res) => {
-//   const { userId } = req.params;
+// Route to update user profile
+app.put('/api/profile/:userId', async (req, res) => {
+  const { userId } = req.params;
 
-//   try {
-//       // Update the profile
-//       const updatedProfile = await Profile.findOneAndUpdate(
-//           { user_id: userId }, // Find the profile by user_id
-//           {
-//               ...req.body, // The updated data from the request
-//               updated_at: Date.now(), // Update the timestamp
-//           },
-//           { new: true, runValidators: true } // Options: return the updated document and run validators
-//       );
+  try {
+      // Update the profile
+      const updatedProfile = await Profile.findOneAndUpdate(
+          { user_id: userId }, // Find the profile by user_id
+          {
+              ...req.body, // The updated data from the request
+              updated_at: Date.now(), // Update the timestamp
+          },
+          { new: true, runValidators: true } // Options: return the updated document and run validators
+      );
 
-//       if (!updatedProfile) {
-//           return res.status(404).json({ message: 'Profile not found.' });
-//       }
+      if (!updatedProfile) {
+          return res.status(404).json({ message: 'Profile not found.' });
+      }
 
-//       res.status(200).json(updatedProfile);
-//   } catch (error) {
-//       console.error('Error updating profile:', error);
-//       res.status(500).json({ message: 'Internal server error.' });
-//   }
-// });
+      res.status(200).json(updatedProfile);
+  } catch (error) {
+      console.error('Error updating profile:', error);
+      res.status(500).json({ message: 'Internal server error.' });
+  }
+});
 
 const multer = require('multer');
 
@@ -393,7 +394,8 @@ app.post('/activities/create', upload.array('documents', 10), async (req, res) =
     }
 
     // Get the profile ID from the profile
-    const profileId = userProfile._id;
+    // const profileId = userProfile._id;
+    const profileId = userId;
 
     // Destructure incoming request body
     const { category, startDateTime, endDateTime, title, desc, visibility, location } = req.body;
@@ -473,16 +475,56 @@ app.get('/activities/:studentId', async (req, res) => {
       res.status(200).json(activities);
   } catch (error) {
       res.status(500).json({ message: error.message });
-  }
+  }
 });
 
+//server.js
 
-    // Save uploaded documents
-    // const documents = req.files.map(file => ({
-    //   doc_path: file.path,
-    //   activity_id: savedActivity._id,
-    //   doc_type: file.mimetype.includes('image') ? 'image' : 'pdf',
-    //   uploaded_at: new Date()
-    // }));
-    
-    // await Document.insertMany(documents);
+//GET Dashboard statistics
+app.get('/dashboard/stats', async (req, res) => {
+  try {
+    const studentCount = await User.countDocuments({ role: "student" });
+    //const reviewCount = await Reviews.countDocuments(); // Replace 'Reviews' with your review collection name
+    const facultyCount = await User.countDocuments({ role: "faculty" })
+    const assignedFacultyCount = await FacultyAssignment.countDocuments();
+
+    res.json({ studentCount, facultyCount, assignedFacultyCount });
+  } catch (error) {
+    console.error("Error fetching dashboard stats:", error);
+    res.status(500).json({ error: "Failed to fetch stats" });
+  }
+});
+
+//server.js
+
+//GET:Fetch all faculties
+app.get('/users/getfaculty', async (req, res) => {
+  try {
+    const faculties = await Profile.find()
+      .populate({
+        path: 'user_id',       // Reference field in Profile that links to User
+        match: { role: 'faculty' }, // Filter for faculty role in User collection
+        select: 'role'         // Only fetch the role field from User collection
+      })
+      .select('name branch');   // Only fetch name and branch fields from Profile
+
+    // Filter out profiles without a matched 'faculty' user role
+    const filteredFaculties = faculties.filter(faculty => faculty.user_id !== null);
+
+    // console.log("Fetched faculty profiles:", filteredFaculties); // Log fetched profiles
+    res.json(filteredFaculties);
+  } catch (error) {
+    console.error("Error fetching faculties:", error);
+    res.status(500).json({ error: "Failed to fetch faculty data" });
+  }
+});
+
+// GET: Fetch all faculty-category assignments
+app.get('/facultyAssignments', async (req, res) => {
+  try {
+    const assignments = await facultyAssignment.find();
+    res.status(200).json(assignments);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});

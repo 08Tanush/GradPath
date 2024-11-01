@@ -1,157 +1,68 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Admin Activity Management</title> 
-    <link rel="stylesheet" href="../styles/adminAssignFaculty.css"> 
-    <script src="../JS/adminAssignFaculty.js"></script> 
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> 
-</head> 
-<body> 
-    <!-- Sidebar --> 
-    <nav> 
-        <div class="logo-name"> 
-            <div class="logo-image"> 
-               <img src="../../images/user1.png.png" alt="User"> 
-            </div> 
-            <span class="logo_name">GradPath</span> 
-        </div> 
-        <div class="menu-items"> 
-            <ul class="nav-links"> 
-                <li><a href="adminDashboard.html"> 
-                    <i class="uil uil-estate"></i> 
-                    <span class="link-name">Dashboard</span> 
-                </a></li> 
-                <li><a href="adminAssignFaculty.html"> 
-                    <i class="uil uil-comments"></i>  
-                    <span class="link-name">Assign Faculty</span> 
-                </a></li> 
-            </ul> 
-            <ul class="logout-mode"> 
-                <li><a href="../HTML/loginPage.html"> 
-                    <i class="uil uil-signout"></i> 
-                    <span class="link-name">Logout</span> 
-                </a></li> 
-            </ul> 
-        </div> 
-    </nav> 
- 
-    <!-- Main Dashboard --> 
-    <section class="dashboard"> 
-        <div class="dash-content"> 
-            <div class="title"> 
-                <i class="uil uil-user-plus"></i> 
-                <span class="text">Assign Faculty to Activities</span> 
-            </div> 
- 
-            <!-- Activities Table --> 
-            <table> 
-              <thead> 
-                <tr> 
-                  <th>Professor Name</th> 
-                  <th>Branch</th> 
-                  <th>Category</th> 
-                  <th>Assign</th> 
-                </tr> 
-              </thead> 
-              <tbody> 
-                <!-- Row for each professor with category dropdown and assign button --> 
-                <tr> 
-                  <td>Shiv Negi</td>
-                  <td>IT</td>
-                  <td>
-                    <select id="category-shiv" class="form-control">
-                        <option value="" disabled selected>Select a category</option>
-                        <option value="academics">Academics</option>
-                        <option value="sports">Sports</option>
-                        <option value="technical">Technical</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="community">Community Outreach</option>
-                    </select>
-                  </td>
-                  <td><button class="assign-btn" onclick="assignFaculty('Shiv Negi', 'category-shiv')">Assign</button></td>
-                </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Activity Management</title>
+    <link rel="stylesheet" href="/public/styles/adminAssignFaculty.css"> <!-- Using the same CSS as the faculty dashboard -->
+    <script src="/public/JS/adminAssignFaculty.js"></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="../../images/user1.png.png" alt="User">
+            </div>
 
+            <span class="logo_name">GradPath</span>
+        </div>
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="adminDashboard.html">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Dashboard</span>
+                </a></li>
+                <li><a href="adminAssignFaculty.html">
+                    <i class="uil uil-comments"></i> 
+                    <span class="link-name">Assign Faculty</span>
+                </a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="loginPage.html">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <section class="dashboard">
+        <div class="top">
+        </div>
+
+        <div class="dash-content">
+            <div class="title">
+                <i class="uil uil-user-plus"></i>
+                <span class="text">Assign Faculty to Activities</span>
+            </div>
+            <table id="facultyAssignmentTable">
+              <thead>
                 <tr>
-                  <td>Aditi Mehta</td>
-                  <td>COMPS</td>
-                  <td>
-                    <select id="category-aditi" class="form-control">
-                        <option value="" disabled selected>Select a category</option>
-                        <option value="academics">Academics</option>
-                        <option value="sports">Sports</option>
-                        <option value="technical">Technical</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="community">Community Outreach</option>
-                    </select>
-                  </td>
-                  <td><button class="assign-btn" onclick="assignFaculty('Aditi Mehta', 'category-aditi')">Assign</button></td>
+                  <th>Faculty Name</th>
+                  <th>Branch</th>
+                  <th>Category</th>
+                  <th>Assign</th>
                 </tr>
-
-                <tr>
-                  <td>Devdas</td>
-                  <td>EXTC</td>
-                  <td>
-                    <select id="category-devdas" class="form-control">
-                        <option value="" disabled selected>Select a category</option>
-                        <option value="academics">Academics</option>
-                        <option value="sports">Sports</option>
-                        <option value="technical">Technical</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="community">Community Outreach</option>
-                    </select>
-                  </td>
-                  <td><button class="assign-btn" onclick="assignFaculty('Devdas', 'category-devdas')">Assign</button></td>
-                </tr>
-
-                <!-- Add more rows as needed -->
+              </thead>
+              <tbody id="facultyTableBody">
+                <!-- Rows will be dynamically populated here -->
               </tbody>
             </table>
-        </div>
-    </section>
+        <script src="/public/JS/adminAssignFaculty.js"></script> 
 
-    <script src="../public/scripts/adminAssignFaculty.js"></script>
-    <script>
-        // Function to assign faculty to a category
-function assignFaculty(facultyName, categoryId) {
-    const categoryElement = document.getElementById(categoryId);
-    const category = categoryElement.options[categoryElement.selectedIndex].value;
-
-    if (!category) {
-        alert("Please select a category!");
-        return;
-    }
-
-    // Prepare the data to send to the server
-    const data = {
-        name: facultyName,
-        category: category
-    };
-
-    // Send a POST request to the server to assign faculty
-    fetch('/assign', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            alert(`Assigned ${facultyName} to ${category} category successfully!`);
-            // Optionally, you can update the UI to reflect the assignment
-        } else {
-            alert(`Failed to assign ${facultyName}: ${result.message}`);
-        }
-    })
-    .catch(error => {
-        console.error("Error during assignment:", error);
-        alert('An error occurred. Please try again.');
-    });
-}
-
-    </script>
-</body> 
+</body>
 </html>

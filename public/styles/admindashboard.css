@@ -148,50 +148,6 @@ body.dark li a:hover:before{
     color: var(--black-light-color);    
     transition: var(--tran-05);
 }
-/* Style for the dropdown container */
-/* Style for the dropdown container */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Style the dropdown button (Switch user) */
-.dropbtn {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Dropdown content links */
-.dropdown-content li a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content li a:hover { 
-    background-color: #ddd; 
-}
-
-/* Show the dropdown content when hovering */
-.dropdown:hover .dropdown-content { 
-    display: block; 
-}
-
-
 nav.close li a .link-name{
     opacity: 0;
     pointer-events: none;
@@ -276,40 +232,6 @@ nav.close ~ .dashboard{
 nav.close ~ .dashboard .top{
     left: 73px;
     width: calc(100% - 73px);
-}
-.dashboard .top .sidebar-toggle{
-    font-size: 26px;
-    color: var(--text-color);
-    cursor: pointer;
-}
-.dashboard .top .search-box{
-    position: relative;
-    height: 45px;
-    max-width: 600px;
-    width: 100%;
-    margin: 0 30px;
-}
-.top .search-box input{
-    position: absolute;
-    border: 1px solid var(--border-color);
-    background-color: var(--panel-color);
-    padding: 0 25px 0 50px;
-    border-radius: 5px;
-    height: 100%;
-    width: 100%;
-    color: var(--text-color);
-    font-size: 15px;
-    font-weight: 400;
-    outline: none;
-}
-.top .search-box i{
-    position: absolute;
-    left: 15px;
-    font-size: 22px;
-    z-index: 10;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--black-light-color);
 }
 .top img{
     width: 40px;
@@ -451,7 +373,7 @@ nav.close ~ .dashboard .top{
 
 @media (max-width: 780px) {
     .dash-content .boxes .box{
-        width: calc(100% / 2 - 15px);
+        width: calc(100% / 3 - 15px);
         margin-top: 15px;
     }
 }

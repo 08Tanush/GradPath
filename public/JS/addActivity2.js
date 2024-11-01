@@ -1,16 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     const token = localStorage.getItem('token');
-    let userId = localStorage.getItem('userId') || new URLSearchParams(window.location.search).get('userId');
-
-    // Store userId in localStorage if it's retrieved from URL
-    if (userId) {
-        localStorage.setItem('userId', userId);
-    }
-
+    const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
+    const role = localStorage.getItem('role');
     if (!token || !userId) {
-        alert('Session expired or invalid. Please log in again.');
-        window.location.href = '../HTML/loginPage.html';  
-        return;
+      alert('Session expired or invalid. Please log in again.');
+      window.location.href = '../HTML/loginPage.html';  
+      return;
+    }
+  
+    // Define allowed roles for each page
+    const dashboards = {
+      'student':'/public/HTML/studentDashboard.html',
+      'faculty':'/public/HTML/facultyDashboard.html',
+      'admin':'/public/HTML/adminDashboard.html',
+    };
+
+    // Get current page path
+    const currentPage = window.location.pathname;
+
+    // Check if the role has access to the current page
+    const allowedRole = 'student';
+    if (allowedRole !== role) {
+      // Redirect to the user's dashboard if they are not authorized for this page
+      alert('You are not allowed to view this page.');
+      window.location.href = dashboards[role]||'../HTML/loginPage.html';
     }
 
     // Add userId to links in the navbar
