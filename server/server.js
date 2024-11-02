@@ -23,6 +23,7 @@ const { Activity } = require('./models/Activities');
 const { ActivityField } = require('./models/activity_fields');
 const { Category } = require('./models/categories');
 const { CategoryField } = require('./models/categoryFields');
+const {FacultyAssignment} = require('./models/facultyAssignments')
 const { Profile } = require('./models/profiles');
 
 // JWT Secret Key (store this securely in production)
@@ -94,6 +95,7 @@ async function getProfileIdFromUserId(userId) {
 }
 
 // POST: Register a new user (Signup)
+// POST: Register a new user (Signup)
 app.post('/signup', async (req, res) => {
   try {
     const { user_name, email, password } = req.body;
@@ -106,7 +108,7 @@ app.post('/signup', async (req, res) => {
 
     // Determine the role based on email pattern
     let userRole;
-    if (/^\d/.test(email)) {
+    if (/^\d{3}[a-z]+[0-9]{4}@dbit\.in$/.test(email)) {
       userRole = 'student';
     } else {
       const roleCheck = await User.findOne({ role: { $in: ['faculty', 'admin'] } });
@@ -120,10 +122,41 @@ app.post('/signup', async (req, res) => {
     const pass_hash = await hashPassword(password);
 
     // Create a new user
-    const newUser = new User({ user_name, email, pass_hash, role: userRole });
+    const newUser = new User({ user_name, email, pass_hash, role: 'student' });
     const savedUser = await newUser.save();
 
-    res.status(201).json({ message: 'User registered successfully', user: savedUser });
+    // Create a profile for the new user
+    const profileData = {
+      user_id: savedUser._id,
+      name: user_name,
+      email: email,
+      start_year: "Unknown",
+      class: "Not specified",             // Placeholder
+      branch: "Not specified",            // Placeholder
+      current_position: "Not specified",  // Placeholder
+      since_when: null,                   // Placeholder
+      about: "No bio provided",           // Placeholder
+      skills: [],                         // Default empty array
+      profile_picture: "anonymous.png",   // Default profile picture
+      contact_number: "Not specified",    // Placeholder
+      github: "Not specified",            // Placeholder
+      linkedin: "Not specified",          // Placeholder
+      website: "Not specified",           // Placeholder
+      dob: null,                          // Placeholder for date of birth
+      current_year: "Not specified",      // Placeholder for current academic year
+      position: userRole === 'faculty' ? "Faculty" : "Student" // Position defaults based on role
+    };
+
+    // Save the profile in the database
+    const newProfile = new Profile(profileData);
+    await newProfile.save();
+
+    // Respond with a success message and user info
+    res.status(201).json({
+      message: 'User registered successfully, and profile created',
+      user: savedUser,
+      profile: newProfile
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -494,24 +527,21 @@ app.get('/dashboard/stats', async (req, res) => {
     res.status(500).json({ error: "Failed to fetch stats" });
   }
 });
-
-//server.js
-
-//GET:Fetch all faculties
-app.get('/users/getfaculty', async (req, res) => {
+// GET: Fetch all faculties
+app.get('/getfaculty', async (req, res) => {
   try {
+    // Find profiles and populate only if the role in the User collection is 'faculty'
     const faculties = await Profile.find()
       .populate({
         path: 'user_id',       // Reference field in Profile that links to User
-        match: { role: 'faculty' }, // Filter for faculty role in User collection
-        select: 'role'         // Only fetch the role field from User collection
+        match: { role: 'faculty' }, // Only match users with the 'faculty' role
+        select: 'role'        // Only fetch the role field from User collection
       })
-      .select('name branch');   // Only fetch name and branch fields from Profile
+      .select('name branch');   // Fetch only 'name' and 'branch' fields from Profile
 
-    // Filter out profiles without a matched 'faculty' user role
-    const filteredFaculties = faculties.filter(faculty => faculty.user_id !== null);
+    // Filter out profiles where user_id does not match the faculty role
+    const filteredFaculties = faculties.filter(faculty => faculty.user_id);
 
-    // console.log("Fetched faculty profiles:", filteredFaculties); // Log fetched profiles
     res.json(filteredFaculties);
   } catch (error) {
     console.error("Error fetching faculties:", error);
@@ -519,12 +549,36 @@ app.get('/users/getfaculty', async (req, res) => {
   }
 });
 
+
 // GET: Fetch all faculty-category assignments
 app.get('/facultyAssignments', async (req, res) => {
   try {
-    const assignments = await facultyAssignment.find();
+    const assignments = await FacultyAssignment.find();
     res.status(200).json(assignments);
   } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+// POST: Assign category to faculty
+app.post('/facultyAssignments', async (req, res) => {
+  try {
+    const { faculty_id, category_id } = req.body;
+    
+    // Check that both facultyId and categoryId are provided
+    if (!faculty_id || !category_id) {
+      return res.status(400).json({ message: 'Faculty ID and Category ID are required' });
+    }
+
+    // Insert or update the assignment in the facultyAssignments collection
+    const result = await FacultyAssignment.updateOne(
+      { faculty_id: faculty_id }, // Find document by faculty ID
+      { $set: { category_id: category_id } }, // Set category
+      { upsert: true } // Insert if not found
+    );
+
+    res.status(200).json({ message: 'Category assigned successfully', result });
+  } catch (error) {
+    console.error('Error assigning category:', error);
     res.status(500).json({ message: error.message });
   }
 });

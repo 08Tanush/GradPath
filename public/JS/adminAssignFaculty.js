@@ -1,6 +1,6 @@
 async function fetchFaculties() {
   try {
-    const response = await fetch('http://localhost:3000/users/getfaculty');
+    const response = await fetch('http://localhost:3000/getfaculty');
     return await response.json();
   } catch (error) {
     console.error("Error fetching faculties:", error);
@@ -132,7 +132,7 @@ async function populateFacultyAssignmentTable() {
           categoryCell.innerHTML = selectedCategoryName;
           assignButton.disabled = true;
           assignButton.textContent = 'Assigned';
-          alert("${selectedCategoryName} has been assigned to ${faculty.name} successfully.");
+          alert(`${selectedCategoryName} has been assigned to ${faculty.name} successfully.`);
         }
       });
 

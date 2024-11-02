@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+const connectDB = require('../config/db');
+const Schema = mongoose.Schema;
 
-const profileSchema = new mongoose.Schema({
-    user_id: {type: String,required: true }, // Refers to the user
+const profileSchema = new Schema({
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Refers to the user
     name: { type: String, required: true }, // Full Name
     class: { type: String }, // Class of the student
     branch: { type: String }, // Branch or Department
